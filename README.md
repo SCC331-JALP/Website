@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://raw.githubusercontent.com/SCC331-JALP/Website/master/app/images/profile.png" alt="JALP SmartLab">
+<img src="https://raw.githubusercontent.com/SCC331-JALP/Website/master/app/images/logo.png" alt="JALP SmartLab">
 </p>
 
 # JALP SmartLab.
