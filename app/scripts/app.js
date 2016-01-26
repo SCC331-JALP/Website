@@ -34,12 +34,41 @@ angular
         templateUrl: 'views/signin.html',
         controller: 'AuthcontrollerCtrl'
       })
+      .when('/register', {
+        templateUrl: 'views/register.html',
+        controller: 'RegisterCtrl',
+        controllerAs: 'register'
+      })
+      .when('/signin', {
+        templateUrl: 'views/signin.html',
+        controller: 'SigninCtrl',
+        controllerAs: 'signin'
+      })
       .otherwise({
         redirectTo: '/'
       });
 
       
   })
-  .run(function($rootScope) {
-    $rootScope.appName = 'JALP SmartLab';
+  .run(function($rootScope, $route, $window) {
+    $rootScope.ref = new Firebase("https://sunsspot.firebaseio.com/");
+
+    // Create a callback which logs the current auth state
+    $rootScope.authDataCallback = function(authData) {
+      if (authData) {
+        console.log("User " + authData.uid + " is logged in with " + authData.provider);
+      } else {
+        console.log("User is logged out");
+      }
+    }
+
+    $rootScope.ref.onAuth($rootScope.authDataCallback);
+    $rootScope.authData = $rootScope.ref.getAuth();
+    $rootScope.logged = $rootScope.authData ? true : false;
+    
+    $rootScope.logout = function(){
+      $rootScope.ref.unauth();
+      $window.location.href = '/';
+    }
+
   });

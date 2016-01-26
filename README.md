@@ -15,7 +15,8 @@ version 0.11.1.
 Run `npm install --global npm@latest`
 
 ### Install Bower
-Run `Bower install`
+Run `npm install -g bower`
+Run `bower install`
 
 ### Install the Yeoman toolset
 Run `npm install --global yo bower grunt-cli`
