@@ -1,4 +1,4 @@
-![Image of JALP Logo](https://github.com/SCC331-JALP/Website/blob/master/images/profile.png?raw=true)
+![Image of JALP Logo](https://raw.githubusercontent.com/SCC331-JALP/Website/master/app/images/profile.png)
 
 # JALP SmartLab.
 
