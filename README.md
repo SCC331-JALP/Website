@@ -1,4 +1,6 @@
+<p align="center">
 ![Image of JALP Logo](https://raw.githubusercontent.com/SCC331-JALP/Website/master/app/images/profile.png)
+</p>
 
 # JALP SmartLab.
 
