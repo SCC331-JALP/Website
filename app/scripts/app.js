@@ -34,6 +34,11 @@ angular
         templateUrl: 'views/signin.html',
         controller: 'AuthcontrollerCtrl'
       })
+      .when('/sensorAdmin', {
+        templateUrl: 'views/sensoradmin.html',
+        controller: 'SensoradminCtrl',
+        controllerAs: 'sensorAdmin'
+      })
       .otherwise({
         redirectTo: '/'
       });
