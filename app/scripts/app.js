@@ -30,11 +30,6 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/signin', {
-        templateUrl: 'views/signin.html',
-        controller: 'AuthcontrollerCtrl'
-      })
-<<<<<<< HEAD
       .when('/register', {
         templateUrl: 'views/register.html',
         controller: 'RegisterCtrl',
@@ -44,12 +39,11 @@ angular
         templateUrl: 'views/signin.html',
         controller: 'SigninCtrl',
         controllerAs: 'signin'
-=======
+      })
       .when('/sensorAdmin', {
         templateUrl: 'views/sensoradmin.html',
         controller: 'SensoradminCtrl',
         controllerAs: 'sensorAdmin'
->>>>>>> 2c97912dc62a1a2602e9c0b21577aa5d327dcdd9
       })
       .otherwise({
         redirectTo: '/'
