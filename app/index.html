@@ -45,6 +45,7 @@
 
             <ul class="nav navbar-nav navbar-right">
               <li><a ng-href="/signin"><span class="glyphicon glyphicon-user"></span></a></li>
+              <li ng-if="logged"><a ng-click="logout()" class="btn">Logout</a></li>
             </ul>
           </div>
         </div>
@@ -99,7 +100,8 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/authcontroller.js"></script>
+        <script src="scripts/controllers/register.js"></script>
+        <script src="scripts/controllers/signin.js"></script>
         <script src="scripts/controllers/sensoradmin.js"></script>
         <!-- endbuild -->
 </body>

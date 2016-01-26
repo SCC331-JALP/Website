@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+
+    <div class="main">
+
+      <h3>Register, or <a href="/signin">Log in</a></h3>
+
+      <div class="login-or">
+        <hr class="hr-or">
+        <span class="span-or">or</span>
+      </div>
+		
+      <form ng-submit="submit()" ng-controller="RegisterCtrl">
+        <div class="form-group">
+          <label for="inputFirstName">First Name</label>
+          <input type="text" class="form-control" ng-model="user.firstName">
+        </div>
+        <div class="form-group">
+          <label for="inputLastName">Last Name</label>
+          <input type="text" class="form-control" ng-model="user.lastName">
+        </div>
+        <div class="form-group">
+          <label for="inputEmail">Email</label>
+          <input type="email" class="form-control" ng-model="user.email" required>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword">Password</label>
+          <input type="password" class="form-control" ng-model="user.password" required>
+        </div>
+
+        <input type="submit" class="btn btn btn-primary" value="Register" />
+
+      </form>
+    
+    </div>
+    
+  </div>
+</div>
