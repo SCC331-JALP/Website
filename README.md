@@ -33,7 +33,10 @@ Run `grunt` for building and `grunt serve` for preview.
 > **Error?**
 > - Warning: Running "imagemin:dist" (imagemin) task
 > - Run: `npm cache clean && npm install gruntjs/grunt-contrib-imagemin`
-
+> - Fatal error: Unable to find local grunt
+> - Run `npm install grunt --save-dev`
+> - cannot find module connect-modrewrite
+> - Run `npm install`
 
 ## Testing
 
