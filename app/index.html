@@ -26,7 +26,7 @@
     <!-- Add your site or application content here -->
     <div class="header">
       <div class="navbar navbar-default" role="navigation">
-        <div class="container">
+        <div class="container-fluid">
           <div class="navbar-header">
 
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
@@ -36,7 +36,9 @@
               <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="/">{{ appName }}</a>
+            <a class="navbar-brand" href="/">
+              <img alt="Brand" height="30" src="./images/logo.png">
+            </a>
           </div>
 
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
@@ -48,7 +50,11 @@
         </div>
       </div>
     </div>
-  
+    
+    <div class="jumbotron">
+      <h1>Hello, world!</h1>
+      <p>...</p>
+    </div>
     <div class="container">
       <div ng-view=""></div>
     </div>
