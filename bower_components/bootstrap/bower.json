@@ -30,5 +30,14 @@
   ],
   "dependencies": {
     "jquery": "1.9.1 - 2"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/js/bootstrap.js",
+        "dist/css/bootstrap.css",
+        "less/bootstrap.less"
+      ]
+    }
   }
 }
