@@ -1,4 +1,4 @@
-[[https://github.com/SCC331-JALP/Website/blob/master/images/profile.png?raw=true|alt=JALP SmartLab.]]
+![Image of JALP Logo](https://github.com/SCC331-JALP/Website/blob/master/images/profile.png?raw=true)
 
 # JALP SmartLab.
 
@@ -29,8 +29,8 @@ Run `npm install grunt-karma karma karma-phantomjs-launcher karma-jasmine jasmin
 Run `grunt` for building and `grunt serve` for preview.
 
 > **Error?**
->- Warning: Running "imagemin:dist" (imagemin) task
->> Run: `npm cache clean && npm install gruntjs/grunt-contrib-imagemin`
+> - Warning: Running "imagemin:dist" (imagemin) task
+> - Run: `npm cache clean && npm install gruntjs/grunt-contrib-imagemin`
 
 
 ## Testing
