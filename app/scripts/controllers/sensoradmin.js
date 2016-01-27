@@ -17,8 +17,8 @@ angular.module('jalpWebApp')
 
 
     if($rootScope.logged){
-      console.log("logged");
-      console.log($rootScope.authData.uid);
+
+      //console.log($rootScope.authData.uid);
       var USERNAME = "Povilas"//$rootScope.authData.uid; //username Initialize based on authentication
       var userReference = new Firebase("https://sunsspot.firebaseio.com/users/" + USERNAME + "/spots")
 
@@ -42,8 +42,9 @@ angular.module('jalpWebApp')
 
 
 
-function handleNewSensor(snapshot, address){
 
+function handleNewSensor(snapshot, address){
+  console.log(snapshot);
   var sensorString = "<tr id="+ address +"> <td id='name'>" + snapshot.name + "</td>" + "<td>" + snapshot.alive + "</td>" + "<td>" + snapshot.battery + "</td>";
   if(snapshot.button == 0){
     sensorString += "<td> None </td>"
@@ -60,13 +61,17 @@ function handleNewSensor(snapshot, address){
 
   $("#sensorTable").append(sensorString)
   increaseSensorCount();
+  $("#"+address).addClass("success")
+  setTimeout(function(){
+      $("#"+address).removeClass('success');
+  },1000);
 
 }
 
 
 function handleChangedSensor(snapshot, address){
   var row = $("#"+address)[0];
-  console.log(snapshot);
+//  console.log(snapshot);
 
   var sensorString = "<tr id="+ address +"> <td id='name'>" + snapshot.name + "</td>" + "<td>" + snapshot.alive + "</td>" + "<td>" + snapshot.battery + "</td>";
   if(snapshot.button == 0){
@@ -84,13 +89,21 @@ function handleChangedSensor(snapshot, address){
 
   row.innerHTML = sensorString;
 
+  $(row).addClass("info")
+  setTimeout(function(){
+      $(row).removeClass('info');
+  },1000);
 }
 
 function handleDeletedSensor(snapshot, address){
 
   var row = $("#"+address)[0];
-  row.remove();
-  console.log("deleted row:" + address);
+
+  $(row).addClass("danger")
+  setTimeout(function(){
+      row.remove();
+  },1000);
+ console.log("deleted row:" + address);
 }
 
 function increaseSensorCount(){
