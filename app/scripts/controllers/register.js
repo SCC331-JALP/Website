@@ -8,9 +8,14 @@
  * Controller of the jalpWebApp
  */
 angular.module('jalpWebApp')
-  .controller('RegisterCtrl', function ($scope, $rootScope, $window) {
+  .controller('RegisterCtrl', function ($scope, $rootScope, $window, $location) {
 
   	var ref = $rootScope.ref;
+
+  	if(ref.getAuth())
+  		$location.path("/");
+  		
+
   	$scope.user = {};
 
   	$scope.submit = function() 
@@ -32,7 +37,6 @@ angular.module('jalpWebApp')
 	    		console.log('Error creating user:', error);
 	    	}else{
 	    		console.log('Successfully created user account with uid:', userData.uid);
-	    		$window.location.href = '/signin';
 	    		
 	    		//Should be private to user
 				var usersProfileRef = ref.child('users').child(userData.uid);
@@ -47,8 +51,10 @@ angular.module('jalpWebApp')
 				console.log(email);
 				var usersRef = ref.child('usersRef');
 				usersRef.child(email).set(userData.uid);
+
+				$window.location.href = '/signin';
 	    	}
 	    });
-    }
+    };
     
   });
