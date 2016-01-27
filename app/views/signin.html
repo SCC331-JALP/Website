@@ -5,10 +5,12 @@
 
       <!-- LOGGED -->
       <div ng-if="logged">
-      Logged: {{logged}}
-        Hello email address {{authData}}, you are logged in!
-      }
-      }
+      <h3>Authenticated Data</h3>
+        <pre>{{authData | json}}</pre>
+        <h3>Private, only limited to authenticated user</h3>
+        <pre>{{userProfile | json}}</pre>
+        <h3>Public access</h3>
+        <pre>{{usersRef | json}}</pre>
       </div>
       
 
@@ -31,18 +33,18 @@
 
         <form role="form" ng-submit="submit()" ng-controller="SigninCtrl">
           <div class="form-group">
-            <label for="inputEmail">email</label>
+            <label for="inputEmail">Email</label>
             <input type="email" class="form-control" ng-model="user.email" required>
           </div>
           <div class="form-group">
-            <a class="pull-right" href="#">Forgot password?</a>
+            <!-- <a class="pull-right" href="#">Forgot password?</a> -->
             <label for="inputPassword">Password</label>
             <input type="password" class="form-control" ng-model="user.password" required>
           </div>
           <div class="checkbox pull-right">
-            <label>
+<!--             <label>
               <input type="checkbox">
-              Remember me </label>
+              Remember me </label> -->
           </div>
           <input type="submit" class="btn btn btn-primary" value="Log In" />
 

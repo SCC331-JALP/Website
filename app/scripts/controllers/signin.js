@@ -8,7 +8,7 @@
  * Controller of the jalpWebApp
  */
 angular.module('jalpWebApp')
-  .controller('SigninCtrl', function ($scope, $rootScope, $route, $window) {
+  .controller('SigninCtrl', function ($scope, $rootScope, $route, $window, $firebaseObject) {
 
   	var ref = $rootScope.ref;
   	$scope.user = {};
@@ -31,9 +31,15 @@ angular.module('jalpWebApp')
 		    console.log("Login Failed!", error);
 		  } else {
 		    console.log("Authenticated successfully with payload:", authData);
-		    $window.location.href = '/';
+		    $window.location.href = '/signin';
 		  }
 		});
-  	}  	
+  	}
+
+	ref.onAuth(function(authData){
+		$scope.userProfile = authData ? $firebaseObject(ref.child("users").child(authData.uid)) : null;
+	});
+
+	$scope.usersRef = $firebaseObject(ref.child("usersRef"));
 
   });
