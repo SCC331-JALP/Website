@@ -8,7 +8,7 @@
  * Controller of the jalpWebApp
  */
 angular.module('jalpWebApp')
-  .controller('SensoradminCtrl', function ($rootScope) {
+  .controller('SensoradminCtrl', function ($rootScope, $firebaseObject) {
 
     var ref = $rootScope.ref;
     var authData = $rootScope.authData;
@@ -16,7 +16,11 @@ angular.module('jalpWebApp')
     ref.onAuth(function(authData){
       if(authData){
         var UID = authData.uid;
-        var userReference = ref.child('users').child(UID);
+        var userReference = ref.child('users').child(UID).child('data').child('spots');
+        
+        userReference.on('value', function(data){
+          console.log(data.val());
+        });
 
         userReference.on('child_added', function(snapshot){
             handleNewSensor(snapshot.val(), snapshot.key())
