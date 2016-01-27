@@ -19,7 +19,7 @@ angular.module('jalpWebApp')
     if($rootScope.logged){
 
       //console.log($rootScope.authData.uid);
-      var USERNAME = "Povilas"//$rootScope.authData.uid; //username Initialize based on authentication
+      var USERNAME = $rootScope.authData.uid; //username Initialize based on authentication
       var userReference = new Firebase("https://sunsspot.firebaseio.com/users/" + USERNAME + "/spots")
 
 
@@ -35,7 +35,7 @@ angular.module('jalpWebApp')
         handleDeletedSensor(snapshot.val(), snapshot.key())
       });
     }else{
-      console.log("not logged");
+      console.log("ERROR: not logged in");
     }
 
   });
@@ -71,7 +71,7 @@ function handleNewSensor(snapshot, address){
 
 function handleChangedSensor(snapshot, address){
   var row = $("#"+address)[0];
-//  console.log(snapshot);
+  //  console.log(snapshot);
 
   var sensorString = "<tr id="+ address +"> <td id='name'>" + snapshot.name + "</td>" + "<td>" + snapshot.alive + "</td>" + "<td>" + snapshot.battery + "</td>";
   if(snapshot.button == 0){
