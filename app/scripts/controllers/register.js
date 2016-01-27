@@ -29,28 +29,28 @@ angular.module('jalpWebApp')
 
 	    },function(error, userData){
 	    	if(error){
-	    		console.log("Error creating user:", error);
+	    		console.log('Error creating user:', error);
 	    	}else{
-	    		console.log("Successfully created user account with uid:", userData.uid);
+	    		console.log('Successfully created user account with uid:', userData.uid);
 	    		$window.location.href = '/signin';
 	    		
 	    		//Should be private to user
-				var usersProfileRef = ref.child("users").child(userData.uid);
+				var usersProfileRef = ref.child('users').child(userData.uid);
 				usersProfileRef.set({
 					'firstName': $scope.user.firstName,
 					'lastName': $scope.user.lastName
 				});
 
 				//Should be accessed to the world
-				var email = $scope.user.email.replace("@", " ");
-				var email = email.replace(".", " ");
+				var email = $scope.user.email.replace('@', ' ');
+				email = email.replace('.', ' ');
 				console.log(email);
-				var usersRef = ref.child("usersRef").child(email);
+				var usersRef = ref.child('usersRef').child(email);
 				usersRef.set({
 					'uid': userData.uid
 				});
 	    	}
 	    });
-    }
+    };
     
   });

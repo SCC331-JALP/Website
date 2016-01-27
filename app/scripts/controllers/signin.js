@@ -19,7 +19,7 @@ angular.module('jalpWebApp')
   		if($scope.user.email && $scope.user.password){
   			$scope.login();
   		}
-  	}
+  	};
 
   	$scope.login = function()
   	{
@@ -28,18 +28,18 @@ angular.module('jalpWebApp')
 		  password : $scope.user.password
 		}, function(error, authData) {
 		  if (error) {
-		    console.log("Login Failed!", error);
+		    console.log('Login Failed!', error);
 		  } else {
-		    console.log("Authenticated successfully with payload:", authData);
+		    console.log('Authenticated successfully with payload:', authData);
 		    $window.location.href = '/signin';
 		  }
 		});
-  	}
+  	};
 
 	ref.onAuth(function(authData){
-		$scope.userProfile = authData ? $firebaseObject(ref.child("users").child(authData.uid)) : null;
+		$scope.userProfile = authData ? $firebaseObject(ref.child('users').child(authData.uid)) : null;
 	});
 
-	$scope.usersRef = $firebaseObject(ref.child("usersRef"));
+	$scope.usersRef = $firebaseObject(ref.child('usersRef'));
 
   });

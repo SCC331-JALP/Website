@@ -53,16 +53,16 @@ angular
 
   })
   .run(function($rootScope, $route, $window) {
-    $rootScope.ref = new Firebase("https://sunsspot.firebaseio.com/");
+    $rootScope.ref = new Firebase('https://sunsspot.firebaseio.com/');
 
     // Create a callback which logs the current auth state
     $rootScope.authDataCallback = function(authData) {
       if (authData) {
-        console.log("User " + authData.uid + " is logged in with " + authData.provider);
+        console.log('User ' + authData.uid + ' is logged in with ' + authData.provider);
       } else {
-        console.log("User is logged out");
+        console.log('User is logged out');
       }
-    }
+    };
 
     $rootScope.ref.onAuth($rootScope.authDataCallback);
     $rootScope.authData = $rootScope.ref.getAuth();
@@ -71,6 +71,6 @@ angular
     $rootScope.logout = function(){
       $rootScope.ref.unauth();
       $window.location.href = '/';
-    }
+    };
 
   });
