@@ -46,7 +46,7 @@ body {
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
   background: url('../images/jumbotron.png') no-repeat center center;
-  background-size: : cover;
+  background-size: cover;
 }
 .jumbotron .btn {
   font-size: 21px;
