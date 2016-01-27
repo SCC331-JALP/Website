@@ -9,34 +9,29 @@
  */
 angular.module('jalpWebApp')
   .controller('SensoradminCtrl', function ($rootScope) {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
 
+    var ref = $rootScope.ref;
+    var authData = $rootScope.authData;
 
-    if($rootScope.logged){
+    ref.onAuth(function(authData){
+      if(authData){
+        var UID = authData.uid;
+        var userReference = ref.child('users').child(UID);
 
-      //console.log($rootScope.authData.uid);
-      var USERNAME = $rootScope.authData.uid; //username Initialize based on authentication
-      var userReference = new Firebase("https://sunsspot.firebaseio.com/users/" + USERNAME + "/spots")
+        userReference.on('child_added', function(snapshot){
+            handleNewSensor(snapshot.val(), snapshot.key())
+        });
 
+        userReference.on("child_changed", function(snapshot){
+          handleChangedSensor(snapshot.val(), snapshot.key())
+        });
 
-      userReference.on('child_added', function(snapshot){
-          handleNewSensor(snapshot.val(), snapshot.key())
-      });
-
-      userReference.on("child_changed", function(snapshot){
-        handleChangedSensor(snapshot.val(), snapshot.key())
-      });
-
-      userReference.on("child_removed", function(snapshot){
-        handleDeletedSensor(snapshot.val(), snapshot.key())
-      });
-    }else{
-      console.log("ERROR: not logged in");
-    }
+        userReference.on("child_removed", function(snapshot){
+          handleDeletedSensor(snapshot.val(), snapshot.key())
+        });
+      }
+    });
+      
 
   });
 
