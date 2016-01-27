@@ -5,7 +5,12 @@
   padding: 0.2em 0;
 }
 
+.container {
+  background-color: #F5F3EE;
+}
+
 body {
+  background-color: #F5F3EE;
   padding: 0;
 }
 
@@ -13,6 +18,7 @@ body {
 .header,
 .marketing,
 .footer {
+  background-color: #F5F3EE;
   padding-left: 15px;
   padding-right: 15px;
 }
