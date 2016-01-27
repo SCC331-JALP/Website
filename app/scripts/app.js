@@ -50,7 +50,7 @@ angular
         redirectTo: '/'
       });
 
-      
+
   })
   .run(function($rootScope, $route, $window) {
     $rootScope.ref = new Firebase("https://sunsspot.firebaseio.com/");
@@ -67,7 +67,7 @@ angular
     $rootScope.ref.onAuth($rootScope.authDataCallback);
     $rootScope.authData = $rootScope.ref.getAuth();
     $rootScope.logged = $rootScope.authData ? true : false;
-    
+
     $rootScope.logout = function(){
       $rootScope.ref.unauth();
       $window.location.href = '/';
