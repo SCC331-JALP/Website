@@ -45,12 +45,10 @@ angular.module('jalpWebApp')
 				var email = $scope.user.email.replace('@', ' ');
 				email = email.replace('.', ' ');
 				console.log(email);
-				var usersRef = ref.child('usersRef').child(email);
-				usersRef.set({
-					'uid': userData.uid
-				});
+				var usersRef = ref.child('usersRef');
+				usersRef.child(email).set(userData.uid);
 	    	}
 	    });
-    };
+    }
     
   });
