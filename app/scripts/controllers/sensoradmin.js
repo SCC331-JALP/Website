@@ -17,7 +17,7 @@ angular.module('jalpWebApp')
       if(authData){
         var UID = authData.uid;
         var userReference = ref.child('users').child(UID).child('data').child('spots');
-        
+
         userReference.on('value', function(data){
           console.log(data.val());
         });
@@ -35,7 +35,7 @@ angular.module('jalpWebApp')
         });
       }
     });
-      
+
 
   });
 
@@ -56,7 +56,7 @@ function handleNewSensor(snapshot, address){
   }else if(snapshot.button == 4){
     sensorString += "<td> 2 up </td>"
   }
-  sensorString += "<td>" + snapshot.light + "</td>" + "<td>" + snapshot.temp + "</td>" + "<td>" + snapshot.compass + "</td>" + "<td>" + snapshot.infrared + "</td>" + "<td>" + snapshot.sound + "</td>" + "<td>" + address + "</td>"+"</tr>";
+  sensorString += "<td>" + snapshot.light + "</td>" + "<td>" + snapshot.accel + "</td>" + "<td>" + snapshot.temp + "</td>" + "<td>" + snapshot.compass + "</td>" + "<td>" + snapshot.infrared + "</td>" + "<td>" + snapshot.sound + "</td>" + "<td>" + address + "</td>"+"</tr>";
 
   $("#sensorTable").append(sensorString)
   increaseSensorCount();
@@ -84,7 +84,7 @@ function handleChangedSensor(snapshot, address){
   }else if(snapshot.button == 4){
     sensorString += "<td> 2 up </td>"
   }
-  sensorString += "<td>" + snapshot.light + "</td>" + "<td>" + snapshot.temp + "</td>" + "<td>" + snapshot.compass + "</td>" + "<td>" + snapshot.infrared + "</td>" + "<td>" + snapshot.sound + "</td>" + "<td>" + address + "</td>"+"</tr>";
+  sensorString += "<td>" + snapshot.light + "</td>" + "<td>" + snapshot.accel + "</td>" + "<td>" + snapshot.temp + "</td>" + "<td>" + snapshot.compass + "</td>" + "<td>" + snapshot.infrared + "</td>" + "<td>" + snapshot.sound + "</td>" + "<td>" + address + "</td>"+"</tr>";
 
   row.innerHTML = sensorString;
 
