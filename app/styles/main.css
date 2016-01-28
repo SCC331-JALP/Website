@@ -1,26 +1,23 @@
 .browsehappy {
   margin: 0.2em 0;
-  background: #F5F3EE;
+  
   color: #000;
   padding: 0.2em 0;
 }
 
 .container {
-  background: #F5F3EE;
-}
-
-#main{
-  background-color: #F5F3EE;
+  
 }
 
 html, body {
-  background: #F5F3EE;
-  background-color: #F5F3EE;
+  /*background-color: #F5F3EE;*/
   margin: 0px;
   padding: 0px;
   height: 100%;
 }
-
+body{
+  background-color:#F5F3EE;
+}
 h1 {
     margin:0px;
 }
@@ -29,20 +26,20 @@ h1 {
 .header,
 .marketing,
 .footer {
-  background: #F5F3EE;
+  
   padding-left: 15px;
   padding-right: 15px;
 }
 
 /* Custom page header */
 .header {
-  background: #F5F3EE;
+  
   border-bottom: 1px solid #e5e5e5;
   margin-bottom: 10px;
 }
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
-  background: #F5F3EE;
+  
   margin-top: 0;
   margin-bottom: 0;
   line-height: 40px;
@@ -51,14 +48,14 @@ h1 {
 
 /* Custom page footer */
 .footer {
-  background: #F5F3EE;
+  
   padding-top: 19px;
   color: #777;
   border-top: 1px solid #e5e5e5;
 }
 
 .container-narrow > hr {
-  background: #F5F3EE;
+  
   margin: 30px 0;
 }
 
@@ -85,7 +82,7 @@ h1 {
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {
-    background: #F5F3EE;
+    
     max-width: 730px;
   }
 
@@ -93,7 +90,7 @@ h1 {
   .header,
   .marketing,
   .footer {
-    background: #F5F3EE;
+    
     padding-left: 0;
     padding-right: 0;
   }

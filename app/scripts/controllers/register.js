@@ -12,8 +12,9 @@ angular.module('jalpWebApp')
 
   	var ref = $rootScope.ref;
 
-  	if(ref.getAuth())
-  		$location.path("/");
+  	if(ref.getAuth()){
+  		$location.path('/');
+  	}
   		
 
   	$scope.user = {};
