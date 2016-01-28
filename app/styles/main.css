@@ -12,11 +12,12 @@ html,
 body
 {
     height: 100%;
-    /*background-color: #F5F3EE;*/
     margin: 50px;
     padding: 0;
+
+    background-color: #f5f3ee;
 }
-body
+.ng-scope
 {
     background-color: #f5f3ee;
 }
