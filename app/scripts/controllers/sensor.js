@@ -38,7 +38,7 @@ angular.module('jalpWebApp')
 
   });
 
-  function handleNewSensor(snapshot, address){
+function handleNewSensor(snapshot, address){
   //console.log(snapshot);
   var sensorString = "<tr id="+ address +"> <td id='name'>" + snapshot.name + "</td>" + "<td id='alive'>" + snapshot.alive + "</td>" + "<td id='battery'>" + snapshot.battery + "</td>";
 
@@ -60,13 +60,8 @@ function handleChangedSensor(snapshot, address){
   var row = $("#"+address)[0];
   var cells = $(row).children()
 
-//  console.log(cells);
-
-
   cells.each(function(index, element){
     if(index < cells.length -1){ //exclude the last column from updating
-
-
       if(element.innerHTML !== ""+snapshot[$(element).attr('id')]){ //if the data on the page does not match the data in the database
       //  console.log("change detected");
         element.innerHTML = snapshot[$(element).attr('id')] //update the data
@@ -76,15 +71,8 @@ function handleChangedSensor(snapshot, address){
             $(element).removeClass('info');
         },1000);
       }
-
     }
-
   });
-
-
-
-
-
 
 }
 
@@ -97,9 +85,14 @@ function handleDeletedSensor(snapshot, address){
       row.remove();
   },1000);
  console.log("deleted row:" + address);
+
+ decrementSensorCount();
 }
 
 function increaseSensorCount(){
   $("#sensorCount")[0].innerHTML++
+}
 
+function decrementSensorCount(){
+  $("#sensorCount")[0].innerHTML--
 }
