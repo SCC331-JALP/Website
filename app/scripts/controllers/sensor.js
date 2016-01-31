@@ -8,8 +8,8 @@
  * Controller of the jalpWebApp
  */
 angular.module('jalpWebApp')
-  .controller('SensorCtrl', function () {
-    
+  .controller('SensorCtrl', function ($rootScope) {
+
     var ref = $rootScope.ref;
     var authData = $rootScope.authData;
 
@@ -18,9 +18,9 @@ angular.module('jalpWebApp')
         var UID = authData.uid;
         var userReference = ref.child('users').child(UID).child('data').child('spots');
 
-        userReference.on('value', function(data){
+      /*  userReference.on('value', function(data){
           console.log(data.val());
-        });
+        });*/
 
         userReference.on('child_added', function(snapshot){
             handleNewSensor(snapshot.val(), snapshot.key())
@@ -39,20 +39,12 @@ angular.module('jalpWebApp')
   });
 
   function handleNewSensor(snapshot, address){
-  console.log(snapshot);
-  var sensorString = "<tr id="+ address +"> <td id='name'>" + snapshot.name + "</td>" + "<td>" + snapshot.alive + "</td>" + "<td>" + snapshot.battery + "</td>";
-  if(snapshot.button == 0){
-    sensorString += "<td> None </td>"
-  }else if(snapshot.button == 1){
-    sensorString += "<td> 1 pressed </td>"
-  }else if(snapshot.button == 2){
-    sensorString += "<td> 1 up </td>"
-  }else if(snapshot.button == 3){
-    sensorString += "<td> 2 pressed </td>"
-  }else if(snapshot.button == 4){
-    sensorString += "<td> 2 up </td>"
-  }
-  sensorString += "<td>" + snapshot.light + "</td>" + "<td>" + snapshot.accel + "</td>" + "<td>" + snapshot.temp + "</td>" + "<td>" + snapshot.compass + "</td>" + "<td>" + snapshot.infrared + "</td>" + "<td>" + snapshot.sound + "</td>" + "<td>" + address + "</td>"+"</tr>";
+  //console.log(snapshot);
+  var sensorString = "<tr id="+ address +"> <td id='name'>" + snapshot.name + "</td>" + "<td id='alive'>" + snapshot.alive + "</td>" + "<td id='battery'>" + snapshot.battery + "</td>";
+
+  sensorString += "<td id='button'>"+snapshot.button+"</td>"
+
+  sensorString += "<td id='light'>" + snapshot.light + "</td>" + "<td id='accel'>" + snapshot.accel + "</td>" + "<td id='temp'>" + snapshot.temp + "</td>" + "<td id='compass'>" + snapshot.compass + "</td>" + "<td id='infrared'>" + snapshot.infrared + "</td>" + "<td id='sound'>" + snapshot.sound + "</td>" + "<td>" + address + "</td>"+"</tr>";
 
   $("#sensorTable").append(sensorString)
   increaseSensorCount();
@@ -66,28 +58,34 @@ angular.module('jalpWebApp')
 
 function handleChangedSensor(snapshot, address){
   var row = $("#"+address)[0];
-  //  console.log(snapshot);
+  var cells = $(row).children()
 
-  var sensorString = "<tr id="+ address +"> <td id='name'>" + snapshot.name + "</td>" + "<td>" + snapshot.alive + "</td>" + "<td>" + snapshot.battery + "</td>";
-  if(snapshot.button == 0){
-    sensorString += "<td> None </td>"
-  }else if(snapshot.button == 1){
-    sensorString += "<td> 1 pressed </td>"
-  }else if(snapshot.button == 2){
-    sensorString += "<td> 1 up </td>"
-  }else if(snapshot.button == 3){
-    sensorString += "<td> 2 pressed </td>"
-  }else if(snapshot.button == 4){
-    sensorString += "<td> 2 up </td>"
-  }
-  sensorString += "<td>" + snapshot.light + "</td>" + "<td>" + snapshot.accel + "</td>" + "<td>" + snapshot.temp + "</td>" + "<td>" + snapshot.compass + "</td>" + "<td>" + snapshot.infrared + "</td>" + "<td>" + snapshot.sound + "</td>" + "<td>" + address + "</td>"+"</tr>";
+//  console.log(cells);
 
-  row.innerHTML = sensorString;
 
-  $(row).addClass("info")
-  setTimeout(function(){
-      $(row).removeClass('info');
-  },1000);
+  cells.each(function(index, element){
+    if(index < cells.length -1){ //exclude the last column from updating
+
+
+      if(element.innerHTML !== ""+snapshot[$(element).attr('id')]){ //if the data on the page does not match the data in the database
+      //  console.log("change detected");
+        element.innerHTML = snapshot[$(element).attr('id')] //update the data
+
+        $(element).addClass("info") //add class and then remove it after 1 second
+        setTimeout(function(){
+            $(element).removeClass('info');
+        },1000);
+      }
+
+    }
+
+  });
+
+
+
+
+
+
 }
 
 function handleDeletedSensor(snapshot, address){
@@ -105,4 +103,3 @@ function increaseSensorCount(){
   $("#sensorCount")[0].innerHTML++
 
 }
-
