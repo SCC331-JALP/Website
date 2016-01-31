@@ -56,6 +56,11 @@ angular
         controller: 'ActionsCtrl',
         controllerAs: 'actions'
       })
+      .when('/dev', {
+        templateUrl: 'views/dev.html',
+        controller: 'DevCtrl',
+        controllerAs: 'dev'
+      })
       .otherwise({
         redirectTo: '/'
       });
