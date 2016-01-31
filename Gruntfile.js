@@ -37,7 +37,7 @@ module.exports = function (grunt) {
       },
       js: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-        tasks: ['newer:jshint:all'],
+//        tasks: ['newer:jshint:all'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
@@ -445,6 +445,3 @@ module.exports = function (grunt) {
     'build'
   ]);
 };
-
-
-
