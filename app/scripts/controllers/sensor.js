@@ -8,7 +8,7 @@
  * Controller of the jalpWebApp
  */
 angular.module('jalpWebApp')
-  .controller('SensorCtrl', function () {
+  .controller('SensorCtrl', function ($rootScope) {
     
     var ref = $rootScope.ref;
     var authData = $rootScope.authData;
