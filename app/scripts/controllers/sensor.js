@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc function
- * @name jalpWebApp.controller:SensoradminCtrl
+ * @name jalpWebApp.controller:SensorCtrl
  * @description
- * # SensoradminCtrl
+ * # SensorCtrl
  * Controller of the jalpWebApp
  */
 angular.module('jalpWebApp')
-  .controller('SensoradminCtrl', function ($rootScope, $firebaseObject) {
-
+  .controller('SensorCtrl', function () {
+    
     var ref = $rootScope.ref;
     var authData = $rootScope.authData;
 
@@ -36,13 +36,9 @@ angular.module('jalpWebApp')
       }
     });
 
-
   });
 
-
-
-
-function handleNewSensor(snapshot, address){
+  function handleNewSensor(snapshot, address){
   console.log(snapshot);
   var sensorString = "<tr id="+ address +"> <td id='name'>" + snapshot.name + "</td>" + "<td>" + snapshot.alive + "</td>" + "<td>" + snapshot.battery + "</td>";
   if(snapshot.button == 0){
@@ -109,3 +105,4 @@ function increaseSensorCount(){
   $("#sensorCount")[0].innerHTML++
 
 }
+

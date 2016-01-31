@@ -41,10 +41,20 @@ angular
         controller: 'SigninCtrl',
         controllerAs: 'signin'
       })
-      .when('/sensorAdmin', {
-        templateUrl: 'views/sensoradmin.html',
-        controller: 'SensoradminCtrl',
-        controllerAs: 'sensorAdmin'
+      .when('/dashboard', {
+        templateUrl: 'views/dashboard.html',
+        controller: 'DashboardCtrl',
+        controllerAs: 'dashboard'
+      })
+      .when('/sensor', {
+        templateUrl: 'views/sensor.html',
+        controller: 'SensorCtrl',
+        controllerAs: 'sensor'
+      })
+      .when('/actions', {
+        templateUrl: 'views/actions.html',
+        controller: 'ActionsCtrl',
+        controllerAs: 'actions'
       })
       .otherwise({
         redirectTo: '/'

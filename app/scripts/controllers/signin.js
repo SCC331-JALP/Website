@@ -31,7 +31,7 @@ angular.module('jalpWebApp')
 		    console.log('Login Failed!', error);
 		  } else {
 		    console.log('Authenticated successfully with payload:', authData);
-		    $window.location.href = '/signin';
+		    $window.location.href = '/sensor';
 		  }
 		});
   	};

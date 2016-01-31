@@ -1,23 +1,23 @@
 'use strict';
 
-describe('Controller: SensoradminCtrl', function () {
+describe('Controller: SensorCtrl', function () {
 
   // load the controller's module
   beforeEach(module('jalpWebApp'));
 
-  var SensoradminCtrl,
+  var SensorCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    SensoradminCtrl = $controller('SensoradminCtrl', {
+    SensorCtrl = $controller('SensorCtrl', {
       $scope: scope
       // place here mocked dependencies
     });
   }));
 
   it('should attach a list of awesomeThings to the scope', function () {
-    expect(SensoradminCtrl.awesomeThings.length).toBe(3);
+    expect(SensorCtrl.awesomeThings.length).toBe(3);
   });
 });
