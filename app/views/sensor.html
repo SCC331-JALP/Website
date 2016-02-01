@@ -1,5 +1,4 @@
-<div class="page-header"><h1>Sensors <small><span id="sensorCount">0</span> Sensors</small></h1>  </div>
-
+<div class="page-header"><h1>Sensors <small><span id="sensorCount">{{sensors.length}}</span> Sensors</small></h1>  </div>
 
 <table id="sensorTable" class="table table-striped">
   <tr>
@@ -14,6 +13,55 @@
     <td>Infrared</td>
     <td>Sound</td>
     <td>Address</td>
-
+    <td>Edit</td>
   </tr>
-</table>
+
+  <tr ng-repeat="sensor in sensors" ng-include="getTemplate(sensor)" id="{{sensor.$id}}">
+    
+  </tr>
+</table>  
+
+
+
+
+<!-- Sensor template -->
+<script type="text/ng-template" id="show">
+    <td id="name">{{sensor.name}}</td>
+    <td id="alive">{{sensor.alive}}</td>
+    <td id="battery">{{sensor.battery}}</td>
+    <td id="button">{{sensor.button}}</td>
+    <td id="light">{{sensor.light}}</td>
+    <td id="accel">{{sensor.accel}}</td>
+    <td id="temp">{{sensor.temp}}</td>
+    <td id="compass">{{sensor.compass}}</td>
+    <td id="infrared">{{sensor.infrared}}</td>
+    <td id="sound">{{sensor.sound}}</td>
+    <td>{{sensor.$id}}</td>
+    <td><button ng-click="editSensor(sensor)">Edit</button></td>
+</script>
+
+
+
+<!-- Edit template -->
+<script type="text/ng-template" id="edit">
+    <td id="name"><input class="form-control" type="text" ng-model="sensor.name" /></td>
+    <td id="alive"><input class="form-control" type="text" ng-model="sensor.alive" /></td>
+    <td id="battery"><input class="form-control" type="text" ng-model="sensor.battery" /></td>
+    <td id="button"><input class="form-control" type="text" ng-model="sensor.button" /></td>
+    <td id="light"><input class="form-control" type="text" ng-model="sensor.light" /></td>
+    <td id="accel"><input class="form-control" type="text" ng-model="sensor.accel" /></td>
+    <td id="temp"><input class="form-control" type="text" ng-model="sensor.temp" /></td>
+    <td id="compass"><input class="form-control" type="text" ng-model="sensor.compass" /></td>
+    <td id="infrared"><input class="form-control" type="text" ng-model="sensor.infrared" /></td>
+    <td id="sound"><input class="form-control" type="text" ng-model="sensor.sound" /></td>
+    <td>{{sensor.$id}}</td>
+    <td>
+        <button ng-click="save($index)">Save</button>
+        <button ng-click="cancel()">Cancel</button>
+    </td>
+</script>
+
+    <!-- Check JSON object -->
+    <!-- <pre>{{ sensors | json }}</pre> -->
+
+      
