@@ -41,15 +41,6 @@ angular.module('jalpWebApp')
         $scope.save = function(index){
           console.log('Saving sensor');
           var sensor = $scope.sensors[index];
-
-          /** ---------- Change stuff here starts ---------- **/
-          /** Example: $scope.sensors[index].name is bind to <input ng-model="sensor.name"> **/
-          sensor.name = $scope.sensors[index].name;
-          // sensor.alive = $scope.sensors[index].alive;
-          // sensor.battery = $scope.sensors[index].battery;
-          // sensor.button = $scope.sensors[index].button;
-          /** ---------- Change stuff here ends ---------- **/
-
           $scope.sensors.$save(sensor);
           $scope.cancel();
         }
