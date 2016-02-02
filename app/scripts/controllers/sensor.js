@@ -17,10 +17,29 @@ angular.module('jalpWebApp')
       if(authData){
         var UID = authData.uid;
         var userReference = ref.child('users').child(UID).child('data').child('spots');
-
+        var errorLogRef = ref.child('users').child(UID).child('data').child('log');
         //$scope.sensors is a synchronized variable, things change in this variable will change in firebase
         $scope.sensors = $firebaseArray(userReference);
+        $scope.errors = $firebaseArray(errorLogRef);
+        $scope.getTypeCount = function(){
+          var info = 0;
+          var warn = 0;
+          var error = 0;
+          var crit = 0;
 
+          for(var i = 0; i< $scope.errors.length; i++){
+            if($scope.errors[i].lvl == 0){
+              info++;
+            }else if($scope.errors[i].lvl == 1){
+              warn++;
+            }else if($scope.errors[i].lvl == 2){
+              error++;
+            }else if($scope.errors[i].lvl == 3){
+              crit++;
+            }
+          }
+          return {"info":info,"warning":warn,"error":error,"critical":crit}
+        }
         //When 'edit' button is clicked, a copy of selected data will be stored in this variable
         $scope.selectedData = [];
 
@@ -48,6 +67,14 @@ angular.module('jalpWebApp')
           $scope.sensors.$save(sensor);
 
           $scope.cancel();
+        }
+
+        $scope.deleteError = function(error){
+          console.log(  $("#"+error.$id));
+          $("#"+error.$id).slideUp(1000,function(){
+             $scope.errors.$remove(error)
+          })
+
         }
 
         userReference.on('child_added', function(snapshot){
@@ -114,13 +141,4 @@ function handleDeletedSensor(snapshot, address){
   },1000);
  console.log("deleted row:" + address);
 
- // decrementSensorCount();
 }
-
-// function increaseSensorCount(){
-//   $("#sensorCount")[0].innerHTML++
-// }
-
-// function decrementSensorCount(){
-//   $("#sensorCount")[0].innerHTML--
-// }

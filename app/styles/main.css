@@ -177,3 +177,84 @@ h3
 
     text-align: center;
 }
+
+.table-controls
+{
+    border-top: 0;
+    background-color: #7d1935;
+}
+
+.table-control
+{
+    font-size: 15pt;
+    font-weight: 10;
+
+    color: white;
+}
+
+/*
+START
+Sensor Admin Error log CSS
+
+*/
+
+.error-timestamp
+{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.alert
+{
+    position: relative;
+
+    overflow: auto;
+}
+.alert p
+{
+    color: black;
+}
+.alert-error
+{
+    border-color: #ffc266;
+    background-image: -webkit-linear-gradient(top, #ffebcc 0%, #ffd699 100%);
+    background-image:      -o-linear-gradient(top, #ffebcc 0%, #ffd699 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#ffebcc), to(#ffd699));
+    background-image:         linear-gradient(to bottom, #ffebcc 0%, #ffd699 100%);
+    background-repeat: repeat-x;
+
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffebcc', endColorstr='#ffd699', GradientType=0);
+}
+.badge.info
+{
+    color: black;
+    background-color: #5bc0de;
+}
+.badge.warning
+{
+    color: black;
+    background-color: #fdfd96;;
+}
+.badge.error
+{
+    color: black;
+    background-color: #ffc266;
+}
+.badge.critical
+{
+    color: black;
+    background-color: #d9534f;
+}
+
+#errorLogContainer
+{
+    overflow-y: hidden;
+
+    max-height: 500px;
+}
+/*
+END
+Sensor Admin Error log CSS
+
+*/
