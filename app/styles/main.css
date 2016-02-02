@@ -198,6 +198,19 @@ Sensor Admin Error log CSS
 
 */
 
+.error-timestamp
+{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.alert
+{
+    position: relative;
+
+    overflow: auto;
+}
 .alert p
 {
     color: black;
@@ -234,6 +247,12 @@ Sensor Admin Error log CSS
     background-color: #d9534f;
 }
 
+#errorLogContainer
+{
+    overflow-y: hidden;
+
+    max-height: 500px;
+}
 /*
 END
 Sensor Admin Error log CSS

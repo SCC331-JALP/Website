@@ -31,25 +31,44 @@
       <span class="badge error">{{getTypeCount().error}}</span>
       <span class="badge critical">{{getTypeCount().critical}}</span>
     </h1></div>
-    <div id="errorLogContainer">
-      <div ng-repeat="error in errors">
-          <div ng-if="error.lvl==0" class=" alert alert-info" >
-            <a href="#" class="close" data-dismiss="alert" aria-label="close" ng-click="deleteError(error)">&times;</a>
-            <p>{{error}}</p>
-          </div>
+      <div id="errorLogContainer">
+        <div ng-repeat="error in errors">
 
-          <div ng-if="error.lvl==1" class=" alert alert-warning">
-            <p>{{error.msg}}</p>
-          </div>
+            <div ng-if="error.lvl==0" class="alert alert-info" >
+              <a href="#" class="close" data-dismiss="alert" aria-label="close" ng-click="deleteError(error)">&times;</a>
+                  <p>{{error.msg}}</p>
+                  <div class="error-timestamp">
+                    {{error.$id | date: "dd MMM, HH:mm"}}
+                  </div>
+            </div>
 
-          <div ng-if="error.lvl==2" class=" alert alert-error">
+            <div ng-if="error.lvl==1" class=" alert alert-warning">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close" ng-click="deleteError(error)">&times;</a>
               <p>{{error.msg}}</p>
+              <div class="error-timestamp">
+                {{error.$id | date: "dd MMM, HH:mm"}}
+              </div>
+            </div>
+
+
+            <div ng-if="error.lvl==2" class=" alert alert-error">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close" ng-click="deleteError(error)">&times;</a>
+                <p>{{error.msg}}</p>
+                <div class="error-timestamp">
+                  {{error.$id | date: "dd MMM, HH:mm"}}
+                </div>
           </div>
 
-          <div ng-if="error.lvl==3" class=" alert alert-danger">
-            <p>{{error.msg}}</p>
-          </div>
 
+            <div ng-if="error.lvl==3" class=" alert alert-danger">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close" ng-click="deleteError(error)">&times;</a>
+              <p>{{error.msg}}</p>
+              <div class="error-timestamp">
+                {{error.$id | date: "dd MMM, HH:mm"}}
+              </div>
+            </div>
+        </div>
+      </div>
 
       </div>
 
