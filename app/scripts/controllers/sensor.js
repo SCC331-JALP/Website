@@ -70,8 +70,11 @@ angular.module('jalpWebApp')
         }
 
         $scope.deleteError = function(error){
-          console.log(error);
-          $scope.errors.$remove(error)
+          console.log(  $("#"+error.$id));
+          $("#"+error.$id).slideUp(1000,function(){
+             $scope.errors.$remove(error)
+          })
+
         }
 
         userReference.on('child_added', function(snapshot){
@@ -138,5 +141,4 @@ function handleDeletedSensor(snapshot, address){
   },1000);
  console.log("deleted row:" + address);
 
- // decrementSensorCount();
 }
