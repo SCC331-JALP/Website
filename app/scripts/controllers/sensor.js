@@ -40,8 +40,13 @@ angular.module('jalpWebApp')
 
         $scope.save = function(index){
           console.log('Saving sensor');
+
+          //sensor is bind to ng-model="sensor"
+          //If you want to bind a specific model, you can do
+          //var sensorName = $scope.sensors[index].name
           var sensor = $scope.sensors[index];
           $scope.sensors.$save(sensor);
+
           $scope.cancel();
         }
 
