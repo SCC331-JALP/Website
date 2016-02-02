@@ -13,13 +13,13 @@
     <td>Infrared</td>
     <td>Sound</td>
     <td>Address</td>
-    <td>Edit</td>
+  <!--  <td>Edit</td> -->
   </tr>
 
-  <tr ng-repeat="sensor in sensors" ng-include="getTemplate(sensor)" id="{{sensor.$id}}">
-    
+  <tr ng-repeat="sensor in sensors" ng-include="getTemplate(sensor)" id="{{sensor.$id}}" ng-click="editSensor(sensor)">
+
   </tr>
-</table>  
+</table>
 
 
 
@@ -37,7 +37,7 @@
     <td id="infrared">{{sensor.infrared}}</td>
     <td id="sound">{{sensor.sound}}</td>
     <td>{{sensor.$id}}</td>
-    <td><button ng-click="editSensor(sensor)">Edit</button></td>
+    <!--<td><button ng-click="editSensor(sensor)">Edit</button></td>-->
 </script>
 
 
@@ -55,7 +55,7 @@
     <td id="infrared"><input class="form-control" type="text" ng-model="sensor.infrared" /></td>
     <td id="sound"><input class="form-control" type="text" ng-model="sensor.sound" /></td>
     <td>{{sensor.$id}}</td>
-    <td>
+    <td class="table-controls">
         <button ng-click="save($index)">Save</button>
         <button ng-click="cancel()">Cancel</button>
     </td>
@@ -63,5 +63,3 @@
 
     <!-- Check JSON object -->
     <!-- <pre>{{ sensors | json }}</pre> -->
-
-      
