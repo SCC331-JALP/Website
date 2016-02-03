@@ -109,9 +109,10 @@ function tempUpdater(snap,roomElement,ref, spotName){
 
   for(var i=0;i<dataString.length;i++){
     if(dataString.charAt(i) == "t"){
-      $(roomElement).find('#room-temp')[0].innerHTML = snap.temp;
+      if(snap.temp != undefined)
+        $(roomElement).find('#room-temp')[0].innerHTML = snap.temp;
       reference.on("child_changed",function(snapshot){
-        if(snapshot.key() == "temp"){
+        if(snapshot.key() == "temp" && snapshot.val() != undefined){
           $(roomElement).find('#room-temp')[0].innerHTML = snapshot.val();
         }
       });
@@ -126,9 +127,10 @@ function lightUpdater(snap,roomElement,ref, spotName){
 
   for(var i=0;i<dataString.length;i++){
     if(dataString.charAt(i) == "l"){
-      $(roomElement).find('#room-light')[0].innerHTML = snap.light;
+      if(snap.light != undefined)
+        $(roomElement).find('#room-light')[0].innerHTML = snap.light;
       reference.on("child_changed",function(snapshot){
-        if(snapshot.key() == "light"){
+        if(snapshot.key() == "light" && snapshot.val() != undefined){
           $(roomElement).find('#room-light')[0].innerHTML = snapshot.val();
         }
       });
