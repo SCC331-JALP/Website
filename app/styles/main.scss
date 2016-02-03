@@ -2,132 +2,333 @@
 {
     margin: .2em 0;
     padding: .2em 0;
-
     color: #000;
 }
 
-html,
-body
-{
+body{
+  padding: 0 0;
+  margin:0 0;
+  font-family: 'Droid Sans', sans-serif;
+}
+
+// /* Everything but the jumbotron gets side spacing for mobile first views */
+// .header,
+// .marketing,
+// .footer
+// {
+//     padding-right: 15px;
+//     padding-left: 15px;
+// }
+
+// /* Custom page header */
+// .header
+// {
+//     margin-bottom: 10px;
+
+//     border-bottom: 1px solid #e5e5e5;
+// }
+// /* Make the masthead heading the same height as the navigation */
+// .header h3
+// {
+//     line-height: 40px;
+
+//     margin-top: 0;
+//     margin-bottom: 0;
+//     padding-bottom: 19px;
+// }
+
+// /* Custom page footer */
+// .footer
+// {
+//     padding-top: 19px;
+
+//     color: #777;
+//     border-top: 1px solid #e5e5e5;
+// }
+
+// .container-narrow > hr
+// {
+//     margin: 30px 0;
+// }
+
+// /* Main marketing message and sign up button */
+// .jumbotron
+// {
+//     text-align: center;
+
+//     border-bottom: 1px solid #e5e5e5;
+//     background: url('../images/jumbotron.png') no-repeat center center;
+//     background-size: cover;
+// }
+// .jumbotron .btn
+// {
+//     font-size: 21px;
+
+//     padding: 14px 24px;
+// }
+
+// /* Supporting marketing content */
+// .marketing
+// {
+//     margin: 40px 0;
+// }
+// .marketing p + h4
+// {
+//     margin-top: 28px;
+// }
+
+// /* Responsive: Portrait tablets and up */
+// @media screen and (min-width: 768px)
+// {
+//     .container
+//     {
+//         max-width: 730px;
+//     }
+
+//     /* Remove the padding we set earlier */
+//     .header,
+//     .marketing,
+//     .footer
+//     {
+//         padding-right: 0;
+//         padding-left: 0;
+//     }
+//     /* Space out the masthead */
+//     .header
+//     {
+//         margin-bottom: 30px;
+//     }
+//     /* Remove the bottom border on the jumbotron for visual effect */
+//     .jumbotron
+//     {
+//         border-bottom: 0;
+//     }
+// }
+
+/*FRONT-PAGE*/
+body{
+  padding: 0 0;
+  margin:0 0;
+  font-family: 'Droid Sans', sans-serif;
+}
+header{
+    width:100%;
+    height:100px;
+    position:relative;
+    border-bottom:1px solid #e7e7e7;
+}
+header .logo{
+    height:70px;
+    margin-top:10px;
+}
+
+.logo-blue{color:#47589A;}
+.logo-green{color:#10A355;}
+.logo-black{color:#3F3F3F;}
+.nav-jalp{
+    float:right;
+}
+.nav-jalp > li > a{
+    height:100px !important;
+    display:block;
+    line-height:5em;
+    color:#3F3F3F;
+}
+.nav-jalp > li > a:hover{
+    color:#47589A;
+}
+#block-intro-jalp{
+    min-height:550px;
+    background:url('../images/infolab.jpg') no-repeat center center;
+    background-size:cover;
+    position:relative;
+}
+.bg-overlay{
+    position:absolute;
+    left:0;
+    width:100%;
     height: 100%;
-    margin: 50px;
-    padding: 0;
-
-    background-color: #7d1935;
 }
-.ng-background
-{
-    background-color: #7d1935;
+.bg-overlay.pattern{
+    background:url('../images/pattern.png');
 }
-table
-{
-    background-color: white;
+.intro-title-jalp{
+    color:#FFFFFF;
+    transition: all 0.4s ease-in 0s;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-p,
-ul,
-ol
-{
-    color: #f5f3ee;
+.padding-jalp{
+    margin-top:13em;
 }
-
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer
-{
-    padding-right: 15px;
-    padding-left: 15px;
+.btn-jalp{
+    font-size: 18px;
+    color: #FFFFFF;
+    padding: 12px 34px;
+    margin: 10px 3px;
+    font-weight: normal;
+    position: relative;
+    transition: all 0.2s ease-in 0s;
 }
-
-/* Custom page header */
-.header
-{
-    margin-bottom: 10px;
-
-    border-bottom: 1px solid #e5e5e5;
+.intro-spot-jalp{
+    max-height:500px;
+    width:auto;
+    margin-top:8em;
 }
-/* Make the masthead heading the same height as the navigation */
-.header h3
-{
-    line-height: 40px;
-
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-bottom: 19px;
+#block-app-download{
+    min-height:300px;
+    background:url('../images/beach.jpg') top center no-repeat;
+    background-size:cover;
+    position:relative;
 }
-
-/* Custom page footer */
-.footer
-{
-    padding-top: 19px;
-
-    color: #777;
-    border-top: 1px solid #e5e5e5;
+#block-app-download h2{
+    margin-top:2em;
+    /*color:black;*/
 }
-
-.container-narrow > hr
-{
-    margin: 30px 0;
+#block-app-download p{
+    color:#FFFFFF;
 }
-
-/* Main marketing message and sign up button */
-.jumbotron
-{
+.intro-phone-jalp{
+    max-height:350px;
+    width:auto;
+    margin-top:2em;
+    margin-bottom:2em;
+}
+.app-store img{
+    width:153px;
+    height:45px;
+}
+#block-syn-jalp{
+    background-color: #F5F5F5;
+}
+#block-sync-jalp h2{
     text-align: center;
-
-    border-bottom: 1px solid #e5e5e5;
-    background: url('../images/jumbotron.png') no-repeat center center;
-    background-size: cover;
 }
-.jumbotron .btn
-{
-    font-size: 21px;
-
-    padding: 14px 24px;
+#block-sync-jalp span{
+    margin-top:2em;
 }
-
-/* Supporting marketing content */
-.marketing
-{
-    margin: 40px 0;
+#block-sync-jalp .app-description{
+    text-transform: uppercase;
+    font-size: 90%;
+    font-weight: bold;
+    color: #989898;
+    text-align: center;
+    margin: 0 auto;
 }
-.marketing p + h4
-{
-    margin-top: 28px;
+#block-team{
+    min-height:300px;
+    background:url('../images/intro.jpg') top center no-repeat;
+    background-size:cover;
+    position:relative;
+    color:white;
 }
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px)
-{
-    .container
-    {
-        max-width: 730px;
-    }
-
-    /* Remove the padding we set earlier */
-    .header,
-    .marketing,
-    .footer
-    {
-        padding-right: 0;
-        padding-left: 0;
-    }
-    /* Space out the masthead */
-    .header
-    {
-        margin-bottom: 30px;
-    }
-    /* Remove the bottom border on the jumbotron for visual effect */
-    .jumbotron
-    {
-        border-bottom: 0;
-    }
+/*Profile*/
+h6.description{
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #999;
+    border-bottom: 1px solid rgba(0, 0, 0,0.1);
+    padding-bottom: 5px;
 }
+.profile{
+    margin-top: 25px;
+}
+.profile h1{
+    font-weight: normal;
+    font-size: 20px;
+    margin:10px 0 0 0;
+}
+.profile h2{
+    font-size: 14px;
+    font-weight: lighter;
+    margin-top: 5px;
+}
+.profile .img-box{
+    opacity: 1;
+    display: block;
+    position: relative;
+}
+.profile .img-box:after{
+    content:"";
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+.img-box ul{
+    position: absolute;
+    z-index: 2;
+    bottom: 50px;
+    text-align: center;
+    width: 100%;
+    padding-left: 0px;
+    height: 0px;
+    margin:0px;
+    opacity: 0;
+}
+.profile .img-box:after, .img-box ul, .img-box ul li{
+    -webkit-transition: all 0.5s ease-in-out 0s;
+    -moz-transition: all 0.5s ease-in-out 0s;
+    transition: all 0.5s ease-in-out 0s;
+}
+.img-box ul i{
+    font-size: 20px;
+    letter-spacing: 10px;
+}
+.img-box ul li{
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #88C425;
+    margin: 2px;
+    padding: 5px;
+    display: inline-block;
+}
+.img-box a{
+    color:#fff;
+}
+.img-box:hover:after{
+    opacity: 1;
+}
+.img-box:hover ul{
+    opacity: 1;
+}
+.img-box ul a{
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    -moz-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+}
+.img-box a:hover li{
+    border-color: #fff;
+    color: #88C425;
+}
+a{
+    color:#88C425;
+}
+a:hover{
+    text-decoration:none;
+    color:#519548;
+}
+i.red{
+    color:#BC0213;
+}
+
+.footer-jalp{
+    padding:2em 0 2em 0;
+    background-color:rgba(0,0,0,.8);
+    color:white;
+}
+.footer-jalp ul{
+    list-style-type:none;
+    padding:0;
+}
+.copyright{
+    font-size:11px;
+}
+
+
 
 /*Sign in */
 .main
@@ -195,6 +396,7 @@ h3
         color: green;
     }
 }
+
 
 /*
 START

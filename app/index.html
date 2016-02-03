@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js">
   <head>
     <meta charset="utf-8">
@@ -13,7 +13,10 @@
     <!-- build:css(.tmp) styles/main.css -->
 
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
       <link rel="stylesheet" href="styles/main.css">
+      <link rel="stylesheet" href="styles/animate.css">
     <!-- endbuild -->
 
     <base href="/" />
@@ -25,46 +28,73 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="header">
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
-          <div class="navbar-header">
 
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
+    <header>
+      <div class="container">
+        <a href="/" class="navbar-left"><img class="logo" src="images/logo.png"></a>
 
-            <a class="navbar-brand" href="/">
-              <img alt="Brand" height="30" src="./images/logo.png">
-            </a>
-          </div>
+        <ul class="nav navbar-nav navbar-right nav-jalp">
+          <li ng-if="!logged"><a href="/signin">Signin</a></li>
+          <li ng-if="logged"><a href="/dashboard">Dashboard</a></li>
+          <li ng-if="logged"><a href="/actions">Action</a></li>
+          <li ng-if="logged"><a href="/sensor">Sensor</a></li>
+          <li ng-if="logged"><a ng-click="logout()">Logout</a></li>
+        </ul>
+      </div>
+    </header>
 
-          <div class="collapse navbar-collapse" id="js-navbar-collapse">
-            <ul class="nav navbar-nav navbar-right">
-              <li><a ng-href="/signin"><span class="glyphicon glyphicon-user"></span></a></li>
-              <li ng-if="logged"><a href="/dev" class="btn" style="color:red;font-weight:bold;">Admin</a></li>
-              <li ng-if="logged"><a href="/dashboard" class="btn">Dashboard</a></li>
-              <li ng-if="logged"><a href="/actions" class="btn">Action</a></li>
-              <li ng-if="logged"><a href="/sensor" class="btn">Sensor</a></li>
-              <li ng-if="logged"><a ng-click="logout()" class="btn">Logout</a></li>
+
+    <div ng-view></div>
+
+
+<!-- FOOTER -->
+  <footer class="container-fluid footer-jalp">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-2 col-md-offset-2 col-sm-6 footer-links-group collapsed">
+            <h3 class="footer-links-collapse-toggle">JALP</h3>
+            <ul class="footer-links-collapsible">
+                <li>
+                  <a href="/">About us</a>
+                </li>
+                <li>
+                  <a href="/">Contact</a>
+                </li>
             </ul>
           </div>
-        </div>
+
+          <div class="col-md-2 col-md-offset-1 col-sm-6 footer-links-group collapsed">
+            <h3 class="footer-links-collapse-toggle">SUPPORT</h3>
+            <ul class="footer-links-collapsible">
+                <li>
+                  <a href="/">FAQ</a>
+                </li>
+                <li>
+                  <a href="/">Contact</a>
+                </li>
+            </ul>
+          </div>
+
+          <div class="col-md-2 col-md-offset-1 col-sm-6 footer-links-group collapsed">
+            <h3 class="footer-links-collapse-toggle">Legal</h3>
+            <ul class="footer-links-collapsible">
+                <li>
+                  <a href="/">Cookies</a>
+                </li>
+                <li>
+                  <a href="/">Privacy</a>
+                </li>
+                <li>
+                  <a href="/">Terms & Conditions</a>
+                </li>
+            </ul>
+          </div>
       </div>
-    </div>
+      <div class="row text-center copyright">©Copyright 2006-2016 Lancaster University</div>
 
-
-    <div ng-view="" class="ng-background"></div>
-
-
-    <div class="footer">
-
-        <p><span class="glyphicon glyphicon-heart"></span> from the JALP team</p>
-
-    </div>
+  </div>
+  </footer>
+  <!-- FOOTER ENDS -->
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
