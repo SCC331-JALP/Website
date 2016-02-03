@@ -19,8 +19,13 @@ angular.module('jalpWebApp')
         var userReference = ref.child('users').child(UID).child('data').child('spots');
         var errorLogRef = ref.child('users').child(UID).child('data').child('log');
         //$scope.sensors is a synchronized variable, things change in this variable will change in firebase
+        $().tab
+
+
         $scope.sensors = $firebaseArray(userReference);
         $scope.errors = $firebaseArray(errorLogRef);
+        $scope.displayErrors = $scope.errors;
+
         $scope.getTypeCount = function(){
           var info = 0;
           var warn = 0;
@@ -40,6 +45,38 @@ angular.module('jalpWebApp')
           }
           return {"info":info,"warning":warn,"error":error,"critical":crit}
         }
+
+
+        $scope.filterErrors = function(type){
+          console.log(type);
+          console.log($scope.errors);
+
+
+            if(type == 'info'){
+              $scope.displayErrors =  $scope.errors.filter(function(er){
+                  return er.lvl == 0;
+                });
+            }else if(type == 'warning'){
+              $scope.displayErrors =  $scope.errors.filter(function(er){
+                  return er.lvl == 1;
+                });
+            }else if(type == 'error'){
+              $scope.displayErrors =  $scope.errors.filter(function(er){
+                  return er.lvl == 2;
+                });
+            }else if(type == 'critical'){
+              $scope.displayErrors =  $scope.errors.filter(function(er){
+                  return er.lvl == 3;
+                });
+            }else if(type == 'clear'){
+              $scope.displayErrors =  $scope.errors;
+            }
+
+        }
+
+
+
+
         //When 'edit' button is clicked, a copy of selected data will be stored in this variable
         $scope.selectedData = [];
 

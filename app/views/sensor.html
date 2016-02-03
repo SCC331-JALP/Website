@@ -13,6 +13,8 @@
         <td>Compass</td>
         <td>Infrared</td>
         <td>Sound</td>
+        <td>Stored data</td>
+        <td>Live data</td>
         <td>Address</td>
       <!--  <td>Edit</td> -->
         <td class="table-controls"></td>
@@ -26,13 +28,14 @@
 
   <div class="col-xs-4">
     <div class="page-header"><h1>Error Log
-      <span class="badge info">{{getTypeCount().info}}</span>
-      <span class="badge warning">{{getTypeCount().warning}}</span>
-      <span class="badge error">{{getTypeCount().error}}</span>
-      <span class="badge critical">{{getTypeCount().critical}}</span>
+      <span class="badge info" ng-click="filterErrors('info')">{{getTypeCount().info}}</span>
+      <span class="badge warning" ng-click="filterErrors('warning')">{{getTypeCount().warning}}</span>
+      <span class="badge error" ng-click="filterErrors('error')">{{getTypeCount().error}}</span>
+      <span class="badge critical" ng-click="filterErrors('critical')">{{getTypeCount().critical}}</span>
+      <span class="badge" ng-click="filterErrors('clear')">&times;</span>
     </h1></div>
       <div id="errorLogContainer">
-        <div ng-repeat="error in errors">
+        <div ng-repeat="error in displayErrors">
 
             <div id="{{error.$id}}" ng-if="error.lvl==0" class="alert alert-info alert-slide-up" >
               <a href="#" class="close"  aria-label="close" ng-click="deleteError(error)">&times;</a>
@@ -93,6 +96,8 @@
     <td id="compass">{{sensor.compass}}</td>
     <td id="infrared">{{sensor.infrared}}</td>
     <td id="sound">{{sensor.sound}}</td>
+    <td id="liveData">{{sensor.liveData}}</td>
+    <td id="storedData">{{sensor.storedData}}</td>
     <td>{{sensor.$id}}</td>
     <td class="table-controls"></td>
 </script>
@@ -111,6 +116,8 @@
     <td id="compass">{{sensor.compass}}</td>
     <td id="infrared">{{sensor.infrared}}</td>
     <td id="sound">{{sensor.sound}}</td>
+    <td id="liveData">{{sensor.liveData}}</td>
+    <td id="storedData">{{sensor.storedData}}</td>
     <td>{{sensor.$id}}</td>
     <td class="table-controls">
       <div>
