@@ -18,16 +18,12 @@ angular.module('jalpWebApp')
         var UID = authData.uid;
         var userReference = ref.child('users').child(UID).child('data').child('spots');
 
-      /*  userReference.on('value', function(data){
-          console.log(data.val());
-        });*/
-
         userReference.on('child_added', function(snapshot){
-            handleNewRoom(snapshot.val());
+            handleNewRoom(snapshot.val(), userReference,snapshot.key());
         });
 
         userReference.on("child_changed", function(snapshot){
-          handleChangedRoom(snapshot.val());
+          //handleChangedRoom(snapshot.val());
         });
 
         userReference.on("child_removed", function(snapshot){
@@ -39,7 +35,7 @@ angular.module('jalpWebApp')
 
   });
 
-function handleNewRoom(snap){
+function handleNewRoom(snap,ref,spotName){
     var room = snap.room;
     
     if(room == undefined){
@@ -59,6 +55,8 @@ function handleNewRoom(snap){
       roomElement.find("#room-desc")[0].innerHTML = 1;
       $("#roomContainer").append(roomElement);
       $(roomElement).removeClass("hidden");
+      tempUpdater(snap,roomElement, ref, spotName);
+      lightUpdater(snap,roomElement, ref, spotName);
     }
 }
 
@@ -102,4 +100,38 @@ function handleDeletedRoom(snap){
         $(roomElement).remove();
       }
     }
+}
+
+function tempUpdater(snap,roomElement,ref, spotName){
+  var dataString = snap.liveData;
+  console.log(spotName);
+  var reference = ref.child(spotName);
+
+  for(var i=0;i<dataString.length;i++){
+    if(dataString.charAt(i) == "t"){
+      $(roomElement).find('#room-temp')[0].innerHTML = snap.temp;
+      reference.on("child_changed",function(snapshot){
+        if(snapshot.key() == "temp"){
+          $(roomElement).find('#room-temp')[0].innerHTML = snapshot.val();
+        }
+      });
+    }
+  }
+}
+
+function lightUpdater(snap,roomElement,ref, spotName){
+  var dataString = snap.liveData;
+  console.log(spotName);
+  var reference = ref.child(spotName);
+
+  for(var i=0;i<dataString.length;i++){
+    if(dataString.charAt(i) == "l"){
+      $(roomElement).find('#room-light')[0].innerHTML = snap.light;
+      reference.on("child_changed",function(snapshot){
+        if(snapshot.key() == "light"){
+          $(roomElement).find('#room-light')[0].innerHTML = snapshot.val();
+        }
+      });
+    }
+  }
 }
