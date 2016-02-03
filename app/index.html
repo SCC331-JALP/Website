@@ -38,7 +38,7 @@
           <li ng-if="logged"><a href="/dashboard">Dashboard</a></li>
           <li ng-if="logged"><a href="/actions">Action</a></li>
           <li ng-if="logged"><a href="/sensor">Sensor</a></li>
-          <li ng-if="logged"><a ng-click="logout()">Logout</a></li>
+          <li ng-if="logged"><a href="/" ng-click="logout()">Logout</a></li>
         </ul>
       </div>
     </header>
@@ -52,41 +52,27 @@
   <div class="container">
       <div class="row">
           <div class="col-md-2 col-md-offset-2 col-sm-6 footer-links-group collapsed">
-            <h3 class="footer-links-collapse-toggle">JALP</h3>
-            <ul class="footer-links-collapsible">
-                <li>
-                  <a href="/">About us</a>
-                </li>
-                <li>
-                  <a href="/">Contact</a>
-                </li>
+            <h3 class="text-left">JALP</h3>
+            <ul>
+                <li><a href="/">About us</a></li>
+                <li><a href="/">Contact</a></li>
             </ul>
           </div>
 
           <div class="col-md-2 col-md-offset-1 col-sm-6 footer-links-group collapsed">
-            <h3 class="footer-links-collapse-toggle">SUPPORT</h3>
-            <ul class="footer-links-collapsible">
-                <li>
-                  <a href="/">FAQ</a>
-                </li>
-                <li>
-                  <a href="/">Contact</a>
-                </li>
+            <h3 class="text-left">SUPPORT</h3>
+            <ul>
+                <li><a href="/">FAQ</a></li>
+                <li><a href="/">Contact</a></li>
             </ul>
           </div>
 
           <div class="col-md-2 col-md-offset-1 col-sm-6 footer-links-group collapsed">
-            <h3 class="footer-links-collapse-toggle">Legal</h3>
-            <ul class="footer-links-collapsible">
-                <li>
-                  <a href="/">Cookies</a>
-                </li>
-                <li>
-                  <a href="/">Privacy</a>
-                </li>
-                <li>
-                  <a href="/">Terms & Conditions</a>
-                </li>
+            <h3 class="text-left">Legal</h3>
+            <ul>
+                <li><a href="/">Cookies</a></li>
+                <li><a href="/">Privacy</a></li>
+                <li><a href="/">Terms & Conditions</a></li>
             </ul>
           </div>
       </div>
