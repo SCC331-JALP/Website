@@ -37,7 +37,7 @@
       <div id="errorLogContainer">
         <div ng-repeat="error in displayErrors">
 
-            <div id="{{error.$id}}" ng-if="error.lvl==0" class="alert alert-info alert-slide-up" >
+            <div id="{{error.$id}}" ng-if="error.lvl==0" class="alert alert-info alert-slide-up animated fadeInUp" >
               <a href="#" class="close"  aria-label="close" ng-click="deleteError(error)">&times;</a>
                   <p>{{error.msg}}</p>
                   <div class="error-timestamp">
@@ -45,7 +45,7 @@
                   </div>
             </div>
 
-            <div id="{{error.$id}}" ng-if="error.lvl==1" class=" alert alert-warning alert-slide-up">
+            <div id="{{error.$id}}" ng-if="error.lvl==1" class=" alert alert-warning alert-slide-up animated fadeInUp">
               <a href="#" class="close"  aria-label="close" ng-click="deleteError(error)">&times;</a>
               <p>{{error.msg}}</p>
               <div class="error-timestamp">
@@ -54,7 +54,7 @@
             </div>
 
 
-            <div id="{{error.$id}}" ng-if="error.lvl==2" class=" alert alert-error alert-slide-up">
+            <div id="{{error.$id}}" ng-if="error.lvl==2" class=" alert alert-error alert-slide-up animated fadeInUp">
                 <a href="#" class="close"  aria-label="close" ng-click="deleteError(error)">&times;</a>
                 <p>{{error.msg}}</p>
                 <div class="error-timestamp">
@@ -63,7 +63,7 @@
           </div>
 
 
-            <div id="{{error.$id}}" ng-if="error.lvl==3" class=" alert alert-danger alert-slide-up">
+            <div id="{{error.$id}}" ng-if="error.lvl==3" class=" alert alert-danger alert-slide-up animated fadeInUp">
                 <a href="#" class="close"  aria-label="close" ng-click="deleteError(error)">&times;</a>
               <p>{{error.msg}}</p>
               <div class="error-timestamp">
@@ -107,15 +107,18 @@
 <!-- Edit template -->
 <script type="text/ng-template" id="edit">
 
-    <td colspan="12">
+    <td colspan="12" ng-init="initData(sensor.storedData)">
       <label> Name: <input class="form-control" type="text" ng-model="sensor.name" /></label><br>
       <label> Live Data: <input class="form-control" type="text" ng-model="sensor.liveData" /></label><br>
-      <label> Stored Data: <input class="form-control" type="text" ng-model="sensor.storedData" /></label><br>
+      <label> Old Stored Data: <input class="form-control" type="text" ng-model="storedData" /></label><br>
 
-
+      <div ng-repeat="type in sensorTypes">
+        <input type="checkbox" ng-model="type.selected" ng-checked="type.selected" />
+        <label>{{ type.title }}</label>
+      </div>
 
         <div class="table-control">
-          <span class="glyphicon glyphicon-ok table-control" ng-click="save($index)"></span>
+          <span class="glyphicon glyphicon-ok table-control" ng-click="save($index, storedData)"></span>
           <span class="glyphicon glyphicon-remove table-control" ng-click="cancel()"></span>
           <span class="glyphicon glyphicon-trash table-control" ng-click="delete($index)"></span>
         </div>
@@ -123,8 +126,7 @@
     </td>
   <td>{{sensor.$id}}</td>
 
-
-
+  
 
 </script>
 

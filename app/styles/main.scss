@@ -345,6 +345,9 @@ Sensor Admin Error log CSS
 
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffebcc', endColorstr='#ffd699', GradientType=0);
 }
+.badge{
+    cursor: pointer;
+}
 .badge.info
 {
     color: black;

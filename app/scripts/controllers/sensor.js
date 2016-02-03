@@ -18,13 +18,81 @@ angular.module('jalpWebApp')
         var UID = authData.uid;
         var userReference = ref.child('users').child(UID).child('data').child('spots');
         var errorLogRef = ref.child('users').child(UID).child('data').child('log');
-        //$scope.sensors is a synchronized variable, things change in this variable will change in firebase
+        
         $().tab
 
-
+        //$scope.sensors is a synchronized variable, things change in this variable will change in firebase
         $scope.sensors = $firebaseArray(userReference);
         $scope.errors = $firebaseArray(errorLogRef);
         $scope.displayErrors = $scope.errors;
+        $scope.storedData;
+        $scope.sensorTypes = [{
+          title: 'compass',
+          prefix: 'c',
+        },{
+          title: 'temperature',
+          prefix: 't',
+        },{
+          title: 'light',
+          prefix: 'l',
+        },{
+          title: 'acceleration',
+          prefix: 'a',
+        },{
+          title: 'button',
+          prefix: 'b',
+        },{
+          title: 'sound',
+          prefix: 's',
+        },{
+          title: 'battery ',
+          prefix: 'e',
+        },{
+          title: 'infrared',
+          prefix: 'i',
+        },{
+          title: 'A2',
+          prefix: 'w',
+        },{
+          title: 'A3',
+          prefix: 'x',
+        },{
+          title: 'D2',
+          prefix: 'y',
+        },{
+          title: 'D3',
+          prefix: 'z',
+        },{
+          title: 'on/off',
+          prefix: 'o',
+        }];
+
+        $scope.clear = function(){
+          for(var i = 0; i < $scope.sensorTypes.length; i++){
+            $scope.sensorTypes[i].selected = false;
+          }
+        }
+
+        $scope.initData = function(fbStoredData){
+          console.log('initData called.');
+          $scope.storedData = '';
+          $scope.clear();
+          $scope.storedData = fbStoredData;
+          for(var i = 0; i < $scope.sensorTypes.length; i++){
+            if(fbStoredData.indexOf($scope.sensorTypes[i].prefix) !== -1){
+             $scope.sensorTypes[i].selected = true;
+            }
+          }
+        }
+
+        $scope.$watch('sensorTypes', function() {
+          $scope.storedData = '';
+          for(var i = 0; i < $scope.sensorTypes.length; i++) {
+              if($scope.sensorTypes[i].selected === true){
+                  $scope.storedData += $scope.sensorTypes[i].prefix;
+              }
+          }
+        }, true);
 
         $scope.getTypeCount = function(){
           var info = 0;
@@ -94,15 +162,12 @@ angular.module('jalpWebApp')
           $scope.selectedData = [];
         }
 
-        $scope.save = function(index){
+        $scope.save = function(index, storedData){
           console.log('Saving sensor');
-
-          //sensor is bind to ng-model="sensor"
-          //If you want to bind a specific model, you can do
-          //var sensorName = $scope.sensors[index].name
+          $scope.sensors[index].storedData = storedData;
+          console.log(storedData);
           var sensor = $scope.sensors[index];
           $scope.sensors.$save(sensor);
-
           $scope.cancel();
         }
 
