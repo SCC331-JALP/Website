@@ -106,6 +106,14 @@ angular.module('jalpWebApp')
           $scope.cancel();
         }
 
+        $scope.delete = function(index){
+          console.log("deleting spot: " + index);
+
+          var sensor = $scope.sensors[index];
+          $scope.sensors.$remove(sensor);
+          $scope.cancel();
+        }
+
         $scope.deleteError = function(error){
           console.log(  $("#"+error.$id));
           $("#"+error.$id).slideUp(1000,function(){

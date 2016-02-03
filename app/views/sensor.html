@@ -13,11 +13,10 @@
         <td>Compass</td>
         <td>Infrared</td>
         <td>Sound</td>
-        <td>Stored data</td>
         <td>Live data</td>
+        <td>Stored data</td>
         <td>Address</td>
       <!--  <td>Edit</td> -->
-        <td class="table-controls"></td>
       </tr>
 
       <tr ng-repeat="sensor in sensors" ng-include="getTemplate(sensor)" id="{{sensor.$id}}" ng-click="editSensor(sensor)">
@@ -99,32 +98,33 @@
     <td id="liveData">{{sensor.liveData}}</td>
     <td id="storedData">{{sensor.storedData}}</td>
     <td>{{sensor.$id}}</td>
-    <td class="table-controls"></td>
+
 </script>
 
 
 
 <!-- Edit template -->
 <script type="text/ng-template" id="edit">
-    <td id="name"><input class="form-control" type="text" ng-model="sensor.name" /></td>
-    <td id="alive">{{sensor.alive}}</td>
-    <td id="battery">{{sensor.battery}}</td>
-    <td id="button">{{sensor.button}}</td>
-    <td id="light">{{sensor.light}}</td>
-    <td id="accel">{{sensor.accel}}</td>
-    <td id="temp">{{sensor.temp}}</td>
-    <td id="compass">{{sensor.compass}}</td>
-    <td id="infrared">{{sensor.infrared}}</td>
-    <td id="sound">{{sensor.sound}}</td>
-    <td id="liveData"><input class="form-control" type="text" ng-model="sensor.liveData" /></td>
-    <td id="storedData"><input class="form-control" type="text" ng-model="sensor.storedData" /></td>
-    <td>{{sensor.$id}}</td>
-    <td class="table-controls">
-      <div>
-        <span class="glyphicon glyphicon-ok table-control" ng-click="save($index)"></span>
-        <span class="glyphicon glyphicon-remove table-control" ng-click="cancel()"></span>
-      </div>
+
+    <td colspan="12">
+      <label> Name: <input class="form-control" type="text" ng-model="sensor.name" /></label><br>
+      <label> Live Data: <input class="form-control" type="text" ng-model="sensor.liveData" /></label><br>
+      <label> Stored Data: <input class="form-control" type="text" ng-model="sensor.storedData" /></label><br>
+
+
+
+        <div class="table-control">
+          <span class="glyphicon glyphicon-ok table-control" ng-click="save($index)"></span>
+          <span class="glyphicon glyphicon-remove table-control" ng-click="cancel()"></span>
+          <span class="glyphicon glyphicon-trash table-control" ng-click="delete($index)"></span>
+        </div>
+
     </td>
+  <td>{{sensor.$id}}</td>
+
+
+
+
 </script>
 
     <!-- Check JSON object -->

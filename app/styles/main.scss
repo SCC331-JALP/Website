@@ -189,7 +189,11 @@ h3
     font-size: 15pt;
     font-weight: 10;
 
-    color: white;
+    color: red;
+    .glyphicon-ok
+    {
+        color: green;
+    }
 }
 
 /*
