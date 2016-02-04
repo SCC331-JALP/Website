@@ -52,7 +52,7 @@ function handleNewRoom(snap,ref,spotName){
       var roomElement =  $("#roomTemplate").clone();
       $(roomElement).attr("id",room);
       roomElement.find("#room-name")[0].innerHTML =  room;
-      roomElement.find("#room-desc")[0].innerHTML = 1;
+      roomElement.find("#room-desc")[0].innerHTML = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione, dolores?';
       $("#roomContainer").append(roomElement);
       $(roomElement).removeClass("hidden");
       tempUpdater(snap,roomElement, ref, spotName);
@@ -111,9 +111,12 @@ function tempUpdater(snap,roomElement,ref, spotName){
     if(dataString.charAt(i) == "t"){
       if(snap.temp != undefined)
         $(roomElement).find('#room-temp')[0].innerHTML = snap.temp;
+        $(roomElement).find('#room-temp-bar').css("width", snap.temp + '%');
+        
       reference.on("child_changed",function(snapshot){
         if(snapshot.key() == "temp" && snapshot.val() != undefined){
           $(roomElement).find('#room-temp')[0].innerHTML = snapshot.val();
+          $(roomElement).find('#room-temp-bar').css("width", snapshot.val() + '%');
         }
       });
     }
@@ -129,9 +132,11 @@ function lightUpdater(snap,roomElement,ref, spotName){
     if(dataString.charAt(i) == "l"){
       if(snap.light != undefined)
         $(roomElement).find('#room-light')[0].innerHTML = snap.light;
+        $(roomElement).find('#room-light-bar').css("width", snap.light + '%');
       reference.on("child_changed",function(snapshot){
         if(snapshot.key() == "light" && snapshot.val() != undefined){
           $(roomElement).find('#room-light')[0].innerHTML = snapshot.val();
+          $(roomElement).find('#room-light-bar').css("width", snapshot.val() + '%');
         }
       });
     }
