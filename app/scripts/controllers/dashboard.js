@@ -100,10 +100,13 @@ function handleDeletedRoom(snap){
     console.log("Removing spot from "+room);
     if($("#"+room).length > 0){
       var roomElement =  $("#"+room);
-      var spotNo = roomElement.find("#room-desc")[0].innerText;
-      spotNo--;
+      var spotString = roomElement.find("#room-desc")[0].innerText;
+      var spotNo = spotString.charAt(spotString.length - 1);
+      var oldSpotNo = spotNo;
+      spotNo --;
       if(spotNo > 0){
-        roomElement.find("#room-desc")[0].innerHTML = spotNo;
+        newSpotStirng = spotString.replace(oldSpotNo,spotNo);
+        roomElement.find("#room-desc")[0].innerHTML = newSpotString;
       }else{
         $(roomElement).remove();
       }
