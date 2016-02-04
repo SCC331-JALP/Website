@@ -107,20 +107,34 @@
 <!-- Edit template -->
 <script type="text/ng-template" id="edit">
 
-    <td colspan="12" ng-init="initData(sensor.storedData)">
+    <td colspan="12" ng-init="initLiveData(sensor.liveData);initStoredData(sensor.storedData)">
       <label> Name: <input class="form-control" type="text" ng-model="sensor.name" /></label><br>
-      <label> Live Data: <input class="form-control" type="text" ng-model="sensor.liveData" /></label><br>
-      <label> Old Stored Data: <input class="form-control" type="text" ng-model="storedData" /></label><br>
+      
+      <div class="row">
 
-      <div ng-repeat="type in sensorTypes">
-        <input type="checkbox" ng-model="type.selected" ng-checked="type.selected" />
-        <label>{{ type.title }}</label>
+        <div class="col-md-4">
+          <label> Live Data: <input class="form-control" type="text" ng-model="liveData" disabled/></label><br>
+          <div ng-repeat="type in sensorTypesLive">
+            <input type="checkbox" ng-model="type.selected" ng-checked="type.selected" />
+            <label>{{ type.title }}</label>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <label> Stored Data: <input class="form-control" type="text" ng-model="storedData" disabled/></label><br>
+          <div ng-repeat="type in sensorTypes" class="animated" ng-class="type.enabled ? 'fadeInLeft' : 'hide'">
+              <input type="checkbox" ng-model="type.selected" ng-checked="" />
+              <label>{{ type.title }}</label>
+          </div>
+        </div>
       </div>
+      
+      <hr>
 
         <div class="table-control">
-          <span class="glyphicon glyphicon-ok table-control" ng-click="save($index, storedData)"></span>
-          <span class="glyphicon glyphicon-remove table-control" ng-click="cancel()"></span>
-          <span class="glyphicon glyphicon-trash table-control" ng-click="delete($index)"></span>
+          <span class="glyphicon glyphicon-ok table-control btn btn-lg" ng-click="save($index, storedData)"></span>
+          <span class="glyphicon glyphicon-remove table-control btn btn-lg" ng-click="cancel()"></span>
+          <span class="glyphicon glyphicon-trash table-control btn btn-lg" ng-click="delete($index)"></span>
         </div>
 
     </td>

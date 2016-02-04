@@ -1,23 +1,32 @@
-<div id="roomContainer" class="row">
-</div>
+<style>
+.room{
+    background-color: #eee;
+    border-radius: 3px;
+    padding: 5px;
+    border: 1px solid #ddd;
+}
+</style>
 
-<!--
+<div class="container">
+	<div class="content-jalp">
+		<div id="roomContainer" class="row"></div>
 
-ROOM TEMPLATE
-
- -->
-<div id="roomTemplate" class="room col-xs-4 hidden">
-	<div class="col-sm-6">
-	    <div class="card card-block">
-		  <div class="room-contents">
-		  </div>
-		  <div class="room-desc">
-		    <p id="room-name">Room Name</p>
-		    <p id="room-desc">A bit longer room description : might limit input to 140 chars.</p>
-		    <p id="room-temp">No temperature reading</p>
-		    <p id="room-light">No light reading</p>
-		    <a href="#" class="btn btn-primary">Go somewhere</a>
-		  </div>
+		<!-- ROOM TEMPLATE -->
+		<div id="roomTemplate" class="room col-xs-4 col-xs-offset-2 hidden animated flipInX">
+			<div class="col-sm-6">
+			    <div class="card card-block">
+				  <div class="room-contents">
+				  </div>
+				  <div class="room-desc">
+				    <p id="room-name">Room Name</p>
+				    <p id="room-desc">A bit longer room description : might limit input to 140 chars.</p>
+				    <p id="room-temp">No temperature reading</p>
+				    <p id="room-light">No light reading</p>
+				    <a href="#" class="btn btn-primary">Go somewhere</a>
+				  </div>
+				</div>
+			</div>
 		</div>
+
 	</div>
 </div>

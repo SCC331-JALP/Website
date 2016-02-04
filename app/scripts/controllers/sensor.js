@@ -26,6 +26,7 @@ angular.module('jalpWebApp')
         $scope.errors = $firebaseArray(errorLogRef);
         $scope.displayErrors = $scope.errors;
         $scope.storedData;
+        $scope.liveData;
         $scope.sensorTypes = [{
           title: 'compass',
           prefix: 'c',
@@ -67,20 +68,46 @@ angular.module('jalpWebApp')
           prefix: 'o',
         }];
 
-        $scope.clear = function(){
+        $scope.sensorTypesLive = angular.copy($scope.sensorTypes);
+
+        $scope.clearStored = function(){
           for(var i = 0; i < $scope.sensorTypes.length; i++){
             $scope.sensorTypes[i].selected = false;
           }
         }
+        $scope.clearLive = function(){
+          for(var i = 0; i < $scope.sensorTypesLive.length; i++){
+            $scope.sensorTypesLive[i].selected = false;
+          }
+        }
 
-        $scope.initData = function(fbStoredData){
-          console.log('initData called.');
+        $scope.initStoredData = function(fbStoredData){
+          console.log('initDataStored called.');
           $scope.storedData = '';
-          $scope.clear();
+          $scope.clearStored();
           $scope.storedData = fbStoredData;
           for(var i = 0; i < $scope.sensorTypes.length; i++){
-            if(fbStoredData.indexOf($scope.sensorTypes[i].prefix) !== -1){
-             $scope.sensorTypes[i].selected = true;
+
+            // //If firebase stored data string contains sensor type prefix
+            // if(fbStoredData.indexOf($scope.sensorTypes[i].prefix) !== -1){
+            //     $scope.sensorTypes[i].selected = true;
+            // }
+            if($scope.liveData.indexOf($scope.sensorTypes[i].prefix) !== -1){
+                $scope.sensorTypes[i].enabled = true;
+            }
+
+            
+          }
+        }
+
+        $scope.initLiveData = function(fbLiveData){
+          console.log('initLiveData called.');
+          $scope.liveData = '';
+          $scope.clearLive();
+          $scope.liveData = fbLiveData;
+          for(var i = 0; i < $scope.sensorTypesLive.length; i++){
+            if(fbLiveData.indexOf($scope.sensorTypesLive[i].prefix) !== -1){
+             $scope.sensorTypesLive[i].selected = true;
             }
           }
         }
@@ -90,6 +117,18 @@ angular.module('jalpWebApp')
           for(var i = 0; i < $scope.sensorTypes.length; i++) {
               if($scope.sensorTypes[i].selected === true){
                   $scope.storedData += $scope.sensorTypes[i].prefix;
+              }
+          }
+        }, true);
+
+        $scope.$watch('sensorTypesLive', function() {
+          $scope.liveData = '';
+          for(var i = 0; i < $scope.sensorTypesLive.length; i++) {
+              if($scope.sensorTypesLive[i].selected === true){
+                  $scope.liveData += $scope.sensorTypesLive[i].prefix;
+                  $scope.sensorTypes[i].enabled = true;
+              }else{
+                $scope.sensorTypes[i].enabled = false;
               }
           }
         }, true);
@@ -231,9 +270,9 @@ function handleChangedSensor(snapshot, address){
       //  console.log("change detected");
         element.innerHTML = snapshot[$(element).attr('id')] //update the data
 
-        $(element).addClass("info") //add class and then remove it after 1 second
+        $(element).addClass("info animated zoomIn") //add class and then remove it after 1 second
         setTimeout(function(){
-            $(element).removeClass('info');
+            $(element).removeClass('info animated zoomIn');
         },1000);
       }
     }
