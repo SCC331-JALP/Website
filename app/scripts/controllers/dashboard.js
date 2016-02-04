@@ -39,7 +39,7 @@ function handleNewRoom(snap,ref,spotName){
     var room = snap.room;
     
     if(room == undefined){
-      room = "no room";
+      room = "no-room";
     }
     console.log(room);
     if($("#"+room).length > 0){
@@ -65,7 +65,7 @@ function handleChangedRoom(snap){
     var room = snap.room;
 
     if(room == undefined){
-      room = "no room";
+      room = "no-room";
     }
     console.log(room);
     if($("#"+room).length > 0){
@@ -87,7 +87,7 @@ function handleChangedRoom(snap){
 function handleDeletedRoom(snap){
     var room = snap.room;
     if(room == undefined){
-      room = "no room";
+      room = "no-room";
     }
     console.log("Removing spot from "+room);
     if($("#"+room).length > 0){
