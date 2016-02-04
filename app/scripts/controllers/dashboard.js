@@ -111,12 +111,12 @@ function tempUpdater(snap,roomElement,ref, spotName){
     if(dataString.charAt(i) == "t"){
       if(snap.temp != undefined)
         $(roomElement).find('#room-temp')[0].innerHTML = snap.temp;
-        $(roomElement).find('#room-temp-bar').css("width", snap.temp + '%');
+        // $(".progress-temp").find('#room-temp-bar').css("width", snap.temp + '%');
         
       reference.on("child_changed",function(snapshot){
         if(snapshot.key() == "temp" && snapshot.val() != undefined){
           $(roomElement).find('#room-temp')[0].innerHTML = snapshot.val();
-          $(roomElement).find('#room-temp-bar').css("width", snapshot.val() + '%');
+          // $(".progress-temp").find('#room-temp-bar').css("width", snapshot.val() + '%');
         }
       });
     }
@@ -132,11 +132,11 @@ function lightUpdater(snap,roomElement,ref, spotName){
     if(dataString.charAt(i) == "l"){
       if(snap.light != undefined)
         $(roomElement).find('#room-light')[0].innerHTML = snap.light;
-        $(roomElement).find('#room-light-bar').css("width", snap.light + '%');
+        // $(".progress-light").find('#room-light-bar').css("width", snap.light + '%');
       reference.on("child_changed",function(snapshot){
         if(snapshot.key() == "light" && snapshot.val() != undefined){
           $(roomElement).find('#room-light')[0].innerHTML = snapshot.val();
-          $(roomElement).find('#room-light-bar').css("width", snapshot.val() + '%');
+          // $(".progress-light").find('#room-light-bar').css("width", snapshot.val() + '%');
         }
       });
     }

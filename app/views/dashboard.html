@@ -1,10 +1,38 @@
+<!--/////////////////////////////////// OLD DESIGN ///////////////////////////////////-->
+<!-- <div id="roomContainer" class="row">
+</div>
+
+<div id="roomTemplate" class="room col-xs-4 hidden">
+	<div class="col-sm-6">
+	    <div class="card card-block">
+		  <div class="room-contents">
+		  </div>
+		  <div class="room-desc">
+		    <p id="room-name">Room Name</p>
+		    <p id="room-desc">A bit longer room description : might limit input to 140 chars.</p>
+		    <p id="room-temp">No temperature reading</p>
+		    <p id="room-light">No light reading</p>
+		    <a href="#" class="btn btn-primary">Go somewhere</a>
+		  </div>
+		</div>
+	</div>
+</div> -->
+
+
+<!--/////////////////////////////////// NEW DESIGN ///////////////////////////////////-->
 <style>
+#room-dashboard{
+	background-color:#2C3E50;
+	position:relative;
+}
 .room{
     background-color: #2c3e50;
     border-radius: 5px;
     padding: 10px;
     border: 1px solid #ddd;
     color:#FFFFFF;
+    margin:3em;
+    box-shadow:0px 0px 0px #FFFFFF;
 }
 .room h3{
 	line-height:100%;
@@ -16,42 +44,46 @@
 }
 </style>
 
-<div class="container">
-	<div class="content-jalp">
-		<div id="roomContainer" class="row"></div>
+<div class="container-fluid" id="room-dashboard">	
+<div class="bg-overlay pattern"></div>
+	<div class="container" >
 
-		<!-- ROOM TEMPLATE -->
-		<div id="roomTemplate" class="room col-xs-4 col-xs-offset-2 hidden animated flipInX">
+		<div class="content-jalp">
 
-			    <div class="card card-block">
-				  <div class="room-contents">
-				  </div>
-				  <div class="room-desc">
-				    <h3 id="room-name">[RoomName]</h3>
-				    
-				    <p id="room-desc">A bit longer room description : might limit input to 140 chars.</p>
-					<hr>
+			<div id="roomContainer" class="row"></div>
+			
+			<!-- ROOM TEMPLATE -->
+			<div id="roomTemplate" class="room col-md-3 hidden animated flipInX">
 
-					<div class="progress">
-					  <div id="room-temp-bar" class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60"
-					  aria-valuemin="0" aria-valuemax="100" style="width:60%">
-					    Temperature: <span id="room-temp">[No temperature reading]</span><span>&deg;C</span>
+				    <div class="card card-block">
+					  <div class="room-contents">
+					  </div>
+					  <div class="room-desc">
+					    <h3 id="room-name">[RoomName]</h3>
+					    
+					    <p id="room-desc">A bit longer room description : might limit input to 140 chars.</p>
+						<hr>
+
+						<div class="progress progress-temp">
+						  <div id="room-temp-bar" class="room-temp-bar progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60"
+						  aria-valuemin="0" aria-valuemax="100" style="width:60%">
+						    Temperature: <span id="room-temp">[No temperature reading]</span><span>&deg;C</span>
+						  </div>
+						</div>
+
+						<div class="progress progress-light">
+						  <div id="room-light-bar" class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60"
+						  aria-valuemin="0" aria-valuemax="100" style="width:100%">
+						    Light: <span id="room-light">[No light reading]</span>
+						  </div>
+						</div>
+
+					    <a href="#" class="btn btn-primary">Go somewhere</a>
 					  </div>
 					</div>
-
-					<div class="progress">
-					  <div id="room-light-bar" class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60"
-					  aria-valuemin="0" aria-valuemax="100" style="width:100%">
-					    Light: <span id="room-light">[No light reading]</span>
-					  </div>
-					</div>
-
-				    <a href="#" class="btn btn-primary">Go somewhere</a>
-				  </div>
-				</div>
-
+			</div>
 
 		</div>
-
 	</div>
 </div>
+
