@@ -44,15 +44,20 @@ function handleNewRoom(snap,ref,spotName){
     console.log(room);
     if($("#"+room).length > 0){
       var roomElement =  $("#"+room);
-      var spotNo = roomElement.find("#room-desc")[0].innerText;
+      var spotString = roomElement.find("#room-desc")[0].innerText;
+      var spotNo = spotString.charAt(spotString.length - 1);
+      var oldSpotNo = spotNo;
       spotNo++;
-      roomElement.find("#room-desc")[0].innerHTML = spotNo;
+      console.log(spotNo);
+      var newSpotString = spotString.replace(oldSpotNo,spotNo);
+      console.log(spotString);
+      roomElement.find("#room-desc")[0].innerHTML = newSpotString;
     }
     else{
       var roomElement =  $("#roomTemplate").clone();
       $(roomElement).attr("id",room);
       roomElement.find("#room-name")[0].innerHTML =  room;
-      roomElement.find("#room-desc")[0].innerHTML = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione, dolores?';
+      roomElement.find("#room-desc")[0].innerHTML = "Number of spots in this room = 1";
       $("#roomContainer").append(roomElement);
       $(roomElement).removeClass("hidden");
       tempUpdater(snap,roomElement, ref, spotName);
@@ -70,15 +75,18 @@ function handleChangedRoom(snap){
     console.log(room);
     if($("#"+room).length > 0){
       var roomElement =  $("#"+room);
-      var spotNo = roomElement.find("#room-desc")[0].innerText;
+      var spotString = roomElement.find("#room-desc")[0].innerText;
+      spotNo = spotString.charAt(spotString.length);
       spotNo++;
-      roomElement.find("#room-desc")[0].innerHTML = spotNo;
+      spotString.charAt(spotString.length) = spotNo;
+      console.log(spotString);
+      roomElement.find("#room-desc")[0].innerHTML = spotString;
     }
     else{
       var roomElement =  $("#roomTemplate").clone();
       $(roomElement).attr("id",room);
       roomElement.find("#room-name")[0].innerHTML =  room;
-      roomElement.find("#room-desc")[0].innerHTML = 1;
+      roomElement.find("#room-desc")[0].innerHTML = "Number of spots in this room = 1";
       $("#roomContainer").append(roomElement);
       $(roomElement).removeClass("hidden");
     }
