@@ -8,7 +8,7 @@
  * Controller of the jalpWebApp
  */
 angular.module('jalpWebApp')
-  .controller('DashboardCtrl', function ($rootScope) {
+  .controller('DashboardCtrl', function ($scope,$rootScope, $firebaseArray) {
 
     var ref = $rootScope.ref;
     var authData = $rootScope.authData;
@@ -17,8 +17,11 @@ angular.module('jalpWebApp')
       if(authData){
         var UID = authData.uid;
         var userReference = ref.child('users').child(UID).child('data').child('spots');
+        var roomReference = ref.child('users').child(UID).child('data').child('rooms');
 
-        userReference.on('child_added', function(snapshot){
+        $scope.rooms = $firebaseArray(roomReference);
+
+      /*  userReference.on('child_added', function(snapshot){
             handleNewRoom(snapshot.val(), userReference,snapshot.key());
         });
 
@@ -28,16 +31,61 @@ angular.module('jalpWebApp')
 
         userReference.on("child_removed", function(snapshot){
           handleDeletedRoom(snapshot.val());
-        });
+        });*/
+
+        $scope.unhideForm = function(){
+          $(".new-room-button").addClass("hidden");
+          $("#new-room-form").removeClass('hidden');
+        }
+        $scope.createRoom = function(){
+
+          var roomName = $("#newRoomName")[0].value
+          var roomDesc = $("#newRoomDesc")[0].value
+
+          if(roomName.length && roomDesc.length){
+            console.log(roomName);
+            console.log(roomDesc);
+
+            $scope.rooms.$add({
+              name: roomName,
+              description: roomDesc
+            });
+
+            $("#newRoomName")[0].value = "";
+            $("#newRoomDesc")[0].value = "";
+
+
+            $("#new-room-form").addClass('hidden');
+
+            $("#new-room-icon").removeClass("glyphicon-plus").addClass("glyphicon-ok");
+            $(".new-room-button").removeClass("hidden");
+
+            setTimeout(function(){
+              $("#new-room-icon").removeClass("glyphicon-ok").addClass("glyphicon-plus");
+            },1000);
+
+          }else{ //NOTE: basic validation implemented - make it look / work better? look up bootstrap's built in form validation features for ideas.
+            $(".has-error").removeClass("has-error");
+            if(!roomName.length){
+              $("#newRoomName").parent().addClass("has-error");
+            }
+            if(!roomDesc.length){
+              $("#newRoomDesc").parent().addClass("has-error");
+            }
+          }
+        }
+
+
       }
     });
 
 
   });
 
+/*
 function handleNewRoom(snap,ref,spotName){
     var room = snap.room;
-    
+
     if(room == undefined){
       room = "no-room";
     }
@@ -58,7 +106,7 @@ function handleNewRoom(snap,ref,spotName){
       $(roomElement).attr("id",room);
       roomElement.find("#room-name")[0].innerHTML =  room;
       roomElement.find("#room-desc")[0].innerHTML = "Number of spots in this room = 1";
-      $("#roomContainer").append(roomElement);
+      $("#roomContainer").prepend(roomElement);
       $(roomElement).removeClass("hidden");
       tempUpdater(snap,roomElement, ref, spotName);
       lightUpdater(snap,roomElement, ref, spotName);
@@ -123,7 +171,7 @@ function tempUpdater(snap,roomElement,ref, spotName){
       if(snap.temp != undefined)
         $(roomElement).find('#room-temp')[0].innerHTML = snap.temp;
         // $(".progress-temp").find('#room-temp-bar').css("width", snap.temp + '%');
-        
+
       reference.on("child_changed",function(snapshot){
         if(snapshot.key() == "temp" && snapshot.val() != undefined){
           $(roomElement).find('#room-temp')[0].innerHTML = snapshot.val();
@@ -153,3 +201,4 @@ function lightUpdater(snap,roomElement,ref, spotName){
     }
   }
 }
+*/
