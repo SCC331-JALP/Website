@@ -16,6 +16,7 @@
         <td>Sound</td>
         <td>Live data</td>
         <td>Stored data</td>
+        <td>Room</td>
         <td>Address</td>
       <!--  <td>Edit</td> -->
       </tr>
@@ -98,6 +99,7 @@
     <td id="sound">{{sensor.sound}}</td>
     <td id="liveData">{{sensor.liveData}}</td>
     <td id="storedData">{{sensor.storedData}}</td>
+    <td id="room">{{sensor.room}}</td>
     <td>{{sensor.$id}}</td>
 
 </script>
@@ -107,9 +109,18 @@
 <!-- Edit template -->
 <script type="text/ng-template" id="edit">
 
-    <td colspan="12" ng-init="initLiveData(sensor.liveData);initStoredData(sensor.storedData)">
-      <label> Name: <input class="form-control" type="text" ng-model="sensor.name" /></label><br>
-      
+    <td colspan="13" ng-init="initLiveData(sensor.liveData);initStoredData(sensor.storedData)">
+      <div class="row">
+
+        <div class="col-md-4">
+            <label> Name: <input class="form-control" type="text" ng-model="sensor.name" /></label><br>
+        </div>
+
+        <div class="col-md-4 ">
+          <label> Room: <input class="form-control" type="text" ng-model="sensor.room" /></label><br>
+        </div>
+      </div>
+
       <div class="row">
 
         <div class="col-md-4">
@@ -128,7 +139,7 @@
           </div>
         </div>
       </div>
-      
+
       <hr>
 
         <div class="table-control">
@@ -140,7 +151,7 @@
     </td>
   <td>{{sensor.$id}}</td>
 
-  
+
 
 </script>
 
