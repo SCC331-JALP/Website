@@ -61,6 +61,11 @@ angular
         controller: 'DevCtrl',
         controllerAs: 'dev'
       })
+      .when('/room', {
+        templateUrl: 'views/room.html',
+        controller: 'RoomCtrl',
+        controllerAs: 'room'
+      })
       .otherwise({
         redirectTo: '/'
       });

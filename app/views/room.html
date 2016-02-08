@@ -1,0 +1,95 @@
+<style>
+#room-dashboard{
+	background-color:#2C3E50;
+	position:relative;
+}
+.room:hover{
+	    border-color: #a2d4d9;
+}
+.room{
+		min-height: 200px;
+    background-color: #2c3e50;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    color:#FFFFFF;
+    margin:3em;
+    box-shadow:0px 0px 0px #FFFFFF;
+
+}
+.room h3{
+	line-height:100%;
+	margin-top:10px;
+}
+.room hr{
+	margin:1em;
+}
+.room input{
+	color:black;
+}
+.new-room-button{
+	margin: 0 auto;
+	background-color: #3e5871;
+	text-align: center;
+	border-radius: 5px;
+	padding: 10px;
+	border: 1px solid #ddd;
+	max-width: 50px;
+}
+
+
+.has-error input{
+	background-color: rgb(169, 68, 66);
+}
+
+</style>
+
+<div class="container-fluid" id="room-dashboard">
+<div class="bg-overlay pattern"></div>
+	<div class="container" >
+
+		<div class="content-jalp">
+
+			<div id="roomContainer" class="row">
+
+				<div ng-repeat="room in rooms">
+					<div id="{{room.$id}}" class="room col-md-3 animated flipInX">
+
+								<div class="card card-block">
+								<div class="room-contents">
+									<h3 id="room-name">{{room.name}}</h3>
+
+
+									<div class="room-desc">
+										<p id="room-desc">{{room.description}}</p>
+									<hr>
+								</div>
+
+									<a href="#" class="btn btn-primary">Go somewhere</a>
+								</div>
+							</div>
+					</div>
+
+				</div>
+
+
+				<div id="" class="room col-md-3 animated flipInX">
+						<div class="new-room-button">
+							<span id="new-room-icon" class="glyphicon glyphicon-plus" ng-click="unhideForm()"></span>
+						</div>
+						<form id="new-room-form" class="room-form hidden">
+							<label class="control-label"> Room Name: <br><input class="form-control" id='newRoomName' type="text"></input></label>
+							<label  class="control-label"> Room Description: <br><input class="form-control" id='newRoomDesc' type="text"></input></label>
+								<br>
+							<button class="btn btn-primary" ng-click="createRoom()">Submit</button>
+						</form>
+
+				</div>
+			</div>
+
+
+
+
+		</div>
+	</div>
+</div>
