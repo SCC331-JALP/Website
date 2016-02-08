@@ -117,7 +117,10 @@
         </div>
 
         <div class="col-md-4 ">
-          <label> Room: <input class="form-control" type="text" ng-model="sensor.room" /></label><br>
+          <label> Room: </label>
+          <select ng-model="sensor.room">
+            <option ng-repeat="room in rooms" value="{{room.name}}">{{room.name}} </option>
+          </select>
         </div>
       </div>
 
