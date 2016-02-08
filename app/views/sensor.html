@@ -1,33 +1,36 @@
 <section class="container-fluid">
 <div class="row">
-  <div class="col-xs-8">
+  <div class="col-md-12 col-lg-8">
     <div class="page-header"><h1>Sensors <small><span id="sensorCount">{{sensors.length}}</span> Sensors</small></h1>  </div>
-    <table id="sensorTable" class="table table-striped">
-      <tr>
-        <td>Name</td>
-        <td>Alive</td>
-        <td>Battery</td>
-        <td>Button</td>
-        <td>Light</td>
-        <td>Acceleration</td>
-        <td>Temperature</td>
-        <td>Compass</td>
-        <td>Infrared</td>
-        <td>Sound</td>
-        <td>Live data</td>
-        <td>Stored data</td>
-        <td>Room</td>
-        <td>Address</td>
-      <!--  <td>Edit</td> -->
-      </tr>
+    <div class="table-responsive" style="overflow-x:visible;">
+      <table id="sensorTable" class="table table-striped">
+        <tr>
+          <td>Name</td>
+          <td>Alive</td>
+          <td>Battery</td>
+          <td>Button</td>
+          <td>Light</td>
+          <td>Acceleration</td>
+          <td>Temperature</td>
+          <td>Compass</td>
+          <td>Infrared</td>
+          <td>Sound</td>
+          <td>Live data</td>
+          <td>Stored data</td>
+          <td>Room</td>
+          <td>Address</td>
+        <!--  <td>Edit</td> -->
+        </tr>
 
-      <tr ng-repeat="sensor in sensors" ng-include="getTemplate(sensor)" id="{{sensor.$id}}" ng-click="editSensor(sensor)">
+        <tr ng-repeat="sensor in sensors" ng-include="getTemplate(sensor)" id="{{sensor.$id}}" ng-click="editSensor(sensor)">
 
-      </tr>
-    </table>
+        </tr>
+      </table>
+    </div>
+
   </div>
 
-  <div class="col-xs-4">
+  <div class="col-md-6 col-lg-3 pull-right">
     <div class="page-header"><h1>Error Log
       <span class="badge info" ng-click="filterErrors('info')">{{getTypeCount().info}}</span>
       <span class="badge warning" ng-click="filterErrors('warning')">{{getTypeCount().warning}}</span>
