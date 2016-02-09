@@ -18,55 +18,55 @@ angular.module('jalpWebApp')
         var UID = authData.uid;
         var userReference = ref.child('users').child(UID).child('data').child('spots');
         var errorLogRef = ref.child('users').child(UID).child('data').child('log');
-        
-        $().tab
+        var roomReference = ref.child('users').child(UID).child('data').child('rooms');
 
         //$scope.sensors is a synchronized variable, things change in this variable will change in firebase
         $scope.sensors = $firebaseArray(userReference);
         $scope.errors = $firebaseArray(errorLogRef);
+        $scope.rooms = $firebaseArray(roomReference);
         $scope.displayErrors = $scope.errors;
         $scope.storedData;
         $scope.liveData;
         $scope.sensorTypes = [{
-          title: 'compass',
-          prefix: 'c',
-        },{
-          title: 'temperature',
-          prefix: 't',
-        },{
-          title: 'light',
-          prefix: 'l',
-        },{
-          title: 'acceleration',
-          prefix: 'a',
-        },{
-          title: 'button',
-          prefix: 'b',
-        },{
-          title: 'sound',
-          prefix: 's',
-        },{
-          title: 'battery ',
-          prefix: 'e',
-        },{
-          title: 'infrared',
-          prefix: 'i',
-        },{
-          title: 'A2',
-          prefix: 'w',
-        },{
-          title: 'A3',
-          prefix: 'x',
-        },{
-          title: 'D2',
-          prefix: 'y',
-        },{
-          title: 'D3',
-          prefix: 'z',
-        },{
-          title: 'on/off',
-          prefix: 'o',
-        }];
+            title: 'compass',
+            prefix: 'c',
+          },{
+            title: 'temperature',
+            prefix: 't',
+          },{
+            title: 'light',
+            prefix: 'l',
+          },{
+            title: 'acceleration',
+            prefix: 'a',
+          },{
+            title: 'button',
+            prefix: 'b',
+          },{
+            title: 'sound',
+            prefix: 's',
+          },{
+            title: 'battery ',
+            prefix: 'e',
+          },{
+            title: 'infrared',
+            prefix: 'i',
+          },{
+            title: 'A2',
+            prefix: 'w',
+          },{
+            title: 'A3',
+            prefix: 'x',
+          },{
+            title: 'D2',
+            prefix: 'y',
+          },{
+            title: 'D3',
+            prefix: 'z',
+          },{
+            title: 'on/off',
+            prefix: 'o',
+          }];
 
         $scope.sensorTypesLive = angular.copy($scope.sensorTypes);
 
@@ -96,7 +96,7 @@ angular.module('jalpWebApp')
                 $scope.sensorTypes[i].enabled = true;
             }
 
-            
+
           }
         }
 
@@ -195,6 +195,7 @@ angular.module('jalpWebApp')
 
         $scope.editSensor = function(sensor){
           $scope.selectedData = angular.copy(sensor);
+
         };
 
         $scope.cancel = function(){
