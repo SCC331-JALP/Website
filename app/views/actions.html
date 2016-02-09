@@ -13,6 +13,39 @@
 <div class="container-fluid" id="action-panel">
 <div class="bg-overlay pattern"></div>
     <div class="container action-content animated fadeIn">
-        This is action page.
+        <button class="btn btn-primary btn-lg pull-right">+ New</button>
+        <div class="clearfix"></div>
+        <hr>
+        <table class="table">
+          <tr>
+            <td>Action</td>
+            <td>Condition</td>
+            <td>Timeout</td>
+          </tr>
+          <tr ng-repeat="script in scripts">
+            <td>{{script.action}}</td>
+            <td>{{script.condition}}</td>
+            <td>{{script.timeout}}</td>
+          </tr>
+        </table>
     </div>
 </div>
+
+<!-- Template -->
+<script type="text/ng-template" id="show">
+    <td id="name">{{sensor.name}}</td>
+    <td id="alive">{{sensor.alive}}</td>
+    <td id="battery">{{sensor.battery}}</td>
+    <td id="button">{{sensor.button}}</td>
+    <td id="light">{{sensor.light}}</td>
+    <td id="accel">{{sensor.accel}}</td>
+    <td id="temp">{{sensor.temp}}</td>
+    <td id="compass">{{sensor.compass}}</td>
+    <td id="infrared">{{sensor.infrared}}</td>
+    <td id="sound">{{sensor.sound}}</td>
+    <td id="liveData">{{sensor.liveData}}</td>
+    <td id="storedData">{{sensor.storedData}}</td>
+    <td id="room">{{sensor.room}}</td>
+    <td>{{sensor.$id}}</td>
+
+</script>
