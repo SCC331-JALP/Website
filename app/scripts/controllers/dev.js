@@ -24,13 +24,8 @@ angular.module('jalpWebApp')
       return (obj == null || obj == 'undefined') ? 0 : Object.keys(obj).length;
     }
 
-    $scope.getSensors = function(obj){
-      return (obj == null || obj == 'undefined') ? null : Object.keys(obj);
-    }
-
     $scope.getSensor = function(obj, index){
       return (obj == null || obj == 'undefined') ? null : Object.keys(obj)[index];
     }
 
-    // console.log($scope.users);
   });
