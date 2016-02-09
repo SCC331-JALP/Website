@@ -1,12 +1,12 @@
 <style>
-#room-dashboard{
+#sensor-dashboard{
 	background-color:#2C3E50;
 	position:relative;
 }
-.room:hover{
+.sensor:hover{
 	    border-color: #a2d4d9;
 }
-.room{
+.sensor{
 		min-height: 200px;
     background-color: #2c3e50;
     border-radius: 5px;
@@ -17,17 +17,17 @@
     box-shadow:0px 0px 0px #FFFFFF;
 
 }
-.room h3{
+.sensor h3{
 	line-height:100%;
 	margin-top:10px;
 }
-.room hr{
+.sensor hr{
 	margin:1em;
 }
-.room input{
+.sensor input{
 	color:black;
 }
-.new-room-button{
+.new-sensor-button{
 	margin: 0 auto;
 	background-color: #3e5871;
 	text-align: center;
@@ -44,47 +44,55 @@
 
 </style>
 
-<div class="container-fluid" id="room-dashboard">
+<div class="container-fluid" id="sensor-dashboard">
 <div class="bg-overlay pattern"></div>
 	<div class="container" >
 
 		<div class="content-jalp">
 
-			<div id="roomContainer" class="row">
+			<div id="sensorContainer" class="row">
 
-				<div ng-repeat="room in rooms">
-					<div id="{{room.$id}}" class="room col-md-3 animated flipInX">
+				<div ng-repeat="sensor in sensors">
+					<div id="{{sensor.$id}}" class="sensor col-md-3 animated flipInX">
 
 								<div class="card card-block">
-								<div class="room-contents">
-									<h3 id="room-name">{{room.name}}</h3>
+								<div class="sensor-contents">
+									<h3 id="sensor-name">{{sensor.name}}</h3>
 
 
-									<div class="room-desc">
-										<p id="room-desc">{{room.description}}</p>
+									<div class="sensor-type">
+										<p id="sensor-type">{{sensor.liveData}}</p>
 									<hr>
-								</div>
-
-									<a href="#" class="btn btn-primary">Go somewhere</a>
+									</div>
+									<ul>
+		                                <li>Alive: {{sensor.alive}}</li>
+		                                <div class="progress">
+		                                  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: {{sensor.battery}}%;">
+		                                    Battery: {{sensor.battery}}%
+		                                  </div>
+		                                </div>
+		                                <li>Compass: {{sensor.compass}}</li>
+		                                <li>Infrared: {{sensor.infrared}}</li>
+		                                <li>Light: {{sensor.light}}</li>
+		                                <div class="progress">
+		                                  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: {{sensor.temp}}%;">
+		                                    T: {{sensor.temp}} degrees
+		                                  </div>
+		                                </div>
+		                                <li>Sound: {{sensor.sound}}</li>
+		                                <li>DataToCollect: {{sensor.dataToCollect}}</li>
+		                                <li>Acceleration: {{sensor.accel}}</li>
+		                                <li>w: {{sensor.a2}}</li>
+		                                <li>x: {{sensor.a3}}</li>
+		                                <li>y: {{sensor.d2}}</li>
+		                                <li>z: {{sensor.d3}}</li>
+		                            </ul>
 								</div>
 							</div>
 					</div>
 
 				</div>
 
-
-				<div id="" class="room col-md-3 animated flipInX">
-						<div class="new-room-button">
-							<span id="new-room-icon" class="glyphicon glyphicon-plus" ng-click="unhideForm()"></span>
-						</div>
-						<form id="new-room-form" class="room-form hidden">
-							<label class="control-label"> Room Name: <br><input class="form-control" id='newRoomName' type="text"></input></label>
-							<label  class="control-label"> Room Description: <br><input class="form-control" id='newRoomDesc' type="text"></input></label>
-								<br>
-							<button class="btn btn-primary" ng-click="createRoom()">Submit</button>
-						</form>
-
-				</div>
 			</div>
 
 
