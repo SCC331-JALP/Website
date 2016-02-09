@@ -15,7 +15,7 @@ angular.module('jalpWebApp')
     var isDev = $rootScope.isDev;
 
     var users = authData ? $firebaseArray(ref.child('users')) : null;
-    
+
     users.$loaded().then(function () {
       $scope.users = users;
     })
@@ -34,6 +34,42 @@ angular.module('jalpWebApp')
       }else{
         return true;
       }
+    }
+
+    $scope.getErrorCount = function(log){
+      if($scope.getLength(log)){
+        var length = $scope.getLength(log);
+        var count = 0;
+        for(var i = 0; i<length;i++){
+
+          if(log[Object.keys(log)[i]].lvl == 2){         //log ( index ) ---> index = keys of object [i] : surely there is a better way
+            count++
+          }
+
+        }
+
+        return count;
+      }
+
+      return 0;
+    }
+
+    $scope.getCriticalCount = function(log){
+      if($scope.getLength(log)){
+        var length = $scope.getLength(log);
+        var count = 0;
+        for(var i = 0; i<length;i++){
+
+          if(log[Object.keys(log)[i]].lvl == 3){         //log ( index ) ---> index = keys of object [i] : surely there is a better way
+            count++
+          }
+
+        }
+
+        return count;
+      }
+
+      return 0;
     }
 
   });

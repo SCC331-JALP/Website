@@ -15,13 +15,13 @@
     color:#FFFFFF;
 }
 .devPanel-table tbody{
-    
+
 }
 .devPanel-table th {
     font-weight: normal;
     color: white;
     text-align: left;
-    
+
     border:none;
 }
 .devPanel-table td {
@@ -49,7 +49,7 @@
 }
 #devPanel .panel h4{
     border-bottom: 1px solid #2D3644;
-    
+
 }
 #devPanel .panel-title{
     display:block;
@@ -103,18 +103,17 @@
                 <th>Last Name</th>
                 <th>Email</th>
                 <th>No. of sensors</th>
+                <th>No. of Errors</th>
+                <th>No. Critical Errors</th>
             </tr>
-            <tr ng-repeat-start="user in users | filter:search">
+            <tr ng-repeat-start="user in users | filter:search" ng-click="user.expanded = !user.expanded">
                 <td>{{$index}}</td>
                 <td>{{user.firstName}}</td>
                 <td>{{user.lastName}}</td>
                 <td>{{user.email}}</td>
-                <td>
-                    {{getLength(user.data.spots)}}
-                    <a href="" ng-if="user.expanded" ng-click='user.expanded = false'>(Close)</a>
-                    <a href="" ng-if="!user.expanded" ng-click='user.expanded = true'>(View Sensors)</a>
-                    
-                </td>
+                <td>{{getLength(user.data.spots)}}</td>
+                <td>{{getErrorCount(user.data.log)}}</td>
+                <td>{{getCriticalCount(user.data.log)}}</td>
             </tr>
             <tr ng-if="user.expanded" ng-repeat-end="">
                 <td colspan="5">
@@ -150,7 +149,7 @@
                         <div class="col-md-1"></div>
                     </div>
                 </td>
-            </tr>    
+            </tr>
         </table>
 
     </div>
