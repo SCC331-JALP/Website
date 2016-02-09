@@ -8,36 +8,29 @@
  * Controller of the jalpWebApp
  */
 angular.module('jalpWebApp')
-  .controller('DevCtrl', function ($rootScope) {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('DevCtrl', function ($scope, $rootScope, $firebaseArray, $window) {
 
     var ref = $rootScope.ref;
     var authData = $rootScope.authData;
+    var isDev = $rootScope.isDev;
 
-    ref.onAuth(function(authData){
-      if(authData){
-        var UID = authData.uid;
-        var userReference = ref.child('users');
+    var users = authData ? $firebaseArray(ref.child('users')) : null;
+    
+    users.$loaded().then(function () {
+      $scope.users = users;
+    })
 
-      /*  userReference.on('value', function(data){
-          console.log(data.val());
-        });*/
+    $scope.getLength = function(obj){
+      return (obj == null || obj == 'undefined') ? 0 : Object.keys(obj).length;
+    }
 
-        userReference.on('child_added', function(snapshot){
-            handleNewUser(snapshot.val(), snapshot.key());
-        });
+    $scope.getSensors = function(obj){
+      return (obj == null || obj == 'undefined') ? null : Object.keys(obj);
+    }
 
+    $scope.getSensor = function(obj, index){
+      return (obj == null || obj == 'undefined') ? null : Object.keys(obj)[index];
+    }
 
-      }
-    });
-
+    // console.log($scope.users);
   });
-
-
-function handleNewUser(snapshot, key){
-  console.log(snapshot)
-}

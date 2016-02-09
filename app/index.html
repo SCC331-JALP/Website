@@ -33,12 +33,19 @@
       <div class="container">
         <a href="/" class="navbar-left"><img class="logo" src="images/logo.png"></a>
 
-        <ul class="nav navbar-nav navbar-right nav-jalp">
-          <li ng-if="!logged"><a href="/signin">Signin</a></li>
-          <li ng-if="logged"><a href="/dashboard">Dashboard</a></li>
-          <li ng-if="logged"><a href="/actions">Action</a></li>
-          <li ng-if="logged"><a href="/sensor">Sensor</a></li>
-          <li ng-if="logged"><a href="/" ng-click="logout()">Logout</a></li>
+        <ul ng-if="!logged" class="nav navbar-nav navbar-right nav-jalp">
+          <li><a href="/signin">Signin</a></li>
+        </ul>
+
+        <ul ng-if="logged" class="nav navbar-nav navbar-right nav-jalp">
+          <li><a href="/dashboard">Dashboard</a></li>
+          <li><a href="/actions">Action</a></li>
+          <li><a href="/sensor">Sensor</a></li>
+          <li><a href="/" ng-click="logout()">Logout</a></li>
+        </ul>
+
+        <ul ng-if="logged && isDev" class="nav navbar-nav navbar-right nav-jalp">
+          <li><a href="/dev">Admin</a></li>
         </ul>
       </div>
     </header>
@@ -99,7 +106,6 @@
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
@@ -110,6 +116,7 @@
     <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
     <script src="bower_components/firebase/firebase.js"></script>
     <script src="bower_components/angularfire/dist/angularfire.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

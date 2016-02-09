@@ -1,1 +1,157 @@
-<pre>Admin? {{authData.password.email == "dev@dev.com"}}</pre>
+<style>
+#devPanel{
+    background-color:#304056;
+    position:relative;
+}
+.devPanel-Content{
+    position:relative;
+    padding:5em;
+    color:#FFFFFF;
+}
+.devPanel-table {
+    font-family: sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 115%;
+    color:#FFFFFF;
+}
+.devPanel-table tbody{
+    
+}
+.devPanel-table th {
+    font-weight: normal;
+    color: white;
+    text-align: left;
+    
+    border:none;
+}
+.devPanel-table td {
+    padding: 20px 30px;
+    color: rgb(111, 111, 111);
+    color:white;
+    font-size:90%;
+    border:none !important;
+}
+.devPanel-table tr:nth-child(even){
+    background-color: #222D3D;
+}
+.devPanel-table tr:nth-child(odd){
+    background-color: #273446;
+}
+.devPanel-table tr:hover{
+    background-color: #3E516B;
+}
+#devPanel .panel{
+    border:none;
+    background-color:#19212D;
+    padding: 0 0 10px 0;
+    border-radius:1px;
+    border:1px solid #3C506B;
+}
+#devPanel .panel h4{
+    border-bottom: 1px solid #2D3644;
+    
+}
+#devPanel .panel-title{
+    display:block;
+    background-color:#141B25;
+    padding:0.5em;
+}
+#devPanel .panel-subtitle{
+    color: #88C425;
+}
+#devPanel .panel-body{
+    padding:0;
+}
+#devPanel .progress{
+    border-radius:0 !important;
+    margin-bottom:0;
+}
+#devPanel .progress-bar{
+    color:#141B25;
+    font-weight: bold;
+    border-top:1px solid #FFFFFF;
+    border-bottom:1px solid #FFFFFF;
+}
+#devPanel .panel-header{
+    border-color:none;
+    background-color:#19212D;
+    border-radius:none;
+}
+#devPanel .panel-footer{
+    border:none;
+    background-color:#19212D;
+    border-radius:none;
+}
+#devPanel ul{
+    list-style-type:none;
+    padding-left:0;
+}
+#devPanel li{
+    border-bottom: 1px solid #2B3A50;
+    padding: 0.3em;
+}
+</style>
+
+<div class="container-fluid" id="devPanel">
+<div class="bg-overlay pattern"></div>
+    <div class="container devPanel-Content">
+        <table class="table devPanel-table">
+        <label>Search: <input ng-model="search.$" class="form-control" placeholder="Customer Name..."></label> <br>
+            <tr>
+                <th>No.</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>No. of sensors</th>
+            </tr>
+            <tr ng-repeat-start="user in users | filter:search">
+                <td>{{$index}}</td>
+                <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
+                <td>{{user.email}}</td>
+                <td>
+                    {{getLength(user.data.spots)}}
+                    <a href="" ng-if="user.expanded" ng-click='user.expanded = false'>(Close)</a>
+                    <a href="" ng-if="!user.expanded" ng-click='user.expanded = true'>(View Sensors)</a>
+                    
+                </td>
+            </tr>
+            <tr ng-if="user.expanded" ng-repeat-end="">
+                <td colspan="5">
+                    <div ng-repeat="sensor in user.data.spots" ng-init="sensorAddress = getSensor(user.data.spots, $index)">
+                        <div class="animated flipInY panel panel-default col-md-3">
+                          <div class="panel-title text-center">{{sensor.name}}<br/><span class="panel-subtitle">{{sensorAddress}}</span></div>
+                          <div class="panel-body">
+                            <ul>
+                                <li>Alive: {{sensor.alive}}</li>
+                                <div class="progress">
+                                  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: {{sensor.battery}}%;">
+                                    Battery: {{sensor.battery}}%
+                                  </div>
+                                </div>
+                                <li>Compass: {{sensor.compass}}</li>
+                                <li>Infrared: {{sensor.infrared}}</li>
+                                <li>Light: {{sensor.light}}</li>
+                                <div class="progress">
+                                  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: {{sensor.temp}}%;">
+                                    T: {{sensor.temp}} degrees
+                                  </div>
+                                </div>
+                                <li>Sound: {{sensor.sound}}</li>
+                                <li>DataToCollect: {{sensor.dataToCollect}}</li>
+                                <li>Acceleration: {{sensor.accel}}</li>
+                                <li>w: {{sensor.a2}}</li>
+                                <li>x: {{sensor.a3}}</li>
+                                <li>y: {{sensor.d2}}</li>
+                                <li>z: {{sensor.d3}}</li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </td>
+            </tr>    
+        </table>
+
+    </div>
+</div>

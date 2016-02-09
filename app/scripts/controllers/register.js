@@ -43,7 +43,8 @@ angular.module('jalpWebApp')
 				var usersProfileRef = ref.child('users').child(userData.uid);
 				usersProfileRef.set({
 					'firstName': $scope.user.firstName,
-					'lastName': $scope.user.lastName
+					'lastName': $scope.user.lastName,
+                    'email' : $scope.user.email
 				});
 
 				//Should be accessed to the world

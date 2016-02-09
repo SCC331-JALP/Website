@@ -67,7 +67,7 @@ angular
 
 
   })
-  .run(function($rootScope, $route, $window) {
+  .run(function($rootScope, $route, $window, $firebaseObject) {
     $rootScope.ref = new Firebase('https://sunsspot.firebaseio.com/');
 
     // Create a callback which logs the current auth state
@@ -87,5 +87,21 @@ angular
       $rootScope.ref.unauth();
       $window.location.href = '/';
     };
+
+    var ref = $rootScope.ref;
+    var authData = $rootScope.authData;
+
+    ref.onAuth(function(authData){
+      if(authData){
+        var UID = authData.uid;
+        var userReference = ref.child('users');
+        
+        $rootScope.userProfile = authData ? $firebaseObject(userReference.child(UID)) : null;
+        
+        $rootScope.userProfile.$loaded().then(function () {
+          $rootScope.isDev = ($rootScope.userProfile.access_level == 1) ? true : false;
+        });
+      }
+    });
 
   });
