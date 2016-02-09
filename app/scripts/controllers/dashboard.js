@@ -20,7 +20,7 @@ angular.module('jalpWebApp')
         var roomReference = ref.child('users').child(UID).child('data').child('rooms');
 
         $scope.rooms = $firebaseArray(roomReference);
-
+        $scope.roomSensors = new Array;
       /*  userReference.on('child_added', function(snapshot){
             handleNewRoom(snapshot.val(), userReference,snapshot.key());
         });
@@ -75,7 +75,19 @@ angular.module('jalpWebApp')
           }
         }
 
+        $scope.cancelNewRoom = function(){
+          $("#newRoomName")[0].value = "";
+          $("#newRoomDesc")[0].value = "";
+          $("#new-room-form").addClass('hidden');
+            $(".new-room-button").removeClass("hidden");
+        }
 
+        $scope.getSensors = function(roomName){
+          console.log(roomName);
+
+          var query = userReference.orderByChild("room").equalTo(roomName);
+          $scope.roomSensors[roomName] = $firebaseArray(query);
+        }
       }
     });
 

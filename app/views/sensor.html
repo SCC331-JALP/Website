@@ -19,7 +19,6 @@
           <td>Stored data</td>
           <td>Room</td>
           <td>Address</td>
-        <!--  <td>Edit</td> -->
         </tr>
 
         <tr ng-repeat="sensor in sensors" ng-include="getTemplate(sensor)" id="{{sensor.$id}}" ng-click="editSensor(sensor)">
