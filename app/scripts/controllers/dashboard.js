@@ -83,10 +83,23 @@ angular.module('jalpWebApp')
         }
 
         $scope.getSensors = function(roomName){
-          console.log(roomName);
+
 
           var query = userReference.orderByChild("room").equalTo(roomName);
           $scope.roomSensors[roomName] = $firebaseArray(query);
+        }
+
+        $scope.checkType = function(spots){
+            console.log(spots);
+
+            for(spot in spots){
+              if(spot.liveData.indexOf("t") !== -1){
+                return true
+              }
+            }
+            return false
+
+
         }
       }
     });

@@ -77,25 +77,26 @@
 		<div class="content-jalp">
 
 			<div id="roomContainer" class="row">
-
+			<pre>{{rooms | json}}</pre>
 				<div ng-repeat="room in rooms">
-					<div id="{{room.$id}}" class="room col-md-3 animated flipInX" ng-init="getSensors(room.name)">
-								<pre>{{roomSensors[room.name] | json}}</pre>
-								<div class="card card-block">
-								<div class="room-contents">
-									<h3 id="room-name">{{room.name}}</h3>
+					<a href="/room?room={{room.name}}">
+						<div id="{{room.$id}}" class="room col-md-3 animated flipInX" ng-init="getSensors(room.name)">
+									<pre>{{roomSensors[room.name] | json}}</pre>
+									<div class="card card-block">
+									<div class="room-contents">
+										<h3 id="room-name">{{room.name}}</h3>
 
 
-									<div class="room-desc">
-										<p id="room-desc">{{room.description}}</p>
-									<hr>
+										<div class="room-desc">
+											<p id="room-desc">{{room.description}}</p>
+										<hr>
+									</div>
+
+										<div ng-if="containsTemp(roomSensors[room.name])">test</div>
+									</div>
 								</div>
-
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-					</div>
-
+						</div>
+					</a>
 				</div>
 
 
