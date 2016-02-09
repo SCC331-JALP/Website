@@ -89,29 +89,65 @@ angular.module('jalpWebApp')
           $scope.roomSensors[roomName] = $firebaseArray(query);
         }
 
-        $scope.averageTemp = function(sensors){
-            var avgTemp = new Array;
+
+        $scope.averageValue = function(type, sensors){
+            var values = new Array;
             var tempSensorCount = 0;
+
+            var typeIndicator = convertTypeToIndicator(type);
+            console.log(type + " " + typeIndicator);
             if(sensors.length){
               console.log(sensors.length);
               for(var i =0; i < sensors.length; i++){
                 console.log(sensors[i].liveData);
-                if(sensors[i].liveData.indexOf("t") !== -1){
+                if(sensors[i].liveData.indexOf(typeIndicator) !== -1 && sensors[i].alive){
                   console.log("array contains temp sensor");
-                  avgTemp.push(sensors[i].temp)
+                  values.push(sensors[i][type])
                 }
               }
               var total = 0;
-              for(var j=0; j<avgTemp.length;j++){
-                total += avgTemp[j];
+              for(var j=0; j<values.length;j++){
+                total += values[j];
               }
-              return total/avgTemp.length
+            return total/values.length;
 
 
             }
+
+
+
         }
 
-      }
+        function convertTypeToIndicator(type){
+          switch(type){
+            case "temp" :
+              return "t";
+            case "light" :
+              return "l";
+            case "compass":
+              return "c";
+            case "accel":
+              return "a";
+            case "btn_l":
+              return "b";
+            case "btn_r":
+              return "r";
+            case "sound":
+              return "s";
+            case "battery":
+              return "e";
+            case "a2":
+              return "w";
+            case "a3":
+              return "x";
+            case "d2":
+              return "y";
+            case "d3":
+              return "z";
+          }
+        }
+
+      } //if authData
     });
 
 

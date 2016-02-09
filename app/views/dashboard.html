@@ -92,7 +92,11 @@
 										<hr>
 									</div>
 										<div>{{roomSensors[room.name].length}} Sensors</div>
-										<div>{{averageTemp(roomSensors[room.name])}}</div>
+										<div ng-if="averageValue('temp',roomSensors[room.name])">Avg. temp: {{averageValue('temp',roomSensors[room.name])}}</div>
+										<div ng-if="averageValue('light',roomSensors[room.name])">Avg. light: {{averageValue('light',roomSensors[room.name])}}</div>
+										<div ng-if="averageValue('accel',roomSensors[room.name])">Avg. accel: {{averageValue('accel',roomSensors[room.name])}}</div>
+										<div ng-if="averageValue('battery',roomSensors[room.name])">Avg. battery: {{averageValue('battery',roomSensors[room.name])}}</div>
+
 									</div>
 
 								</div>
