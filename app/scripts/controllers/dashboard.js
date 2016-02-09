@@ -75,7 +75,12 @@ angular.module('jalpWebApp')
           }
         }
 
-
+        $scope.cancelNewRoom = function(){
+          $("#newRoomName")[0].value = "";
+          $("#newRoomDesc")[0].value = "";
+          $("#new-room-form").addClass('hidden');
+            $(".new-room-button").removeClass("hidden");
+        }
       }
     });
 

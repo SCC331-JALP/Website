@@ -100,14 +100,15 @@
 
 
 				<div id="" class="room col-md-3 animated flipInX">
-						<div class="new-room-button">
-							<span id="new-room-icon" class="glyphicon glyphicon-plus" ng-click="unhideForm()"></span>
+						<div class="new-room-button" ng-click="unhideForm()">
+							<span id="new-room-icon" class="glyphicon glyphicon-plus" ></span>
 						</div>
 						<form id="new-room-form" class="room-form hidden">
 							<label class="control-label"> Room Name: <br><input class="form-control" id='newRoomName' type="text"></input></label>
 							<label  class="control-label"> Room Description: <br><input class="form-control" id='newRoomDesc' type="text"></input></label>
 								<br>
 							<button class="btn btn-primary" ng-click="createRoom()">Submit</button>
+							<button class="btn btn-danger" ng-click="cancelNewRoom()">Cancel</button>
 						</form>
 
 				</div>
