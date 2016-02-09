@@ -90,15 +90,23 @@ angular.module('jalpWebApp')
         }
 
         $scope.averageTemp = function(sensors){
-            var avgTemp = 0;
+            var avgTemp = new Array;
+            var tempSensorCount = 0;
             if(sensors.length){
               console.log(sensors.length);
               for(var i =0; i < sensors.length; i++){
                 console.log(sensors[i].liveData);
                 if(sensors[i].liveData.indexOf("t") !== -1){
                   console.log("array contains temp sensor");
+                  avgTemp.push(sensors[i].temp)
                 }
               }
+              var total = 0;
+              for(var j=0; j<avgTemp.length;j++){
+                total += avgTemp[j];
+              }
+              return total/avgTemp.length
+
 
             }
         }
