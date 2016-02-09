@@ -79,8 +79,8 @@
 			<div id="roomContainer" class="row">
 
 				<div ng-repeat="room in rooms">
-					<div id="{{room.$id}}" class="room col-md-3 animated flipInX">
-
+					<div id="{{room.$id}}" class="room col-md-3 animated flipInX" ng-init="getSensors(room.name)">
+								<pre>{{roomSensors[room.name] | json}}</pre>
 								<div class="card card-block">
 								<div class="room-contents">
 									<h3 id="room-name">{{room.name}}</h3>
