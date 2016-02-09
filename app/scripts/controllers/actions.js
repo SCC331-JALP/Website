@@ -8,7 +8,7 @@
  * Controller of the jalpWebApp
  */
 angular.module('jalpWebApp')
-  .controller('ActionsCtrl', function () {
+  .controller('ActionsCtrl', function ($scope, $rootScope, $firebaseArray) {
     
   	
     

@@ -28,4 +28,12 @@ angular.module('jalpWebApp')
       return (obj == null || obj == 'undefined') ? null : Object.keys(obj)[index];
     }
 
+    $scope.isDev = function(){
+      if(!isDev){
+        $window.location.href = '/sensor';
+      }else{
+        return true;
+      }
+    }
+
   });
