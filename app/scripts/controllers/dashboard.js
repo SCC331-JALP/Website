@@ -89,18 +89,10 @@ angular.module('jalpWebApp')
           $scope.roomSensors[roomName] = $firebaseArray(query);
         }
 
-        $scope.checkType = function(spots){
-            console.log(spots);
-
-            for(spot in spots){
-              if(spot.liveData.indexOf("t") !== -1){
-                return true
-              }
-            }
-            return false
-
-
+        $scope.averageTemp = function(sensors){
+            console.log(sensors);
         }
+
       }
     });
 
