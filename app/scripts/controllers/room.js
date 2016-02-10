@@ -8,8 +8,8 @@
  * Controller of the jalpWebApp
  */
 angular.module('jalpWebApp')
-  .controller('RoomCtrl', function ($scope,$rootScope, $firebaseArray) {
-    
+  .controller('RoomCtrl', function ($scope,$rootScope, $firebaseArray, $routeParams) {
+
     var ref = $rootScope.ref;
     var authData = $rootScope.authData;
 
@@ -20,6 +20,8 @@ angular.module('jalpWebApp')
         var roomReference = ref.child('users').child(UID).child('data').child('rooms');
 
         $scope.sensors = $firebaseArray(userReference);
+
+        console.log($routeParams);
       }
     })
   });
