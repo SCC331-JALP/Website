@@ -147,14 +147,11 @@
 
 												</div>
 												<div class="col-xs-3">
-														<div ng-if="averageValue('battery',roomSensors[room.name])">
+														<div ng-if="warningBelow('battery','20',roomSensors[room.name])">
 															<object type="image/svg+xml" data="../images/icons/battery.svg" class="icon"></object>
-															{{averageValue('battery',roomSensors[room.name])}}
+															{{warningBelow('battery','20',roomSensors[room.name])}}
 														</div>
-														<div ng-if="!averageValue('battery',roomSensors[room.name])">
-															<object type="image/svg+xml" data="../images/icons/battery.svg" class="icon"></object>
-															&times;
-														</div>
+														
 												</div>
 											</div>
 
