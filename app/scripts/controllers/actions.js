@@ -24,92 +24,180 @@ angular.module('jalpWebApp')
         $scope.spots = $firebaseArray(spotsReference);
 
         $scope.config = {
-          'id' : '',
-         'type' : '',
-          'operator' : '',
-          'value' : ''
+          'id': '',
+          'type': '',
+          'operator': '',
+          'value': ''
         };
 
-        // $scope.config = [{
-        //   id : '',
-        //   type : '',
-        //   operator : '',
-        //   value : ''
-        // }];
-
-
-        $scope.sensorTypes = [
-          {name : 'accel'       ,value : 'MOTION'        ,type : 'Number'},
-          {name : 'brightness'  ,value : 'BRIGHTNESS'    ,type : 'Number'},
-          {name : 'temp'        ,value : 'TEMPERATURE'   ,type : 'Number'},
-          {name : 'a2'          ,value : 'A2'            ,type : 'Number'},
-          {name : 'a3'          ,value : 'A3'            ,type : 'Number'},
-          {name : 'compass'     ,value : 'COMPASS'       ,type : 'Number'},
-          {name : 'd2'          ,value : 'D2'            ,type : 'Boolean'},
-          {name : 'infrared'    ,value : 'INFRARED'      ,type : 'Boolean'},
-          {name : 'sound'       ,value : 'SOUND'         ,type : 'Boolean'},
-          {name : 'alive'       ,value : 'ALIVE'         ,type : 'Boolean'},
-          {name : 'btn_l'       ,value : 'BUTTON_LEFT'   ,type : 'Boolean'},
-          {name : 'btn_r'       ,value : 'BUTTON_RIGHT'  ,type : 'Boolean'}
-        ];
+        $scope.sensorTypes = [{
+          name: 'accel',
+          value: 'MOTION',
+          type: 'Number'
+        }, {
+          name: 'brightness',
+          value: 'BRIGHTNESS',
+          type: 'Number'
+        }, {
+          name: 'temp',
+          value: 'TEMPERATURE',
+          type: 'Number'
+        }, {
+          name: 'a2',
+          value: 'A2',
+          type: 'Number'
+        }, {
+          name: 'a3',
+          value: 'A3',
+          type: 'Number'
+        }, {
+          name: 'compass',
+          value: 'COMPASS',
+          type: 'Number'
+        }, {
+          name: 'd2',
+          value: 'D2',
+          type: 'Boolean'
+        }, {
+          name: 'infrared',
+          value: 'INFRARED',
+          type: 'Boolean'
+        }, {
+          name: 'sound',
+          value: 'SOUND',
+          type: 'Boolean'
+        }, {
+          name: 'alive',
+          value: 'ALIVE',
+          type: 'Boolean'
+        }, {
+          name: 'btn_l',
+          value: 'BUTTON_LEFT',
+          type: 'Boolean'
+        }, {
+          name: 'btn_r',
+          value: 'BUTTON_RIGHT',
+          type: 'Boolean'
+        }];
 
         $scope.operator = '';
-        $scope.operators = [
-          {operator: '<', type : 'Number'},
-          {operator: '>', type : 'Number'},
-          {operator: 'OR', type : 'Boolean'},
-          {operator: 'AND', type : 'Boolean'},
-          {operator: 'TRUE', type : 'Boolean'},
-          {operator: 'FALSE', type : 'Boolean'}
-        ];
 
-        $scope.save = function(){
+        $scope.operators = [{
+          operator: '<',
+          type: 'Number'
+        }, {
+          operator: '>',
+          type: 'Number'
+        }, {
+          operator: 'TRUE',
+          type: 'Boolean'
+        }, {
+          operator: 'FALSE',
+          type: 'Boolean'
+        }];
+
+        $scope.conditions = [];
+
+        $scope.customConditions = [];
+
+        $scope.addCustom = function(condition) {
+          $scope.customConditions.push({
+            condition
+          });
+        }
+
+        $scope.backspace = function() {
+          $scope.customConditions.pop();
+        }
+
+        $scope.add = function() {
           var config = $scope.config;
           var operator = '';
 
-          if(config.operator == 'TRUE'){
+          if (config.operator == 'TRUE') {
             operator = '';
-            $scope.condition = config.id + " " + config.type +  " " + operator + " " + config.value;
-          }else if(config.operator == 'FALSE'){
-              operator = 'not';
-              $scope.condition = operator + ' ' + config.id + " " + config.type;
-          }else{
-            $scope.condition = config.id + " " + config.type +  " " + config.operator + " " + config.value;
+            $scope.conditions.push({
+              "name": config.id + " " + config.type
+            });
+          } else if (config.operator == 'FALSE') {
+            operator = 'not';
+            $scope.conditions.push({
+              "name": operator + ' ' + config.id + " " + config.type
+            });
+          } else {
+            $scope.conditions.push({
+              "name": config.id + " " + config.type + " " + config.operator + " " + config.value
+            });
           }
+
+          $scope.clearConfig();
         }
 
-        $scope.showTypes = function(spot){
-            $scope.config.type = '';
-            $scope.clearTypes();
-            var obj = Object.keys(spot);
-            var length = obj.length;
-            var sensorType = $scope.sensorTypes;
 
-            for(var i=0;i<sensorType.length;i++){
-                for(var j=0;j<length;j++){
-                  if(sensorType[i].name == obj[j]){
-                    sensorType[i].selected = true;
-                  }
-                }
+        $scope.saveCondition = function(customConditions) {
+          $scope.generatedCondition = '';
+
+          if ($scope.conditions.length === 1) {
+            $scope.generateCondition = $scope.conditions[0].name;
+            save($scope.generateCondition);
+            return;
+          } else {
+            for (var i = 0; i < customConditions.length; i++) {
+              $scope.generatedCondition += customConditions[i].condition + ' ';
             }
-        }
-
-        $scope.clearTypes = function(){
-          for(var i=0;i<$scope.sensorTypes.length;i++){
-            $scope.sensorTypes[i].selected = false;
+            save($scope.generatedCondition);
           }
+
+          function save(obj) {
+            var scriptObj = {
+              action: "",
+              condition: obj,
+              timeout: ""
+            };
+            $scope.scripts.$add(scriptObj).then(function(scriptReference) {
+              var id = scriptReference.key();
+              console.log("added record with id " + id);
+              $scope.scripts.$indexFor(id); // returns location in the array
+            });
+          }
+
         }
 
-        $scope.setType = function(type){
-          $scope.operator = type;
-          console.log("SET TYPE: " + $scope.operator);
-        }
-
-        $scope.clearType = function(operator){
+        $scope.clearConfig = function() {
+          $scope.config.id = '';
+          $scope.config.type = '';
           $scope.config.operator = '';
           $scope.config.value = '';
         }
 
+        $scope.showTypes = function(spot) {
+          $scope.config.type = '';
+          $scope.clearTypes();
+          var obj = Object.keys(spot);
+          var length = obj.length;
+          var sensorType = $scope.sensorTypes;
+
+          for (var i = 0; i < sensorType.length; i++)
+            for (var j = 0; j < length; j++)
+              if (sensorType[i].name == obj[j])
+                sensorType[i].selected = true;
+        }
+
+        $scope.clearTypes = function() {
+          for (var i = 0; i < $scope.sensorTypes.length; i++) {
+            $scope.sensorTypes[i].selected = false;
+          }
+        }
+
+        $scope.setType = function(type) {
+          $scope.operator = type;
+          console.log("SET TYPE: " + $scope.operator);
+        }
+
+        $scope.clearType = function(operator) {
+          $scope.config.operator = '';
+          $scope.config.value = '';
+        }
 
         $scope.setStep = function(step) {
           $scope.currentStep = step;
@@ -119,7 +207,7 @@ angular.module('jalpWebApp')
           $scope.currentStep = null;
         }
 
-        $scope.isStep = function(step){
+        $scope.isStep = function(step) {
           return $scope.currentStep == step;
         }
       }

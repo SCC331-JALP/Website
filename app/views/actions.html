@@ -61,6 +61,41 @@
     font-size: 1.5em !important;
     color: #2C3A4C !important;
 }
+.unassigned-condition{
+  background-color: #31708f;
+}
+.custom-condition-btn{
+  float:left;
+  border-radius:6px;
+  padding:5px;
+  margin:5px;
+  box-shadow: 0px 0px 3px black;
+}
+.custom-condition-content{
+  background-color: #151C25;
+  margin: 10px;
+  min-height: 50px;
+  border-radius: 5px;
+  border: 1px solid #1F2A38;
+  line-height:3.5em;
+}
+.custom-default{
+  color: #D8524E;
+  text-shadow: 0px 0px 3px black;
+}
+.custom-and-or{
+  color: #5BB75B;
+  text-shadow: 0px 0px 3px #25C525;
+  border-bottom: 1px solid #25C525;
+}
+.custom-left-bracket{
+  color: #EFAC4D;
+  font-size: 3em;
+}
+.custom-right-bracket{
+  color: #EFAC4D;
+  font-size: 3em;
+}
 </style>
 
 <div class="container-fluid" id="action-panel">
@@ -101,8 +136,6 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit?
 
 <!-- Edit template -->
 <script type="text/ng-template" id="edit">
-  <pre>{{config | json}}</pre>
-  Condition: {{condition}}
   <div class="action-container">
 
 
@@ -154,16 +187,50 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit?
 
         <div class="action-col" ng-if="config.operator=='>' || config.operator=='<' || config.operator=='TRUE' || config.operator=='FALSE'">
           <input type="number" ng-if="config.operator=='>' || config.operator=='<'"class="btn-block form-control" ng-model="config.value"/>
-          <button ng-click="save()" class="btn btn-primary btn-block animated fadeIn">Save</button>
+          <button ng-click="add()" class="btn btn-primary btn-block animated fadeIn">Add Condition</button>
         </div>
 
       </div>
 
-
-
     </div>
 
+    <div class="row">
+      <div class="col-md-12">
+      <hr/>
+        <div class="row container">
+          <div ng-repeat="condition in conditions">
+            <button class="unassigned-condition custom-condition-btn btn" ng-click="addCustom(condition.name)">{{condition.name}}</button>
+          </div>
+        </div>
+
+        <div class="row container-fluid">
+          <div class="row container-fluid" ng-if="conditions.length > 1">
+            <span class="custom-condition-btn btn btn-success" ng-click="addCustom('AND')">AND</span>
+            <span class="custom-condition-btn btn btn-success" ng-click="addCustom('OR')">OR</span>
+            <span class="custom-condition-btn btn btn-warning" ng-click="addCustom('(')">(</span>
+            <span class="custom-condition-btn btn btn-warning" ng-click="addCustom(')')">)</span>
+            <span class="custom-condition-btn btn btn-danger" ng-click="backspace()">Delete</span>
+          </div>
+          <div class="custom-condition-content row container-fluid" ng-if="conditions.length > 1">
+            <span ng-repeat="cc in customConditions">
+
+              <span ng-if="cc.condition == 'AND' || cc.condition == 'OR'" class="custom-and-or">{{cc.condition}}</span>
+
+              <span ng-if="cc.condition == '('" class="custom-left-bracket">{{cc.condition}}</span>
+
+              <span ng-if="cc.condition == ')'" class="custom-left-bracket">{{cc.condition}}</span>
+
+              <span ng-if="cc.condition.length>3" class="custom-default">{{cc.condition}}</span>
+            </span>
+
+          </div>
+          <button ng-disabled="conditions.length<=0" ng-click="saveCondition(customConditions)" class="btn btn-primary btn-block pull-right">Save Condition</button>
+
+        </div>
 
 
 
+      </div>
+
+    </div>
 </script>
