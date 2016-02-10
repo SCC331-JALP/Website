@@ -21,7 +21,8 @@ angular.module('jalpWebApp')
 
         $scope.sensors = $firebaseArray(userReference);
 
-        console.log($routeParams);
+        console.log($routeParams.room);
+        $scope.roomName = $routeParams.room;
       }
     })
   });
