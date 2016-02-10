@@ -3,16 +3,167 @@
     background-color:#304056;
     position:relative;
 }
+.action-step-btn{
+  margin-left:10px;
+}
 .action-content{
     position:relative;
     padding:5em;
     color:#FFFFFF;
+}
+.action-container{
+  background-color: #1A222D;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #293A52;
+  border-radius: 5px;
+  overflow:hidden;
+}
+.action-container p{
+  text-align: center;
+  border-bottom: 1px solid grey;
+  padding-bottom: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 110%;
+  color: #337AB7;
+}
+.action-container ul{
+  list-style-type:none;
+  padding-left: 0;
+}
+.action-col{
+  background-color: #1E2835;
+  border-radius: 3px;
+  padding: 1em;
+  border: 5px solid #19212C;
+}
+.action-col input, .action-col label{
+  cursor: pointer;
+}
+.action-col:hover{
+  background-color:#1F2A3A;
+}
+.action-col li{
+  font-weight:none;
+}
+.action-col span{
+  padding-left:10px;
+}
+.action-col h4{
+  border-bottom: 1px solid grey;
+  color: #286090;
+  font-weight: bold;
+}
+.action-arrow-down{
+    padding-left: 0px !important;
+    width: 100%;
+    font-size: 1.5em !important;
+    color: #2C3A4C !important;
 }
 </style>
 
 <div class="container-fluid" id="action-panel">
 <div class="bg-overlay pattern"></div>
     <div class="container action-content animated fadeIn">
-        This is action page.
+
+        <!-- <button ng-if="currentStep == null" class="btn btn-lg pull-right glyphicon btn-primary glyphicon-plus" ng-click="setStep('edit')"></button> -->
+
+        <button class="btn btn-lg pull-right glyphicon btn-primary glyphicon-plus" ng-init="setStep('edit')"></button>
+
+        <!-- <button ng-if="currentStep != null" class="btn btn-lg pull-right glyphicon btn-danger glyphicon-minus" ng-click="clearSteps()"></button> -->
+
+        <div class="clearfix"></div>
+          <div ng-include='currentStep'></div>
+        <hr>
+        <table class="table">
+          <tr>
+            <td>Action</td>
+            <td>Condition</td>
+            <td>Timeout</td>
+          </tr>
+          <tr ng-repeat="script in scripts">
+            <td>{{script.action}}</td>
+            <td>{{script.condition}}</td>
+            <td>{{script.timeout}}</td>
+          </tr>
+        </table>
     </div>
 </div>
+
+<!-- Show template -->
+<script type="text/ng-template" id="show">
+<h1>Show - Lorem ipsum dolor.</h1>
+<p>
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit?
+</p>
+</script>
+
+<!-- Edit template -->
+<script type="text/ng-template" id="edit">
+  <pre>{{config | json}}</pre>
+  Result: {{result}}
+  <div class="action-container">
+
+
+
+
+
+
+    <div class="col-md-4 action-col">
+      <p>Sensors</p>
+      <ul ng-repeat="spot in spots">
+        <li>
+          <label><input type="radio" ng-model="config.id" value="{{spot.$id}}" ng-click="showTypes(spot)"><span>{{spot.$id}}</span></label>
+        </li>
+      </ul>
+    </div>
+
+
+
+
+
+
+    <div class="col-md-4 action-col" ng-if="config.id!=''">
+    <p>Type</p>
+
+    <h4>Number</h4>
+    <ul ng-repeat="sensorType in sensorTypes" ng-if="sensorType.type == 'Number' && sensorType.selected == true">
+      <label><input type="radio" ng-click="clearType();setType(sensorType.type)" ng-model="config.type" value="{{sensorType.value}}"><span>{{sensorType.value}}</span></label>
+    </ul>
+
+    <h4>Boolean</h4>
+    <ul ng-repeat="sensorType in sensorTypes" ng-if="sensorType.type == 'Boolean' && sensorType.selected == true">
+      <label><input type="radio" ng-click="clearType();setType(sensorType.type)" ng-model="config.type" value="{{sensorType.value}}"><span>{{sensorType.value}}</span></label>
+    </ul>
+
+    </div>
+
+
+
+
+
+
+
+    <div class="col-md-4 action-col" ng-if="config.type!=''">
+      <div>
+        <p>Operators</p>
+        <ul ng-if="op.type == operator" ng-repeat="op in operators">
+          <label><input type="radio" ng-model="config.operator" value="{{op.operator}}"><span>{{op.operator}}</span></label>
+        </ul>
+
+        <div class="action-col" ng-if="config.operator=='>' || config.operator=='<' || config.operator=='TRUE' || config.operator=='FALSE'">
+          <input type="number" ng-if="config.operator=='>' || config.operator=='<'"class="btn-block form-control" ng-model="config.value"/>
+          <button ng-click="save()" class="btn btn-primary btn-block animated fadeIn">Save</button>
+        </div>
+
+      </div>
+
+
+
+    </div>
+
+
+
+
+</script>
