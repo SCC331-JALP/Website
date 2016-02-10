@@ -23,6 +23,8 @@ angular.module('jalpWebApp')
 
         console.log($routeParams.room);
         $scope.roomName = $routeParams.room;
+        var query = userReference.orderByChild("room").equalTo($scope.roomName);
+        $scope.sensors = $firebaseArray(query);
       }
     })
   });
