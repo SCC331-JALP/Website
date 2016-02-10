@@ -97,14 +97,15 @@
 
 										<div class="room-desc">
 											<p id="room-desc">{{room.description}}</p>
+											<p>{{roomSensors[room.name].length}} Sensors</p>
 										<hr>
 									</div>
 
 										<div class="room-values">
 											<div class="row">
 												<div class="col-xs-6">
-													<div ng-if="anyBoolean('infrared', roomSensors[room.name])">IR DETECTED!</div>
-													<div ng-if="!anyBoolean('infrared', roomSensors[room.name])">NO IR!</div>
+													<div ng-if="anyBoolean('infrared', roomSensors[room.name])"><object type="image/svg+xml" data="../images/icons/infrared.svg" class="icon active"></object></div>
+													<div ng-if="!anyBoolean('infrared', roomSensors[room.name])"><object type="image/svg+xml" data="../images/icons/noinfrared.svg" class="icon inactive"></object></div>
 												</div>
 												<div class="col-xs-6">
 														<div ng-if="anyBoolean('sound', roomSensors[room.name])"><object type="image/svg+xml" data="../images/icons/sound.svg" class="icon active"></object></div>
@@ -112,13 +113,57 @@
 												</div>
 											</div>
 
+											<div class="row">
+												<div class="col-xs-3">
+
+														<div ng-if="averageValue('temp',roomSensors[room.name])">
+															<object type="image/svg+xml" data="../images/icons/temp.svg" class="icon"></object>
+															{{averageValue('temp',roomSensors[room.name])}}
+														</div>
+														<div ng-if="!averageValue('temp',roomSensors[room.name])">
+															<object type="image/svg+xml" data="../images/icons/temp.svg" class="icon"></object>
+															&times;
+														</div>
+												</div>
+												<div class="col-xs-3">
+														<div ng-if="averageValue('light',roomSensors[room.name])">
+															<object type="image/svg+xml" data="../images/icons/light.svg" class="icon"></object>
+															{{averageValue('light',roomSensors[room.name])}}
+														</div>
+														<div ng-if="!averageValue('light',roomSensors[room.name])">
+															<object type="image/svg+xml" data="../images/icons/light.svg" class="icon"></object>
+															&times;
+														</div>
+												</div>
+												<div class="col-xs-3">
+														<div ng-if="averageValue('accel',roomSensors[room.name])">
+															<object type="image/svg+xml" data="../images/icons/accel.svg" class="icon"></object>
+															{{averageValue('accel',roomSensors[room.name])}}
+														</div>
+														<div ng-if="!averageValue('accel',roomSensors[room.name])">
+															<object type="image/svg+xml" data="../images/icons/accel.svg" class="icon"></object>
+															&times;
+														</div>
+
+												</div>
+												<div class="col-xs-3">
+														<div ng-if="averageValue('battery',roomSensors[room.name])">
+															<object type="image/svg+xml" data="../images/icons/battery.svg" class="icon"></object>
+															{{averageValue('battery',roomSensors[room.name])}}
+														</div>
+														<div ng-if="!averageValue('battery',roomSensors[room.name])">
+															<object type="image/svg+xml" data="../images/icons/battery.svg" class="icon"></object>
+															&times;
+														</div>
+												</div>
+											</div>
 
 										</div>
-										<div>{{roomSensors[room.name].length}} Sensors</div>
-										<div ng-if="averageValue('temp',roomSensors[room.name])">Avg. temp: {{averageValue('temp',roomSensors[room.name])}}</div>
-										<div ng-if="averageValue('light',roomSensors[room.name])">Avg. light: {{averageValue('light',roomSensors[room.name])}}</div>
-										<div ng-if="averageValue('accel',roomSensors[room.name])">Avg. accel: {{averageValue('accel',roomSensors[room.name])}}</div>
-										<div ng-if="averageValue('battery',roomSensors[room.name])">Avg. battery: {{averageValue('battery',roomSensors[room.name])}}</div>
+
+
+
+
+
 
 									</div>
 
