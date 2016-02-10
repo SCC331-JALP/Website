@@ -65,27 +65,28 @@
 									<hr>
 									</div>
 									<ul>
-		                                <li>Alive: {{sensor.alive}}</li>
-		                                <div class="progress">
+		                                <li ng-if=>Alive: {{sensor.alive}}</li>
+		                                <div ng-if="isBattery(sensor.liveData)" class="progress">
 		                                  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: {{sensor.battery}}%;">
 		                                    Battery: {{sensor.battery}}%
 		                                  </div>
 		                                </div>
-		                                <li>Compass: {{sensor.compass}}</li>
-		                                <li>Infrared: {{sensor.infrared}}</li>
-		                                <li>Light: {{sensor.light}}</li>
-		                                <div class="progress">
+		                                <li ng-if="isCompass(sensor.liveData)">Compass: {{sensor.compass}}</li>
+		                                <li ng-if="isInfrared(sensor.liveData)">Infrared: {{sensor.infrared}}</li>
+		                                <li ng-if="isLight(sensor.liveData)">Light: {{sensor.light}}</li>
+		                                <div ng-if="isTemp(sensor.liveData)" class="progress">
 		                                  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: {{sensor.temp}}%;">
 		                                    T: {{sensor.temp}} degrees
 		                                  </div>
 		                                </div>
-		                                <li>Sound: {{sensor.sound}}</li>
-		                                <li>DataToCollect: {{sensor.dataToCollect}}</li>
-		                                <li>Acceleration: {{sensor.accel}}</li>
-		                                <li>w: {{sensor.a2}}</li>
-		                                <li>x: {{sensor.a3}}</li>
-		                                <li>y: {{sensor.d2}}</li>
-		                                <li>z: {{sensor.d3}}</li>
+		                                <li ng-if="isSound(sensor.liveData)">Sound: {{sensor.sound}}</li>
+		                                <li ng-if="isAcceleration(sensor.liveData)">Acceleration: {{sensor.accel}}</li>
+		                                <li ng-if="isLeftButton(sensor.liveData)">w: {{sensor.btn_l}}</li>
+		                                <li ng-if="isRightButton(sensor.liveData)">w: {{sensor.btn_r}}</li>
+		                                <li ng-if="isA2(sensor.liveData)">w: {{sensor.a2}}</li>
+		                                <li ng-if="isA3(sensor.liveData)">x: {{sensor.a3}}</li>
+		                                <li ng-if="isD2(sensor.liveData)">y: {{sensor.d2}}</li>
+		                                <li ng-if="isD3(sensor.liveData)">z: {{sensor.d3}}</li>
 		                            </ul>
 								</div>
 							</div>
