@@ -92,16 +92,16 @@ angular.module('jalpWebApp')
 
         $scope.averageValue = function(type, sensors){
             var values = new Array;
-            var tempSensorCount = 0;
+
 
             var typeIndicator = convertTypeToIndicator(type);
-            console.log(type + " " + typeIndicator);
+          //  console.log(type + " " + typeIndicator);
             if(sensors.length){
-              console.log(sensors.length);
+              //console.log(sensors.length);
               for(var i =0; i < sensors.length; i++){
-                console.log(sensors[i].liveData);
+              //  console.log(sensors[i].liveData);
                 if(sensors[i].liveData.indexOf(typeIndicator) !== -1 && sensors[i].alive){
-                  console.log("array contains temp sensor");
+                //  console.log("array contains temp sensor");
                   values.push(sensors[i][type])
                 }
               }
@@ -109,14 +109,30 @@ angular.module('jalpWebApp')
               for(var j=0; j<values.length;j++){
                 total += values[j];
               }
-            return total/values.length;
+              return total/values.length;
+            }
+        }
 
-
+        $scope.anyBoolean = function(type,sensors){
+          console.log(type);
+          var typeIndicator = convertTypeToIndicator(type);
+        //  console.log(type + " " + typeIndicator);
+          if(sensors.length){
+            //console.log(sensors.length);
+            for(var i =0; i < sensors.length; i++){
+            //  console.log(sensors[i].liveData);
+              if(sensors[i].liveData.indexOf(typeIndicator) !== -1 && sensors[i].alive){
+              //  console.log("array contains temp sensor");
+                if(sensors[i][type]){
+                  return true;
+                }
+              }
             }
 
-
-
+          return false
+          }
         }
+
 
         function convertTypeToIndicator(type){
           switch(type){
@@ -134,6 +150,8 @@ angular.module('jalpWebApp')
               return "r";
             case "sound":
               return "s";
+            case "infrared":
+              return "i";
             case "battery":
               return "e";
             case "a2":
