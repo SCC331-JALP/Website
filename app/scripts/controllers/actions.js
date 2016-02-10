@@ -37,6 +37,7 @@ angular.module('jalpWebApp')
         //   value : ''
         // }];
 
+
         $scope.sensorTypes = [
           {name : 'accel'       ,value : 'MOTION'        ,type : 'Number'},
           {name : 'brightness'  ,value : 'BRIGHTNESS'    ,type : 'Number'},
@@ -68,14 +69,13 @@ angular.module('jalpWebApp')
 
           if(config.operator == 'TRUE'){
             operator = '';
-            $scope.result = config.id + " " + config.type +  " " + operator + " " + config.value;
+            $scope.condition = config.id + " " + config.type +  " " + operator + " " + config.value;
           }else if(config.operator == 'FALSE'){
               operator = 'not';
-              $scope.result = operator + ' ' + config.id + " " + config.type;
+              $scope.condition = operator + ' ' + config.id + " " + config.type;
+          }else{
+            $scope.condition = config.id + " " + config.type +  " " + config.operator + " " + config.value;
           }
-
-
-          console.log($scope.result);
         }
 
         $scope.showTypes = function(spot){
