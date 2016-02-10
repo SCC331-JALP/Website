@@ -83,12 +83,89 @@ angular.module('jalpWebApp')
         }
 
         $scope.getSensors = function(roomName){
-          console.log(roomName);
+
 
           var query = userReference.orderByChild("room").equalTo(roomName);
           $scope.roomSensors[roomName] = $firebaseArray(query);
         }
-      }
+
+
+        $scope.averageValue = function(type, sensors){
+            var values = new Array;
+
+
+            var typeIndicator = convertTypeToIndicator(type);
+          //  console.log(type + " " + typeIndicator);
+            if(sensors.length){
+              //console.log(sensors.length);
+              for(var i =0; i < sensors.length; i++){
+              //  console.log(sensors[i].liveData);
+                if(sensors[i].liveData.indexOf(typeIndicator) !== -1 && sensors[i].alive){
+                //  console.log("array contains temp sensor");
+                  values.push(sensors[i][type])
+                }
+              }
+              var total = 0;
+              for(var j=0; j<values.length;j++){
+                total += values[j];
+              }
+              return total/values.length;
+            }
+        }
+
+        $scope.anyBoolean = function(type,sensors){
+          console.log(type);
+          var typeIndicator = convertTypeToIndicator(type);
+        //  console.log(type + " " + typeIndicator);
+          if(sensors.length){
+            //console.log(sensors.length);
+            for(var i =0; i < sensors.length; i++){
+            //  console.log(sensors[i].liveData);
+              if(sensors[i].liveData.indexOf(typeIndicator) !== -1 && sensors[i].alive){
+              //  console.log("array contains temp sensor");
+                if(sensors[i][type]){
+                  return true;
+                }
+              }
+            }
+
+          return false
+          }
+        }
+
+
+        function convertTypeToIndicator(type){
+          switch(type){
+            case "temp" :
+              return "t";
+            case "light" :
+              return "l";
+            case "compass":
+              return "c";
+            case "accel":
+              return "a";
+            case "btn_l":
+              return "b";
+            case "btn_r":
+              return "r";
+            case "sound":
+              return "s";
+            case "infrared":
+              return "i";
+            case "battery":
+              return "e";
+            case "a2":
+              return "w";
+            case "a3":
+              return "x";
+            case "d2":
+              return "y";
+            case "d3":
+              return "z";
+          }
+        }
+
+      } //if authData
     });
 
 

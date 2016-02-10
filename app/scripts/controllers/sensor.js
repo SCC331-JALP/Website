@@ -40,9 +40,6 @@ angular.module('jalpWebApp')
             title: 'acceleration',
             prefix: 'a',
           },{
-            title: 'button',
-            prefix: 'b',
-          },{
             title: 'sound',
             prefix: 's',
           },{
@@ -66,6 +63,12 @@ angular.module('jalpWebApp')
           },{
             title: 'on/off',
             prefix: 'o',
+          },{
+            title: 'Right Button',
+            prefix: 'r',
+          },{
+            title: 'Left Button',
+            prefix: 'b'
           }];
 
         $scope.sensorTypesLive = angular.copy($scope.sensorTypes);
@@ -202,9 +205,10 @@ angular.module('jalpWebApp')
           $scope.selectedData = [];
         }
 
-        $scope.save = function(index, storedData){
+        $scope.save = function(index, storedData, liveData){
           console.log('Saving sensor');
           $scope.sensors[index].storedData = storedData;
+          $scope.sensors[index].liveData = liveData;
           console.log(storedData);
           var sensor = $scope.sensors[index];
           $scope.sensors.$save(sensor);
