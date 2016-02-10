@@ -147,12 +147,21 @@
 
 												</div>
 												<div class="col-xs-3">
-														<div ng-if="warningBelow('battery','20',roomSensors[room.name])">
+														<div ng-if="warningAbove('compass',50,roomSensors[room.name])">
+														<object type="image/svg+xml" data="../images/icons/compass.svg" class="icon"></object>
+															{{warningAbove('compass',50,roomSensors[room.name])}}
+														</div>
+												</div>
+												
+												<div class="col-xs-3">
+														<div ng-if="warningBelow('battery',20,roomSensors[room.name])">
 															<object type="image/svg+xml" data="../images/icons/battery.svg" class="icon"></object>
 															{{warningBelow('battery','20',roomSensors[room.name])}}
 														</div>
-														
 												</div>
+
+
+
 											</div>
 
 										</div>

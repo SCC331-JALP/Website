@@ -93,7 +93,6 @@ angular.module('jalpWebApp')
         $scope.averageValue = function(type, sensors){
             var values = new Array;
 
-
             var typeIndicator = convertTypeToIndicator(type);
           //  console.log(type + " " + typeIndicator);
             if(sensors.length){
@@ -114,7 +113,7 @@ angular.module('jalpWebApp')
         }
 
         $scope.anyBoolean = function(type,sensors){
-          console.log(type);
+          //console.log(type);
           var typeIndicator = convertTypeToIndicator(type);
         //  console.log(type + " " + typeIndicator);
           if(sensors.length){
@@ -149,16 +148,35 @@ angular.module('jalpWebApp')
                   addresses.push(sensors[i].$id);
                 }
               }
-
             }
           //  console.log(addresses);
             return addresses.length
           }
             return false
-
-
         }
 
+        $scope.warningAbove = function(type,threshold,sensors){
+        //  console.log(sensors);
+          var addresses = new Array
+          var typeIndicator = convertTypeToIndicator(type);
+        //   console.log(type + " " + typeIndicator);
+          if(sensors.length){
+        //    console.log(sensors.length);
+            for(var i =0; i < sensors.length; i++){
+            //  console.log(sensors[i].liveData);
+              if(sensors[i].liveData.indexOf(typeIndicator) !== -1 && sensors[i].alive){
+              //  console.log("array contains temp sensor");
+                if(sensors[i][type] > threshold){
+                //  console.log(sensors[i].$id);
+                  addresses.push(sensors[i].$id);
+                }
+              }
+            }
+          //  console.log(addresses);
+            return addresses.length
+          }
+            return false
+        }
 
         function convertTypeToIndicator(type){
           switch(type){
