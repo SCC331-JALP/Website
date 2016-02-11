@@ -395,3 +395,38 @@ END
 Dashboard
 
 */
+
+
+/* Jalp table */
+.jalp-table {
+    font-family: sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 115%;
+    color:#FFFFFF;
+}
+.jalp-table tbody{
+
+}
+.jalp-table th {
+    font-weight: normal;
+    color: white;
+    text-align: left;
+
+    border:none;
+}
+.jalp-table td {
+    padding: 20px 30px;
+    color: rgb(111, 111, 111);
+    color:white;
+    font-size:90%;
+    border:none !important;
+}
+.jalp-table tr:nth-child(even){
+    background-color: #222D3D;
+}
+.jalp-table tr:nth-child(odd){
+    background-color: #273446;
+}
+.jalp-table tr:hover{
+    background-color: #3E516B;
+}
