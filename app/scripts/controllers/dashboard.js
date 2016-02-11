@@ -128,8 +128,9 @@ angular.module('jalpWebApp')
               }
             }
 
-          return false
+            return true;
           }
+          return false;
         }
 
         $scope.warningBelow = function(type,threshold,sensors){

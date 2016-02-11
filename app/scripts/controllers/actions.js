@@ -23,12 +23,97 @@ angular.module('jalpWebApp')
         $scope.scripts = $firebaseArray(scriptReference);
         $scope.spots = $firebaseArray(spotsReference);
 
-        $scope.config = {
+        //Script object
+        $scope.scriptObj = {
+          action: "",
+          // condition: "8025 D2",
+          condition: "",
+          timeout: ""
+        };
+
+        $scope.conditionConfig = {
           'id': '',
           'type': '',
           'operator': '',
           'value': ''
         };
+
+        /*Action Templates Starts */
+        $scope.actionConfig = {
+          'id' : '',
+          'action' : '',
+          'params' : [],
+          'timeout' : ''
+        };
+
+        $scope.currentTemplate;
+
+        $scope.setTemplate = function(template){
+          console.log(template);
+          $scope.currentTemplate = template;
+        }
+
+        $scope.sensorActions = [{
+          spot : 'spot',
+          action : 'BLINK',
+        },{
+          spot : 'spot',
+          action : 'BEEP'
+        },{
+          spot : 'base',
+          action : 'KETTLE'
+        },{
+          spot : 'base',
+          action : 'EASYBULB'
+        }];
+
+        $scope.saveAction = function(actionConfig){
+          var paramString;
+          var paramsLength = getLength(actionConfig.action);
+          paramString = actionConfig.id + ' ';
+          paramString += actionConfig.action + ' ';
+          for(var i=0;i<paramsLength;i++){
+            if(actionConfig.params[i] > 0){
+              paramString += actionConfig.params[i] + ' ';
+            }else{
+              paramString += '0 ';
+            }
+
+          }
+          var timeout = actionConfig.timeout == null ? 0 : actionConfig.timeout;
+
+          // var trimmedParams = paramString.replace(/\s+$/, ';');
+          var trimmedParams = paramString.replace(/\s+$/, '');
+
+          $scope.scriptObj.action = trimmedParams;
+          $scope.scriptObj.timeout = timeout;
+
+          //Save
+          $scope.AddNewEntry($scope.scriptObj);
+
+          //Reset
+          $scope.actionConfig = {
+            'id' : '',
+            'action' : '',
+            'params' : [],
+            'timeout' : ''
+          };
+
+          function getLength(action){
+            if(action.indexOf('BLINK') > -1){
+              return 7;
+            }else if(action.indexOf('BEEP') > -1){
+              return 4
+            }else if(action.indexOf('KETTLE') > -1){
+              return 2
+            }else if(action.indexOf('EASYBULB') > -1){
+              return 3
+            }else{
+              return 0;
+            }
+          }
+        }
+        /*Action Templates Ends*/
 
         $scope.sensorTypes = [{
           name: 'accel',
@@ -80,7 +165,7 @@ angular.module('jalpWebApp')
           type: 'Boolean'
         }];
 
-        $scope.operator = '';
+        $scope.currentOperator = '';
 
         $scope.operators = [{
           operator: '<',
@@ -111,68 +196,76 @@ angular.module('jalpWebApp')
         }
 
         $scope.add = function() {
-          var config = $scope.config;
-          var operator = '';
+          var config = $scope.conditionConfig;
+          var operator = ''; //Clear old setting
 
           if (config.operator == 'TRUE') {
-            operator = '';
             $scope.conditions.push({
-              "name": config.id + " " + config.type
+              'name' : config.id + ' ' + config.type
             });
           } else if (config.operator == 'FALSE') {
             operator = 'not';
             $scope.conditions.push({
-              "name": operator + ' ' + config.id + " " + config.type
+              'name' : operator + ' ' + config.id + ' ' + config.type
             });
           } else {
             $scope.conditions.push({
-              "name": config.id + " " + config.type + " " + config.operator + " " + config.value
+              'name' : config.id + ' ' + config.type + ' ' + config.operator + ' ' + config.value
             });
           }
 
-          $scope.clearConfig();
+          $scope.resetConditionConfig();
         }
 
 
         $scope.saveCondition = function(customConditions) {
-          $scope.generatedCondition = '';
 
           if ($scope.conditions.length === 1) {
-            $scope.generateCondition = $scope.conditions[0].name;
-            save($scope.generateCondition);
+            $scope.onlyCondition = $scope.conditions[0].name;
+            save($scope.onlyCondition);
             return;
           } else {
+            $scope.generatedCondition = '';
             for (var i = 0; i < customConditions.length; i++) {
               $scope.generatedCondition += customConditions[i].condition + ' ';
             }
             save($scope.generatedCondition);
           }
 
-          function save(obj) {
-            var scriptObj = {
-              action: "",
-              condition: obj,
-              timeout: ""
-            };
-            $scope.scripts.$add(scriptObj).then(function(scriptReference) {
-              var id = scriptReference.key();
-              console.log("added record with id " + id);
-              $scope.scripts.$indexFor(id); // returns location in the array
-            });
+          //Reset configuration
+          $scope.onlyCondition = '';
+          $scope.generatedCondition = '';
+          $scope.customConditions = [];
+
+          // Inner Save function starts
+          function save(conditions) {
+            $scope.scriptObj.condition = conditions;
           }
+          // Inner save function ends
 
         }
 
-        $scope.clearConfig = function() {
-          $scope.config.id = '';
-          $scope.config.type = '';
-          $scope.config.operator = '';
-          $scope.config.value = '';
+        // Add new entry to database
+        $scope.AddNewEntry = function(scriptObj){
+
+          //Firebase save API
+          $scope.scripts.$add(scriptObj).then(function(scriptReference) {
+            var id = scriptReference.key();
+            console.log("added record with id " + id);
+            $scope.scripts.$indexFor(id); // returns location in the array
+          });
+        }
+
+        $scope.resetConditionConfig = function() {
+          $scope.conditionConfig.id = '';
+          $scope.conditionConfig.type = '';
+          $scope.conditionConfig.operator = '';
+          $scope.conditionConfig.value = '';
         }
 
         $scope.showTypes = function(spot) {
-          $scope.config.type = '';
-          $scope.clearTypes();
+
+          reset();
           var obj = Object.keys(spot);
           var length = obj.length;
           var sensorType = $scope.sensorTypes;
@@ -181,23 +274,26 @@ angular.module('jalpWebApp')
             for (var j = 0; j < length; j++)
               if (sensorType[i].name == obj[j])
                 sensorType[i].selected = true;
-        }
 
-        $scope.clearTypes = function() {
-          for (var i = 0; i < $scope.sensorTypes.length; i++) {
-            $scope.sensorTypes[i].selected = false;
+          function reset(){
+            $scope.conditionConfig.type = '';
+            for (var i = 0; i < $scope.sensorTypes.length; i++)
+              $scope.sensorTypes[i].selected = false;
           }
         }
 
-        $scope.setType = function(type) {
-          $scope.operator = type;
-          console.log("SET TYPE: " + $scope.operator);
+        $scope.setCurrentOperator = function(type) {
+          reset();
+
+          $scope.currentOperator = type;
+          console.log("SET current operator: " + $scope.currentOperator);
+
+          function reset(){
+            $scope.conditionConfig.operator = '';
+            $scope.conditionConfig.value = '';
+          }
         }
 
-        $scope.clearType = function(operator) {
-          $scope.config.operator = '';
-          $scope.config.value = '';
-        }
 
         $scope.setStep = function(step) {
           $scope.currentStep = step;

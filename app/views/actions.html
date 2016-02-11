@@ -102,11 +102,19 @@
 <div class="bg-overlay pattern"></div>
     <div class="container action-content animated fadeIn">
 
-        <!-- <button ng-if="currentStep == null" class="btn btn-lg pull-right glyphicon btn-primary glyphicon-plus" ng-click="setStep('edit')"></button> -->
 
-        <button class="btn btn-lg pull-right glyphicon btn-primary glyphicon-plus" ng-init="setStep('edit')"></button>
+        <!-- DEBUG STARTS -->
+        <!-- Script Object: <pre>{{scriptObj | json}}</pre>
+        Actions Config: <pre>{{actionConfig | json}}</pre> -->
+        <!-- Actions: <pre>{{sensorActions | json}}</pre> -->
 
-        <!-- <button ng-if="currentStep != null" class="btn btn-lg pull-right glyphicon btn-danger glyphicon-minus" ng-click="clearSteps()"></button> -->
+
+
+        <button ng-if="currentStep == null" class="btn btn-lg pull-right glyphicon btn-primary glyphicon-plus" ng-click="setStep('condition')"></button>
+
+        <!-- <button class="btn btn-lg pull-right glyphicon btn-primary glyphicon-plus" ng-init="setStep('condition')"></button> -->
+
+        <button ng-if="currentStep != null" class="btn btn-lg pull-right glyphicon btn-danger glyphicon-minus" ng-click="clearSteps()"></button>
 
         <div class="clearfix"></div>
           <div ng-include='currentStep'></div>
@@ -126,111 +134,287 @@
     </div>
 </div>
 
-<!-- Show template -->
-<script type="text/ng-template" id="show">
-<h1>Show - Lorem ipsum dolor.</h1>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit?
-</p>
-</script>
+<!-- Condition Template -->
+<script type="text/ng-template" id="condition">
 
-<!-- Edit template -->
-<script type="text/ng-template" id="edit">
-  <div class="action-container">
+<!-- Action Container starts -->
+<div class="action-container">
 
 
+  <!-- Sensors Starts -->
+  <div class="col-md-4 action-col">
+    <p>Sensors</p>
+    <ul ng-repeat="spot in spots">
+      <li>
+        <label>
+          <input type="radio" ng-model="conditionConfig.id" value="{{spot.$id}}" ng-click="showTypes(spot)"><span>{{spot.$id}}</span></label>
+      </li>
+    </ul>
+  </div>
+  <!-- Sensors Ends -->
 
 
-
-
-    <div class="col-md-4 action-col">
-      <p>Sensors</p>
-      <ul ng-repeat="spot in spots">
-        <li>
-          <label><input type="radio" ng-model="config.id" value="{{spot.$id}}" ng-click="showTypes(spot)"><span>{{spot.$id}}</span></label>
-        </li>
-      </ul>
-    </div>
-
-
-
-
-
-
-    <div class="col-md-4 action-col" ng-if="config.id!=''">
+  <!-- Types Starts -->
+  <div class="col-md-4 action-col" ng-if="conditionConfig.id!=''">
     <p>Type</p>
 
     <h4>Number</h4>
     <ul ng-repeat="sensorType in sensorTypes" ng-if="sensorType.type == 'Number' && sensorType.selected == true">
-      <label><input type="radio" ng-click="clearType();setType(sensorType.type)" ng-model="config.type" value="{{sensorType.value}}"><span>{{sensorType.value}}</span></label>
+      <label>
+        <input type="radio" ng-click="setCurrentOperator(sensorType.type)" ng-model="conditionConfig.type" value="{{sensorType.value}}"><span>{{sensorType.value}}</span></label>
     </ul>
 
     <h4>Boolean</h4>
     <ul ng-repeat="sensorType in sensorTypes" ng-if="sensorType.type == 'Boolean' && sensorType.selected == true">
-      <label><input type="radio" ng-click="clearType();setType(sensorType.type)" ng-model="config.type" value="{{sensorType.value}}"><span>{{sensorType.value}}</span></label>
+      <label>
+        <input type="radio" ng-click="setCurrentOperator(sensorType.type)" ng-model="conditionConfig.type" value="{{sensorType.value}}"><span>{{sensorType.value}}</span></label>
     </ul>
 
-    </div>
+  </div>
+  <!-- Types Ends -->
 
 
+  <!-- Operators Starts -->
+  <div class="col-md-4 action-col" ng-if="conditionConfig.type!=''">
+    <div>
+      <p>Operators</p>
+      <ul ng-if="op.type == currentOperator" ng-repeat="op in operators">
+        <label>
+          <input type="radio" ng-model="conditionConfig.operator" value="{{op.operator}}"><span>{{op.operator}}</span></label>
+      </ul>
 
-
-
-
-
-    <div class="col-md-4 action-col" ng-if="config.type!=''">
-      <div>
-        <p>Operators</p>
-        <ul ng-if="op.type == operator" ng-repeat="op in operators">
-          <label><input type="radio" ng-model="config.operator" value="{{op.operator}}"><span>{{op.operator}}</span></label>
-        </ul>
-
-        <div class="action-col" ng-if="config.operator=='>' || config.operator=='<' || config.operator=='TRUE' || config.operator=='FALSE'">
-          <input type="number" ng-if="config.operator=='>' || config.operator=='<'"class="btn-block form-control" ng-model="config.value"/>
-          <button ng-click="add()" class="btn btn-primary btn-block animated fadeIn">Add Condition</button>
-        </div>
-
+      <div class="action-col" ng-if="conditionConfig.operator=='>' || conditionConfig.operator=='<' || conditionConfig.operator=='TRUE' || conditionConfig.operator=='FALSE'">
+        <input type="number" ng-if="conditionConfig.operator=='>' || conditionConfig.operator=='<'" class="btn-block form-control" ng-model="conditionConfig.value" />
+        <button ng-click="add()" class="btn btn-primary btn-block animated fadeIn">Add Condition</button>
       </div>
 
     </div>
+  </div>
+  <!-- Operators Ends -->
 
-    <div class="row">
-      <div class="col-md-12">
-      <hr/>
-        <div class="row container">
-          <div ng-repeat="condition in conditions">
-            <button class="unassigned-condition custom-condition-btn btn" ng-click="addCustom(condition.name)">{{condition.name}}</button>
-          </div>
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <hr>
+      <!-- Conditions buttons starts -->
+      <div class="row container">
+        <div ng-repeat="condition in conditions">
+          <button class="unassigned-condition custom-condition-btn btn" ng-click="addCustom(condition.name)">{{condition.name}}</button>
         </div>
+      </div>
+      <!-- Conditions buttons ends -->
 
+
+      <div class="row container-fluid">
+
+        <!-- Conditions Keys Starts -->
         <div class="row container-fluid">
-          <div class="row container-fluid" ng-if="conditions.length > 1">
-            <span class="custom-condition-btn btn btn-success" ng-click="addCustom('AND')">AND</span>
-            <span class="custom-condition-btn btn btn-success" ng-click="addCustom('OR')">OR</span>
-            <span class="custom-condition-btn btn btn-warning" ng-click="addCustom('(')">(</span>
-            <span class="custom-condition-btn btn btn-warning" ng-click="addCustom(')')">)</span>
-            <span class="custom-condition-btn btn btn-danger" ng-click="backspace()">Delete</span>
-          </div>
-          <div class="custom-condition-content row container-fluid" ng-if="conditions.length > 1">
-            <span ng-repeat="cc in customConditions">
-
-              <span ng-if="cc.condition == 'AND' || cc.condition == 'OR'" class="custom-and-or">{{cc.condition}}</span>
-
-              <span ng-if="cc.condition == '('" class="custom-left-bracket">{{cc.condition}}</span>
-
-              <span ng-if="cc.condition == ')'" class="custom-left-bracket">{{cc.condition}}</span>
-
-              <span ng-if="cc.condition.length>3" class="custom-default">{{cc.condition}}</span>
-            </span>
-
-          </div>
-          <button ng-disabled="conditions.length<=0" ng-click="saveCondition(customConditions)" class="btn btn-primary btn-block pull-right">Save Condition</button>
-
+          <span class="custom-condition-btn btn btn-success" ng-disabled="conditions.length <=1 " ng-click="addCustom('AND')">AND</span>
+          <span class="custom-condition-btn btn btn-success" ng-disabled="conditions.length <=1 " ng-click="addCustom('OR')">OR</span>
+          <span class="custom-condition-btn btn btn-warning" ng-disabled="conditions.length <=1 " ng-click="addCustom('(')">(</span>
+          <span class="custom-condition-btn btn btn-warning" ng-disabled="conditions.length <=1 " ng-click="addCustom(')')">)</span>
+          <span class="custom-condition-btn btn btn-danger" ng-disabled="conditions.length <=1 " ng-click="backspace()">Delete</span>
         </div>
+        <!-- Conditions Keys Ends -->
 
 
+        <!-- Conditions Panel Starts -->
+        <div ng-if="conditions.length > 1" class="custom-condition-content row container-fluid">
+          <span ng-repeat="cc in customConditions">
+            <span ng-if="cc.condition == 'AND' || cc.condition == 'OR'" class="custom-and-or">{{cc.condition}}</span>
+
+          <span ng-if="cc.condition == '('" class="custom-left-bracket">{{cc.condition}}</span>
+
+          <span ng-if="cc.condition == ')'" class="custom-left-bracket">{{cc.condition}}</span>
+
+          <span ng-if="cc.condition.length>3" class="custom-default">{{cc.condition}}</span>
+          </span>
+        </div>
+        <!-- Conditions Panel Ends -->
+
+        <button ng-disabled="conditions.length<=0" ng-click="saveCondition(customConditions);setStep('action')" class="btn btn-primary btn-block pull-right">Save Condition</button>
 
       </div>
+      <!-- Col-md-12 ends-->
 
     </div>
+    <!-- row ends -->
+
+  </div>
+  <!-- Action Container Ends -->
+</script>
+
+
+
+
+<!-- Condition Template -->
+<script type="text/ng-template" id="action">
+
+<!-- Action Container starts -->
+<div class="action-container">
+  <p>Now add actions to this condition [<b>{{scriptObj.condition}}</b>]</p>
+
+  <!-- Sensors Starts -->
+  <div class="col-md-4 action-col">
+    <p>Sensors</p>
+    <ul ng-repeat="spot in spots">
+      <li>
+        <label>
+          <input type="radio" ng-model="actionConfig.id" value="{{spot.$id}}"><span>{{spot.$id}}</span></label>
+      </li>
+    </ul>
+  </div>
+  <!-- Sensors Ends -->
+
+  <!-- Actions Starts -->
+  <div class="col-md-4 action-col">
+    <p>Actions</p>
+
+    <h4 style="border-bottom:none;">Spot</h4>
+    <ul ng-repeat="sensorAction in sensorActions" ng-if="sensorAction.spot=='spot'">
+      <li>
+        <label>
+          <input type="radio" ng-model="actionConfig.action" value="{{sensorAction.action}}" ng-click="setTemplate(sensorAction.action)"><span>{{sensorAction.action}}</span>
+        </label>
+      </li>
+    </ul>
+
+    <h4 style="border-bottom:none;">Base</h4>
+    <ul ng-repeat="sensorAction in sensorActions" ng-if="sensorAction.spot=='base'">
+      <li>
+        <label>
+          <input type="radio" ng-model="actionConfig.action" value="{{sensorAction.action}}" ng-click="setTemplate(sensorAction.action)"><span>{{sensorAction.action}}</span>
+        </label>
+      </li>
+    </ul>
+  </div>
+  <!-- Actions Ends -->
+
+  <!-- Options Starts -->
+  <div class="col-md-4 action-col">
+    <p>Options</p>
+    <div ng-include=currentTemplate></div>
+    <p>Timeout</p>
+    <div class="form-group">
+      <label>TIMEOUT in ms</label>
+      <input [required="string"] class="form-control block" type="number" ng-model="actionConfig.timeout" />
+    </div>
+  </div>
+  <!-- Options Ends -->
+
+  <button class="btn btn-primary btn-block pull-right" ng-click="saveAction(actionConfig);clearSteps()">Add Action</button>
+
+
+</div>
+
+</script>
+
+<!-- BLINK Template -->
+<script type="text/ng-template" id="BLINK">
+<div class="form-group">
+  <label>How long stays on in ms (1000ms = 1 s)</label>
+  <input class="form-control block" type="number" ng-model="actionConfig.params[0]" />
+</div>
+
+<div class="form-group">
+  <label>How long stays off in ms (1000ms = 1 s)</label>
+  <input class="form-control block" type="number" ng-model="actionConfig.params[1]" />
+</div>
+
+<div class="form-group">
+  <label>Red (0 - 255)</label> <a href="http://www.colorpicker.com/">Please refer http://www.colorpicker.com/</a>
+  <input class="form-control block" type="number" ng-model="actionConfig.params[2]" />
+</div>
+
+<div class="form-group">
+  <label>Green (0 - 255)</label> <a href="http://www.colorpicker.com/">Please refer http://www.colorpicker.com/</a>
+  <input class="form-control block" type="number" ng-model="actionConfig.params[3]" />
+</div>
+
+<div class="form-group">
+  <label>Blue (0 - 255)</label> <a href="http://www.colorpicker.com/">Please refer http://www.colorpicker.com/</a>
+  <input class="form-control block" type="number" ng-model="actionConfig.params[4]" />
+</div>
+
+<div class="form-group">
+  <label>Which leds to display as mapped to bits</label>
+  <input class="form-control block" type="number" ng-model="actionConfig.params[5]" />
+</div>
+
+<div class="form-group">
+  <label>How many cycles like this to repeat</label>
+  <input class="form-control block" type="number" ng-model="actionConfig.params[6]" />
+</div>
+</script>
+
+<!-- BEEP Template -->
+<script type="text/ng-template" id="BEEP">
+<div class="form-group">
+  <label>Beep time in ms (1000ms = 1 s)</label>
+  <input class="form-control block" type="number" ng-model="actionConfig.params[0]" />
+</div>
+
+<div class="form-group">
+  <label>Silence time in ms (1000ms = 1 s)</label>
+  <input class="form-control block" type="number" ng-model="actionConfig.params[1]" />
+</div>
+
+<div class="form-group">
+  <label>Frequency in Hertz (200 - 8000 I think)</label>
+  <input class="form-control block" type="number" ng-model="actionConfig.params[2]" />
+</div>
+
+<div class="form-group">
+  <label>How many times to repeat</label>
+  <input class="form-control block" type="number" ng-model="actionConfig.params[3]" />
+</div>
+</script>
+
+<!-- KETTLE Template -->
+<script type="text/ng-template" id="KETTLE">
+<div class="form-group">
+  <label>base mac address</label>
+  <input class="form-control block" type="text" ng-model="actionConfig.params[0]" />
+</div>
+
+<div class="form-group">
+  <label>String of command:</label>
+  <ul>
+    <li>OFF</li>
+    <li>BOIL N (100/95/80/65)</li>
+    <li>WARM N (0/5/10/20)</li>
+  </ul>
+  <input class="form-control block" type="text" ng-model="actionConfig.params[1]" />
+</div>
+
+</script>
+
+<!-- EASYBULB Template -->
+<script type="text/ng-template" id="EASYBULB">
+<div class="form-group">
+  <label>String of command</label>
+  <ul>
+    <li>ON</li>
+    <li>OFF</li>
+    <li>WHITE</li>
+    <li>BRIGHTNESS</li>
+    <li>COLOR</li>
+  </ul>
+  <input class="form-control block" type="text" ng-model="actionConfig.params[0]" />
+</div>
+
+<div class="form-group">
+  <label>Group number: 1 / 2 / 3 / 4 / ALL</label>
+  <input class="form-control block" type="text" ng-model="actionConfig.params[1]" />
+</div>
+
+<div class="form-group">
+  <label>Argument (not applicable for ON, OFF or WHITE)</label>
+  <ul>
+    <li>-128 to -99 for BRIGHTNESS</li>
+    <li>-128 to 127 for COLOUR</li>
+  </ul>
+  <input class="form-control block" type="text" ng-model="actionConfig.params[2]" />
+</div>
 </script>
