@@ -113,6 +113,7 @@ angular.module('jalpWebApp')
             }
           }
         }
+        
         /*Action Templates Ends*/
 
         $scope.sensorTypes = [{
@@ -189,11 +190,11 @@ angular.module('jalpWebApp')
           $scope.customConditions.push({
             condition
           });
-        }
+        };
 
         $scope.backspace = function() {
           $scope.customConditions.pop();
-        }
+        };
 
         $scope.add = function() {
           var config = $scope.conditionConfig;
@@ -215,7 +216,7 @@ angular.module('jalpWebApp')
           }
 
           $scope.resetConditionConfig();
-        }
+        };
 
 
         $scope.saveCondition = function(customConditions) {
