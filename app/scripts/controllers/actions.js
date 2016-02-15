@@ -18,9 +18,11 @@ angular.module('jalpWebApp')
         var UID = authData.uid;
         var userDataReference = ref.child('users').child(UID).child('data');
         var scriptReference = userDataReference.child('scripts');
+        var basesReference = userDataReference.child('bases');
         var spotsReference = userDataReference.child('spots');
 
         $scope.scripts = $firebaseArray(scriptReference);
+        $scope.bases = $firebaseArray(basesReference);
         $scope.spots = $firebaseArray(spotsReference);
 
         //Script object
@@ -42,7 +44,8 @@ angular.module('jalpWebApp')
           'id' : '',
           'action' : '',
           'params' : [],
-          'timeout' : ''
+          'timeout' : '',
+          'sensorType' : ''
         };
 
         $scope.customActions = [];
@@ -113,7 +116,7 @@ angular.module('jalpWebApp')
             }
           }
         }
-        
+
         /*Action Templates Ends*/
 
         $scope.sensorTypes = [{
@@ -121,7 +124,7 @@ angular.module('jalpWebApp')
           value: 'MOTION',
           type: 'Number'
         }, {
-          name: 'brightness',
+          name: 'light',
           value: 'BRIGHTNESS',
           type: 'Number'
         }, {

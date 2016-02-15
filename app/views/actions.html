@@ -139,16 +139,17 @@
 <!-- Action Container starts -->
 <div class="action-container">
 
-
   <!-- Sensors Starts -->
   <div class="col-md-4 action-col">
-    <p>Sensors</p>
+
+    <p>Spots</p>
     <ul ng-repeat="spot in spots">
       <li>
         <label>
           <input type="radio" ng-model="conditionConfig.id" value="{{spot.$id}}" ng-click="showTypes(spot)"><span>{{spot.$id}}</span></label>
       </li>
     </ul>
+
   </div>
   <!-- Sensors Ends -->
 
@@ -255,14 +256,23 @@
 <!-- Action Container starts -->
 <div class="action-container">
   <p>Now add actions to this condition [<b>{{scriptObj.condition}}</b>]</p>
+  <pre>{{actionConfig | json}}</pre>
 
   <!-- Sensors Starts -->
   <div class="col-md-4 action-col">
-    <p>Sensors</p>
+    <p>Bases</p>
+    <ul ng-repeat="base in bases">
+      <li>
+        <label>
+          <input type="radio" ng-model="actionConfig.id" ng-change="actionConfig.sensorType = 'base'" value="{{base.$id}}"><span>{{base.$id}}</span></label>
+      </li>
+    </ul>
+
+    <p>Spots</p>
     <ul ng-repeat="spot in spots">
       <li>
         <label>
-          <input type="radio" ng-model="actionConfig.id" value="{{spot.$id}}"><span>{{spot.$id}}</span></label>
+          <input type="radio" ng-model="actionConfig.id" ng-change="actionConfig.sensorType = 'spot'" value="{{spot.$id}}"><span>{{spot.$id}}</span></label>
       </li>
     </ul>
   </div>
@@ -272,8 +282,7 @@
   <div class="col-md-4 action-col">
     <p>Actions</p>
 
-    <h4 style="border-bottom:none;">Spot</h4>
-    <ul ng-repeat="sensorAction in sensorActions" ng-if="sensorAction.spot=='spot'">
+    <ul ng-repeat="sensorAction in sensorActions" ng-if="sensorAction.spot=='spot' && actionConfig.sensorType == 'spot'">
       <li>
         <label>
           <input type="radio" ng-model="actionConfig.action" value="{{sensorAction.action}}" ng-click="setTemplate(sensorAction.action)"><span>{{sensorAction.action}}</span>
@@ -281,8 +290,7 @@
       </li>
     </ul>
 
-    <h4 style="border-bottom:none;">Base</h4>
-    <ul ng-repeat="sensorAction in sensorActions" ng-if="sensorAction.spot=='base'">
+    <ul ng-repeat="sensorAction in sensorActions" ng-if="sensorAction.spot=='base' && actionConfig.sensorType == 'base'">
       <li>
         <label>
           <input type="radio" ng-model="actionConfig.action" value="{{sensorAction.action}}" ng-click="setTemplate(sensorAction.action)"><span>{{sensorAction.action}}</span>
