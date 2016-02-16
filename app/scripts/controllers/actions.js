@@ -18,15 +18,16 @@ angular.module('jalpWebApp')
         var UID = authData.uid;
         var userDataReference = ref.child('users').child(UID).child('data');
         var scriptReference = userDataReference.child('scripts');
+        var basesReference = userDataReference.child('bases');
         var spotsReference = userDataReference.child('spots');
 
         $scope.scripts = $firebaseArray(scriptReference);
+        $scope.bases = $firebaseArray(basesReference);
         $scope.spots = $firebaseArray(spotsReference);
 
         //Script object
         $scope.scriptObj = {
           action: "",
-          // condition: "8025 D2",
           condition: "",
           timeout: ""
         };
@@ -43,8 +44,11 @@ angular.module('jalpWebApp')
           'id' : '',
           'action' : '',
           'params' : [],
-          'timeout' : ''
+          'timeout' : '',
+          'sensorType' : ''
         };
+
+        $scope.customActions = [];
 
         $scope.currentTemplate;
 
@@ -78,7 +82,6 @@ angular.module('jalpWebApp')
             }else{
               paramString += '0 ';
             }
-
           }
           var timeout = actionConfig.timeout == null ? 0 : actionConfig.timeout;
 
@@ -113,6 +116,7 @@ angular.module('jalpWebApp')
             }
           }
         }
+
         /*Action Templates Ends*/
 
         $scope.sensorTypes = [{
@@ -189,11 +193,11 @@ angular.module('jalpWebApp')
           $scope.customConditions.push({
             condition
           });
-        }
+        };
 
         $scope.backspace = function() {
           $scope.customConditions.pop();
-        }
+        };
 
         $scope.add = function() {
           var config = $scope.conditionConfig;
@@ -215,7 +219,7 @@ angular.module('jalpWebApp')
           }
 
           $scope.resetConditionConfig();
-        }
+        };
 
 
         $scope.saveCondition = function(customConditions) {
@@ -233,15 +237,19 @@ angular.module('jalpWebApp')
           }
 
           //Reset configuration
-          $scope.onlyCondition = '';
-          $scope.generatedCondition = '';
-          $scope.customConditions = [];
+          reset();
 
           // Inner Save function starts
           function save(conditions) {
             $scope.scriptObj.condition = conditions;
           }
           // Inner save function ends
+
+          function reset(){
+            $scope.onlyCondition = '';
+            $scope.generatedCondition = '';
+            $scope.customConditions = [];
+          }
 
         }
 
