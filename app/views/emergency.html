@@ -78,18 +78,24 @@
                 <th>Email</th>
             </tr>
             <tr ng-repeat-start="user in users | filter:search" ng-click="user.expanded = !user.expanded">
+
                 <td>{{$index}}</td>
                 <td>{{user.firstName}}</td>
                 <td>{{user.lastName}}</td>
                 <td>{{user.email}}</td>
             </tr>
             <tr ng-if="user.expanded" ng-repeat-end="">
+
                 <td colspan="7">
+
                       <div class="panel panel-default col-md-3">
-                      
-                          <div ng-repeat="dietEntry in user.data.fridge.diet">
+
+                          <div ng-repeat="dietEntry in user.data.fridge.diet track by $index">
                             <div ng-if="$index != 0">
-                              <li>{{indexToFood($index)}}: {{dietEntry}} portions</li>
+                              <li>{{indexToFood($index)}}: {{dietEntry}} portions
+
+                                <button ng-click="decreasePortion(user,$index)" class="btn btn-primary"><span class="glyphicon glyphicon-minus"></span></button>
+                                 <button ng-click="increasePortion(user,$index)" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button></li>
                             </div>
 
 

@@ -51,4 +51,17 @@ angular.module('jalpWebApp')
         }
       }
 
+      $scope.increasePortion = function(user,index){
+
+        var current = user.data.fridge.diet[index]
+        user.data.fridge.diet[index] = current + 1;
+        users.$save(user);
+
+
+      }
+      $scope.decreasePortion = function(user,index){
+        var current = user.data.fridge.diet[index]
+        user.data.fridge.diet[index] = current - 1;
+        users.$save(user);
+      }
   });
