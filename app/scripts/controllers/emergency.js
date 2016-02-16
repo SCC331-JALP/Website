@@ -64,4 +64,9 @@ angular.module('jalpWebApp')
         user.data.fridge.diet[index] = current - 1;
         users.$save(user);
       }
+
+      $scope.disableAlarm = function(user){
+        user.data.fridge.alert = false
+        users.$save(user);
+      }
   });
