@@ -41,6 +41,7 @@
 
 
         <ul ng-if="logged" class="nav navbar-nav navbar-right nav-jalp">
+
           <li><a href="/dashboard">Dashboard</a></li>
           <li><a href="/actions">Action</a></li>
           <li><a href="/sensor">Sensor</a></li>
@@ -51,11 +52,12 @@
           <li><a href="/dev">Admin</a></li>
         </ul>
 
-        <ul ng-if="logged"class="nav navbar-nav navbar-right nav-jalp" >
-          <li ng-if="isES"><a href="/emergency" class="btn">E.S.</a></li>
-          <li ng-if="!isES"><a href="/fridge" class="btn">Fridge</a></li>
+        <ul ng-if="logged && isES" class="nav navbar-nav navbar-right nav-jalp">
+          <li><a href="/emergency" class="btn">E.S.</a></li>
         </ul>
-
+        <ul ng-if="logged && !isES" class="nav navbar-nav navbar-right nav-jalp">
+          <li><a href="/fridge" class="btn">Fridge</a></li>
+        </ul>
 
       </div>
     </header>

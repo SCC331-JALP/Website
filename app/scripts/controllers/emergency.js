@@ -29,4 +29,26 @@ angular.module('jalpWebApp')
       }
     }
 
+    $scope.indexToFood = function(index){
+      //console.log(index);
+      switch(index){
+        case 1:
+          return "Vegetables";
+        case 2:
+          return "Fish";
+        case 3:
+          return "Meat";
+        case 4:
+          return "Chocolate";
+        case 5:
+          return "Pasta";
+        case 6:
+          return "Potatoes";
+        case 7:
+          return "Fruit";
+        case 8:
+          return "Biscuits";
+        }
+      }
+
   });
