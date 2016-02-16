@@ -110,11 +110,12 @@ angular
       if(authData){
         var UID = authData.uid;
         var userReference = ref.child('users');
-        
+
         $rootScope.userProfile = authData ? $firebaseObject(userReference.child(UID)) : null;
-        
+
         $rootScope.userProfile.$loaded().then(function () {
           $rootScope.isDev = ($rootScope.userProfile.access_level == 1) ? true : false;
+          $rootScope.isES = ($rootScope.userProfile.access_level == 2) ? true : false;
         });
       }
     });
