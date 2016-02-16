@@ -66,6 +66,16 @@ angular
         controller: 'RoomCtrl',
         controllerAs: 'room'
       })
+      .when('/fridge', {
+        templateUrl: 'views/fridge.html',
+        controller: 'FridgeCtrl',
+        controllerAs: 'fridge'
+      })
+      .when('/emergency', {
+        templateUrl: 'views/emergency.html',
+        controller: 'EmergencyCtrl',
+        controllerAs: 'emergency'
+      })
       .otherwise({
         redirectTo: '/'
       });
