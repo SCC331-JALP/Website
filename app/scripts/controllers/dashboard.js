@@ -116,19 +116,21 @@ angular.module('jalpWebApp')
           //console.log(type);
           var typeIndicator = convertTypeToIndicator(type);
         //  console.log(type + " " + typeIndicator);
+
           if(sensors.length){
             //console.log(sensors.length);
             for(var i =0; i < sensors.length; i++){
             //  console.log(sensors[i].liveData);
               if(sensors[i].liveData.indexOf(typeIndicator) !== -1 && sensors[i].alive){
               //  console.log("array contains temp sensor");
+
                 if(sensors[i][type]){
                   return true;
                 }
               }
             }
 
-            return true;
+          //  return true;
           }
           return false;
         }
@@ -215,124 +217,3 @@ angular.module('jalpWebApp')
 
 
   });
-
-/*
-function handleNewRoom(snap,ref,spotName){
-    var room = snap.room;
-
-    if(room == undefined){
-      room = "no-room";
-    }
-    console.log(room);
-    if($("#"+room).length > 0){
-      var roomElement =  $("#"+room);
-      var spotString = roomElement.find("#room-desc")[0].innerText;
-      var spotNo = spotString.charAt(spotString.length - 1);
-      var oldSpotNo = spotNo;
-      spotNo++;
-      console.log(spotNo);
-      var newSpotString = spotString.replace(oldSpotNo,spotNo);
-      console.log(spotString);
-      roomElement.find("#room-desc")[0].innerHTML = newSpotString;
-    }
-    else{
-      var roomElement =  $("#roomTemplate").clone();
-      $(roomElement).attr("id",room);
-      roomElement.find("#room-name")[0].innerHTML =  room;
-      roomElement.find("#room-desc")[0].innerHTML = "Number of spots in this room = 1";
-      $("#roomContainer").prepend(roomElement);
-      $(roomElement).removeClass("hidden");
-      tempUpdater(snap,roomElement, ref, spotName);
-      lightUpdater(snap,roomElement, ref, spotName);
-    }
-}
-
-//Not complete
-function handleChangedRoom(snap){
-    var room = snap.room;
-
-    if(room == undefined){
-      room = "no-room";
-    }
-    console.log(room);
-    if($("#"+room).length > 0){
-      var roomElement =  $("#"+room);
-      var spotString = roomElement.find("#room-desc")[0].innerText;
-      spotNo = spotString.charAt(spotString.length);
-      spotNo++;
-      spotString.charAt(spotString.length) = spotNo;
-      console.log(spotString);
-      roomElement.find("#room-desc")[0].innerHTML = spotString;
-    }
-    else{
-      var roomElement =  $("#roomTemplate").clone();
-      $(roomElement).attr("id",room);
-      roomElement.find("#room-name")[0].innerHTML =  room;
-      roomElement.find("#room-desc")[0].innerHTML = "Number of spots in this room = 1";
-      $("#roomContainer").append(roomElement);
-      $(roomElement).removeClass("hidden");
-    }
-}
-
-function handleDeletedRoom(snap){
-    var room = snap.room;
-    if(room == undefined){
-      room = "no-room";
-    }
-    console.log("Removing spot from "+room);
-    if($("#"+room).length > 0){
-      var roomElement =  $("#"+room);
-      var spotString = roomElement.find("#room-desc")[0].innerText;
-      var spotNo = spotString.charAt(spotString.length - 1);
-      var oldSpotNo = spotNo;
-      spotNo --;
-      if(spotNo > 0){
-        newSpotStirng = spotString.replace(oldSpotNo,spotNo);
-        roomElement.find("#room-desc")[0].innerHTML = newSpotString;
-      }else{
-        $(roomElement).remove();
-      }
-    }
-}
-
-function tempUpdater(snap,roomElement,ref, spotName){
-  var dataString = snap.liveData;
-  console.log(spotName);
-  var reference = ref.child(spotName);
-
-  for(var i=0;i<dataString.length;i++){
-    if(dataString.charAt(i) == "t"){
-      if(snap.temp != undefined)
-        $(roomElement).find('#room-temp')[0].innerHTML = snap.temp;
-        // $(".progress-temp").find('#room-temp-bar').css("width", snap.temp + '%');
-
-      reference.on("child_changed",function(snapshot){
-        if(snapshot.key() == "temp" && snapshot.val() != undefined){
-          $(roomElement).find('#room-temp')[0].innerHTML = snapshot.val();
-          // $(".progress-temp").find('#room-temp-bar').css("width", snapshot.val() + '%');
-        }
-      });
-    }
-  }
-}
-
-function lightUpdater(snap,roomElement,ref, spotName){
-  var dataString = snap.liveData;
-  console.log(spotName);
-  var reference = ref.child(spotName);
-
-  for(var i=0;i<dataString.length;i++){
-    if(dataString.charAt(i) == "l"){
-      if(snap.light != undefined)
-        $(roomElement).find('#room-light')[0].innerHTML = snap.light;
-        // $(".progress-light").find('#room-light-bar').css("width", snap.light + '%');
-      reference.on("child_changed",function(snapshot){
-        if(snapshot.key() == "light" && snapshot.val() != undefined){
-          $(roomElement).find('#room-light')[0].innerHTML = snapshot.val();
-          // $(".progress-light").find('#room-light-bar').css("width", snapshot.val() + '%');
-        }
-      });
-    }
-  }
-}
-*/

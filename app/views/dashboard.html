@@ -104,11 +104,12 @@
 										<div class="room-values">
 											<div class="row">
 												<div class="col-xs-6">
-													<div ng-if="anyBoolean('infrared', roomSensors[room.name])">
+													
 														<object ng-if="anyBoolean('infrared', roomSensors[room.name])" type="image/svg+xml" data="../images/icons/infrared.svg" class="icon active"></object>
 														<object ng-if="!anyBoolean('infrared', roomSensors[room.name])" type="image/svg+xml" data="../images/icons/noinfrared.svg" class="icon inactive"></object>
+
 												</div>
-												</div>
+
 												<div class="col-xs-6">
 														<div ng-if="anyBoolean('sound', roomSensors[room.name])">
 															<object ng-if="anyBoolean('sound', roomSensors[room.name])" type="image/svg+xml" data="../images/icons/sound.svg" class="icon active"></object>

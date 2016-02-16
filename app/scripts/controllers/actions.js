@@ -120,7 +120,7 @@ angular.module('jalpWebApp')
           value: 'MOTION',
           type: 'Number'
         }, {
-          name: 'brightness',
+          name: 'light',
           value: 'BRIGHTNESS',
           type: 'Number'
         }, {
