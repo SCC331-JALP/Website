@@ -20,4 +20,10 @@ describe('Controller: EmergencyCtrl', function () {
   it('should attach a list of awesomeThings to the scope', function () {
     expect(EmergencyCtrl.awesomeThings.length).toBe(3);
   });
+
+
+  it('should convert indexes to strings correctly', function(){
+    expect(EmergencyCtrl.indexToFood(1)).toBe("Vegetables");
+    expect(EmergencyCtrl.indexToFood(8)).toBe("Biscuits");
+  })
 });
