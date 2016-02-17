@@ -20,6 +20,7 @@ angular.module('jalpWebApp')
       	var fridgeReference = ref.child('users').child(UID).child('data').child('fridge');
       	$scope.diets = $firebaseArray(fridgeReference.child('diet'));
       	$scope.fridge = $firebaseArray(fridgeReference);
+      	$scope.contents = $firebaseArray(fridgeReference.child('fridgeContents'));
 
       	$scope.percentageDrank = function(){
 	    	var percentage = (fridgeReference.liquidsConsumedToday/fridgeReference.dailyLiquidsRecommended) * 100;
@@ -31,7 +32,8 @@ angular.module('jalpWebApp')
 
     $scope.indexToFood = function(index){
       //console.log(index);
-      switch(index){
+      var indexInt = 0 + index;
+      switch(indexInt){
         case 0:
           return "Vegetables";
         case 1:
@@ -50,4 +52,28 @@ angular.module('jalpWebApp')
           return "Biscuits";
       }
     }
+
+    $scope.idToFood = function(id){
+      console.log(id);
+      var idInt =  parseInt(id, 10);
+      console.log(idInt);
+      switch(idInt){
+        case 1:
+          return "Vegetables";
+        case 2:
+          return "Fish";
+        case 3:
+          return "Meat";
+        case 4:
+          return "Chocolate";
+        case 5:
+          return "Pasta";
+        case 6:
+          return "Potatoes";
+        case 7:
+          return "Fruit";
+        case 8:
+          return "Biscuits";
+        }
+      }
   });

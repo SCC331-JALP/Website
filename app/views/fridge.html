@@ -8,6 +8,7 @@
 
 	<div id="Fridge Contents">
 		<p>Fridge Contents</p>
+		<li ng-repeat="content in contents">{{content}} {{idToFood(content.$id)}}: {{(content.length)}}</li>
 	</div>
 
 	<div id="Fluid Intake">
