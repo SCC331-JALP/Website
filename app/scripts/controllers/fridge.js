@@ -21,12 +21,6 @@ angular.module('jalpWebApp')
       	$scope.diets = $firebaseArray(fridgeReference.child('diet'));
       	$scope.fridgeTest = $firebaseObject(fridgeReference);
       	$scope.contents = $firebaseArray(fridgeReference.child('fridgeContents'));
-
-      	$scope.percentageDrank = function(){
-	    	var percentage = (fridgeReference.liquidsConsumedToday/fridgeReference.dailyLiquidsRecommended) * 100;
-	    	var returner = percentage + "%";
-	    	return returner;
-	    }
       }
     })
 
@@ -76,4 +70,12 @@ angular.module('jalpWebApp')
           return "Biscuits";
         }
       }
+
+    $scope.percentageDrank = function(drank,toDrink){
+    		console.log(drank);
+	    	var percentage = (drank/toDrink) * 100;
+	    	percentage = Math.round(percentage);
+	    	var returner = percentage + "%";
+	    	return returner;
+	    }
   });

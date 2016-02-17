@@ -15,6 +15,6 @@
 		<p>Fluid Intake</p>
 		<li>Amount Drank: {{fridgeTest.liquidsConsumedToday}}</li>
 		<li>Daily Recommended: {{fridgeTest.dailyLiquidsRecommended}}</li>
-		<li>{{percentageDrank()}}</li>
+		<li>{{percentageDrank(fridgeTest.liquidsConsumedToday,fridgeTest.dailyLiquidsRecommended)}}</li>
 	</div>
 </div>
