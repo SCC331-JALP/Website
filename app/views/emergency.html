@@ -102,7 +102,7 @@
                           </div>
                       </div>
 
-                      <div ng-if="user.data.fridge.alert"> <button  ng-click="disableAlarm(user)" class="btn btn-large btn-danger"><span>Disable Alarm</span></button> </div>
+                      <div ng-if="user.data.fridge.alert"> <span class="glyphicon glyphicon-alert"></span><button  ng-click="disableAlarm(user)" class="btn btn-large btn-danger"><span>Disable Alarm</span></button> </div>
                       <div ng-if="!user.data.fridge.alert"> <button disabled class="btn btn-large btn-danger"><span>Disable Alarm</span></button>  </div>
                 </td>
             </tr>
