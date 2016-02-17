@@ -1,1 +1,16 @@
-<p>This is the fridge view.</p>
+<div class="container-fluid">
+
+	<pre>{{diets | json}}</pre>
+	<div id="diet plan" >
+		<p>Diet Plan</p>
+		<li ng-repeat="dietEntry in diets track by $index">{{indexToFood($index)}}: {{dietEntry.$value}}</li>
+	</div>
+
+	<div id="Fridge Contents">
+		<p>Fridge Contents</p>
+	</div>
+
+	<div id="Fluid Intake">
+		<p>Fluid Intake</p>
+	</div>
+</div>
