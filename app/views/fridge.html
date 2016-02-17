@@ -1,6 +1,6 @@
 <div class="container-fluid">
 
-	<pre>{{diets | json}}</pre>
+	<pre>{{fridges | json}}</pre>
 	<div id="diet plan" >
 		<p>Diet Plan</p>
 		<li ng-repeat="dietEntry in diets track by $index">{{indexToFood($index)}}: {{dietEntry.$value}}</li>
@@ -12,5 +12,8 @@
 
 	<div id="Fluid Intake">
 		<p>Fluid Intake</p>
+		<li>Amount Drank: {{fridge.liquidsConsumedToday}}</li>
+		<li>Daily Recommended: {{fridge.dailyLiquidsRecommended}}</li>
+		<li>{{percentageDrank()}}</li>
 	</div>
 </div>

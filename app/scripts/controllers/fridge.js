@@ -19,7 +19,13 @@ angular.module('jalpWebApp')
       if(authData){
       	var fridgeReference = ref.child('users').child(UID).child('data').child('fridge');
       	$scope.diets = $firebaseArray(fridgeReference.child('diet'));
+      	$scope.fridge = $firebaseArray(fridgeReference);
 
+      	$scope.percentageDrank = function(){
+	    	var percentage = (fridgeReference.liquidsConsumedToday/fridgeReference.dailyLiquidsRecommended) * 100;
+	    	var returner = percentage + "%";
+	    	return returner;
+	    }
       }
     })
 
