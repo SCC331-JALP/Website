@@ -8,7 +8,7 @@
  * Controller of the jalpWebApp
  */
 angular.module('jalpWebApp')
-  .controller('FridgeCtrl', function ($scope, $rootScope, $firebaseArray) {
+  .controller('FridgeCtrl', function ($scope, $rootScope, $firebaseArray, $firebaseObject) {
     var ref = $rootScope.ref;
     var authData = $rootScope.authData;
     var isES = $rootScope.isES;
@@ -19,7 +19,7 @@ angular.module('jalpWebApp')
       if(authData){
       	var fridgeReference = ref.child('users').child(UID).child('data').child('fridge');
       	$scope.diets = $firebaseArray(fridgeReference.child('diet'));
-      	$scope.fridge = $firebaseArray(fridgeReference);
+      	$scope.fridgeTest = $firebaseObject(fridgeReference);
       	$scope.contents = $firebaseArray(fridgeReference.child('fridgeContents'));
 
       	$scope.percentageDrank = function(){
