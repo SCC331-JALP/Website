@@ -8,7 +8,7 @@
  * Controller of the jalpWebApp
  */
 angular.module('jalpWebApp')
-  .controller('FridgeCtrl', function ($scope, $rootScope, $firebaseArray, $firebaseObject) {
+  .controller('FridgeCtrl', function ($scope, $rootScope, $firebaseArray, $firebaseObject, $firebase) {
     var ref = $rootScope.ref;
     var authData = $rootScope.authData;
     var isES = $rootScope.isES;
@@ -21,6 +21,18 @@ angular.module('jalpWebApp')
       	$scope.diets = $firebaseArray(fridgeReference.child('diet'));
       	$scope.fridgeTest = $firebaseObject(fridgeReference);
       	$scope.contents = $firebaseArray(fridgeReference.child('fridgeContents'));
+      	$scope.notified = false;
+
+      	fridgeReference.child('consumption').on("child_changed", function(snapshot){
+          checkDietPlan(snapshot);
+        });
+
+      	var checkDietPlan = function(snap){
+      		var diets = $scope.diets;
+      		if(snap.val() > diets[snap.key()-1].$value){
+      			$scope.notified = true;
+      		}
+      	}
 
       	$scope.percentageDrank = function(drank,toDrink){
 	    	var percentage = (drank/toDrink) * 100;
@@ -72,5 +84,9 @@ angular.module('jalpWebApp')
       }
 
       return Object.keys(childObject).length - 3; //get a list of keys inside the object, then count the length, and decrement by 3 to account for things js add to ovjects 
+    }
+
+    $scope.notifyFalse = function(){
+    	$scope.notified = false;
     }
   });

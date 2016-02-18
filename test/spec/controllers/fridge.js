@@ -17,7 +17,13 @@ describe('Controller: FridgeCtrl', function () {
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(FridgeCtrl.awesomeThings.length).toBe(3);
-  });
+  it('should convert indexes to strings correctly', function(){
+    expect(FridgeCtrl.indexToFood(0)).toBe("Vegetables");
+    expect(FridgeCtrl.indexToFood(7)).toBe("Biscuits");
+  })
+
+  it('should calculate the correct percentage of the first number to the second', function(){
+    expect(FridgeCtrl.percentageDrank(10,100)).toBe("10%");
+    expect(FridgeCtrl.percentageDrank(107,100)).toBe("107%");
+  })
 });

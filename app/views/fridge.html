@@ -30,6 +30,10 @@
 					<div class="fridge col-md-3 animated flipInX">
 						<div id="diet plan" class="card card-block">
 							<p>Diet Plan</p>
+							<div ng-if="notified">
+								<label for="notifyBtn">You aren't following the diet plan.</label>
+								<button id="notifyBtn" ng-click="notifyFalse()"> <span class="glyphicon glyphicon-remove"></span></button>
+							</div>
 							<li ng-repeat="dietEntry in diets track by $index">{{indexToFood($index)}}: {{dietEntry.$value}}</li>
 						</div>
 					</div>
