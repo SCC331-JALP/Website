@@ -55,8 +55,16 @@ angular.module('jalpWebApp')
 	    }
 
 	$scope.getLength = function(content){
-			var contentRef = ref.child('users').child(UID).child('data').child('fridge').child('fridgeContents');
-    		var contentArray = $firebaseArray(contentRef);
-    		console.log(contentArray);
-	    }
+    	var food = $scope.indexToFood(parseInt(content) - 1);
+    
+      var childObject;
+      for(var child in $scope.contents){
+
+        if($scope.contents[child].$id == content){
+          childObject = $scope.contents[child];
+        }
+      }
+
+      return Object.keys(childObject).length - 3;
+    }
   });
