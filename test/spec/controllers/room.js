@@ -16,8 +16,4 @@ describe('Controller: RoomCtrl', function () {
       // place here mocked dependencies
     });
   }));
-
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(RoomCtrl.awesomeThings.length).toBe(3);
-  });
 });

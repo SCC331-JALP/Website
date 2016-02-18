@@ -16,8 +16,4 @@ describe('Controller: SensorCtrl', function () {
       // place here mocked dependencies
     });
   }));
-
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(SensorCtrl.awesomeThings.length).toBe(3);
-  });
 });

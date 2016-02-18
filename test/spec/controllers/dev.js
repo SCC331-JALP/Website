@@ -16,8 +16,4 @@ describe('Controller: DevCtrl', function () {
       // place here mocked dependencies
     });
   }));
-
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(DevCtrl.awesomeThings.length).toBe(3);
-  });
 });
