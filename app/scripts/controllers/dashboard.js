@@ -93,7 +93,7 @@ angular.module('jalpWebApp')
         $scope.averageValue = function(type, sensors){
             var values = new Array;
 
-            var typeIndicator = convertTypeToIndicator(type);
+            var typeIndicator = $scope.convertTypeToIndicator(type);
           //  console.log(type + " " + typeIndicator);
             if(sensors.length){
               //console.log(sensors.length);
@@ -114,7 +114,7 @@ angular.module('jalpWebApp')
 
         $scope.anyBoolean = function(type,sensors){
           //console.log(type);
-          var typeIndicator = convertTypeToIndicator(type);
+          var typeIndicator = $scope.convertTypeToIndicator(type);
         //  console.log(type + " " + typeIndicator);
 
           if(sensors.length){
@@ -138,7 +138,7 @@ angular.module('jalpWebApp')
         $scope.warningBelow = function(type,threshold,sensors){
         //  console.log(sensors);
           var addresses = new Array
-          var typeIndicator = convertTypeToIndicator(type);
+          var typeIndicator = $scope.convertTypeToIndicator(type);
       //   console.log(type + " " + typeIndicator);
           if(sensors.length){
         //    console.log(sensors.length);
@@ -161,7 +161,7 @@ angular.module('jalpWebApp')
         $scope.warningAbove = function(type,threshold,sensors){
         //  console.log(sensors);
           var addresses = new Array
-          var typeIndicator = convertTypeToIndicator(type);
+          var typeIndicator = $scope.convertTypeToIndicator(type);
         //   console.log(type + " " + typeIndicator);
           if(sensors.length){
         //    console.log(sensors.length);
@@ -181,7 +181,7 @@ angular.module('jalpWebApp')
             return false
         }
 
-        function convertTypeToIndicator(type){
+        $scope.convertTypeToIndicator = function(type){
           switch(type){
             case "temp" :
               return "t";

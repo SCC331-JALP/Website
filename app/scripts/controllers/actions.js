@@ -190,9 +190,9 @@ angular.module('jalpWebApp')
         $scope.customConditions = [];
 
         $scope.addCustom = function(condition) {
-          $scope.customConditions.push({
+          $scope.customConditions.push(
             condition
-          });
+          );
         };
 
         $scope.backspace = function() {
