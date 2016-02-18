@@ -19,6 +19,7 @@ angular.module('jalpWebApp')
       if(authData){
       	var fridgeReference = ref.child('users').child(UID).child('data').child('fridge');
       	$scope.diets = $firebaseArray(fridgeReference.child('diet'));
+        $scope.consumptions = $firebaseArray(fridgeReference.child('consumption'));
       	$scope.fridgeTest = $firebaseObject(fridgeReference);
       	$scope.contents = $firebaseArray(fridgeReference.child('fridgeContents'));
       	$scope.notified = false;

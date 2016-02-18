@@ -38,6 +38,12 @@
 						</div>
 					</div>
 					<div class="fridge col-md-3 animated flipInX">
+						<div id="diet plan" class="card card-block">
+							<p>Consumed</p>
+							<li ng-repeat="consumption in consumptions track by $index">{{indexToFood($index)}}: {{consumption.$value}}</li>
+						</div>
+					</div>
+					<div class="fridge col-md-3 animated flipInX">
 						<div id="Fridge Contents" class="card card-block">
 							<p>Fridge Contents</p>
 							<li ng-repeat="content in contents">{{indexToFood(content.$id - 1)}}: {{getLength(content.$id)}}</li>
