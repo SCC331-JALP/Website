@@ -55,16 +55,16 @@ angular.module('jalpWebApp')
 	    }
 
 	$scope.getLength = function(content){
-    	var food = $scope.indexToFood(parseInt(content) - 1);
-    
-      var childObject;
-      for(var child in $scope.contents){
+      //recieve id as parameter
 
-        if($scope.contents[child].$id == content){
-          childObject = $scope.contents[child];
+      var childObject;
+      for(var child in $scope.contents){ //for every child in fridgeContents
+
+        if($scope.contents[child].$id == content){ //if the child's id maches the parameter id
+          childObject = $scope.contents[child]; //store the child in a temp object
         }
       }
 
-      return Object.keys(childObject).length - 3;
+      return Object.keys(childObject).length - 3; //get a list of keys inside the object, then count the length, and decrement by 3 to account for things js add to ovjects 
     }
   });
