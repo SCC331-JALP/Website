@@ -8,7 +8,7 @@
 
 	<div id="Fridge Contents">
 		<p>Fridge Contents</p>
-		<li ng-repeat="content in contents">{{content}} {{idToFood(content.$id)}}: {{(content.length)}}</li>
+		<li ng-repeat="content in contents">{{content}} {{indexToFood(content.$id - 1)}}: {{getLength(content)}}</li>
 	</div>
 
 	<div id="Fluid Intake">
