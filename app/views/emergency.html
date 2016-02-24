@@ -1,0 +1,115 @@
+<style>
+#devPanel{
+    background-color:#304056;
+    position:relative;
+}
+.devPanel-Content{
+    position:relative;
+    padding:5em;
+    color:#FFFFFF;
+}
+
+#devPanel .panel{
+    border:none;
+    background-color:#19212D;
+    padding: 0 0 10px 0;
+    border-radius:1px;
+    border:1px solid #3C506B;
+}
+#devPanel .panel h4{
+    border-bottom: 1px solid #2D3644;
+
+}
+#devPanel .panel-title{
+    display:block;
+    background-color:#141B25;
+    padding:0.5em;
+    height: 82px;
+}
+#devPanel .panel-subtitle-alive{
+    color: #88C425;
+}
+#devPanel .panel-subtitle-off{
+    color: #c46125;
+}
+#devPanel .panel-body{
+    padding:0;
+}
+#devPanel .progress{
+    border-radius:0 !important;
+    margin-bottom:0;
+}
+#devPanel .progress-bar{
+    color:#141B25;
+    font-weight: bold;
+    border-top:1px solid #FFFFFF;
+    border-bottom:1px solid #FFFFFF;
+}
+#devPanel .panel-header{
+    border-color:none;
+    background-color:#19212D;
+    border-radius:none;
+}
+#devPanel .panel-footer{
+    border:none;
+    background-color:#19212D;
+    border-radius:none;
+}
+#devPanel ul{
+    list-style-type:none;
+    padding-left:0;
+}
+#devPanel li{
+    border-bottom: 1px solid #2B3A50;
+    padding: 0.3em;
+}
+
+
+</style>
+<div class="container-fluid" id="devPanel" ng-if="isES()">
+<div class="bg-overlay pattern"></div>
+    <div class="container devPanel-Content animated fadeIn">
+        <table class="table jalp-table">
+        <label>Search: <input ng-model="search.$" class="form-control" placeholder="Customer Name..."></label> <br>
+            <tr>
+                <th>No.</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+            </tr>
+            <tr ng-repeat-start="user in users | filter:search" ng-click="user.expanded = !user.expanded">
+
+                <td>{{$index}}</td>
+                <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
+                <td>{{user.email}}</td>
+            </tr>
+            <tr ng-if="user.expanded" ng-repeat-end="">
+
+                <td colspan="7">
+
+                      <div class="panel panel-default col-md-3">
+
+                          <div ng-repeat="dietEntry in user.data.fridge.diet track by $index">
+                            <div ng-if="$index != 0">
+                              <li>{{indexToFood($index)}}: {{dietEntry}} portions
+                                <br>
+                                <div>
+                                  <button ng-click="decreasePortion(user,$index)" class="btn btn-primary"><span class="glyphicon glyphicon-minus"></span></button>
+                                   <button ng-click="increasePortion(user,$index)" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                                </div>
+                                </li>
+                            </div>
+
+
+                          </div>
+                      </div>
+
+                      <div ng-if="user.data.fridge.alert"> <button  ng-click="disableAlarm(user)" class="btn btn-large btn-danger pull-right"><span class="glyphicon glyphicon-alert"></span><span>Disable Alarm</span></button> </div>
+                      <div ng-if="!user.data.fridge.alert"> <button disabled class="btn btn-large btn-danger pull-right"> <span> Disable Alarm</span></button>  </div>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</div>

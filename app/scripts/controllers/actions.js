@@ -69,20 +69,37 @@ angular.module('jalpWebApp')
         },{
           spot : 'base',
           action : 'EASYBULB'
+        },{
+          spot: 'base',
+          action : 'NOTIFY'
         }];
 
         $scope.saveAction = function(actionConfig){
           var paramString;
           var paramsLength = getLength(actionConfig.action);
+
+          console.log("Length: " + paramsLength);
+
           paramString = actionConfig.id + ' ';
           paramString += actionConfig.action + ' ';
-          for(var i=0;i<paramsLength;i++){
-            if(actionConfig.params[i] > 0){
-              paramString += actionConfig.params[i] + ' ';
-            }else{
-              paramString += '0 ';
+          if(actionConfig.action == "NOTIFY"){
+            for(var i=0;i<paramsLength;i++){
+              if(actionConfig.params[i].length > 0){
+                paramString += actionConfig.params[i].replace(/ /g,"_") + ' ';
+              }else{
+                paramString += 'NoParameterSaved ';
+              }
+            }
+          }else{
+            for(var i=0;i<paramsLength;i++){
+              if(actionConfig.params[i] > 0){
+                paramString += actionConfig.params[i] + ' ';
+              }else{
+                paramString += '0 ';
+              }
             }
           }
+
           var timeout = actionConfig.timeout == null ? 0 : actionConfig.timeout;
 
           // var trimmedParams = paramString.replace(/\s+$/, ';');
@@ -106,11 +123,13 @@ angular.module('jalpWebApp')
             if(action.indexOf('BLINK') > -1){
               return 7;
             }else if(action.indexOf('BEEP') > -1){
-              return 4
+              return 4;
             }else if(action.indexOf('KETTLE') > -1){
-              return 2
+              return 2;
             }else if(action.indexOf('EASYBULB') > -1){
-              return 3
+              return 3;
+            }else if(action.indexOf('NOTIFY') > -1){
+              return 2;
             }else{
               return 0;
             }
