@@ -66,6 +66,16 @@ angular
         controller: 'RoomCtrl',
         controllerAs: 'room'
       })
+      .when('/fridge', {
+        templateUrl: 'views/fridge.html',
+        controller: 'FridgeCtrl',
+        controllerAs: 'fridge'
+      })
+      .when('/emergency', {
+        templateUrl: 'views/emergency.html',
+        controller: 'EmergencyCtrl',
+        controllerAs: 'emergency'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -100,11 +110,12 @@ angular
       if(authData){
         var UID = authData.uid;
         var userReference = ref.child('users');
-        
+
         $rootScope.userProfile = authData ? $firebaseObject(userReference.child(UID)) : null;
-        
+
         $rootScope.userProfile.$loaded().then(function () {
           $rootScope.isDev = ($rootScope.userProfile.access_level == 1) ? true : false;
+          $rootScope.isES = ($rootScope.userProfile.access_level == 2) ? true : false;
         });
       }
     });

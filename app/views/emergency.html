@@ -93,20 +93,31 @@
                           <div ng-repeat="dietEntry in user.data.fridge.diet track by $index">
                             <div ng-if="$index != 0">
                               <li>{{indexToFood($index)}}: {{dietEntry}} portions
+<<<<<<< HEAD
                                 <br>
                                 <div>
                                   <button ng-click="decreasePortion(user,$index)" class="btn btn-primary"><span class="glyphicon glyphicon-minus"></span></button>
                                    <button ng-click="increasePortion(user,$index)" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
                                 </div>
                                 </li>
+=======
+
+                                <button ng-click="decreasePortion(user,$index)" class="btn btn-primary"><span class="glyphicon glyphicon-minus"></span></button>
+                                 <button ng-click="increasePortion(user,$index)" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button></li>
+>>>>>>> 3556c1a86bc4fc32f6c0c54c6921115c2ed002c6
                             </div>
 
 
                           </div>
                       </div>
 
+<<<<<<< HEAD
                       <div ng-if="user.data.fridge.alert"> <button  ng-click="disableAlarm(user)" class="btn btn-large btn-danger pull-right"><span class="glyphicon glyphicon-alert"></span><span>Disable Alarm</span></button> </div>
                       <div ng-if="!user.data.fridge.alert"> <button disabled class="btn btn-large btn-danger pull-right"> <span> Disable Alarm</span></button>  </div>
+=======
+                      <div ng-if="user.data.fridge.alert"> <span class="glyphicon glyphicon-alert"></span><button  ng-click="disableAlarm(user)" class="btn btn-large btn-danger"><span>Disable Alarm</span></button> </div>
+                      <div ng-if="!user.data.fridge.alert"> <button disabled class="btn btn-large btn-danger"><span>Disable Alarm</span></button>  </div>
+>>>>>>> 3556c1a86bc4fc32f6c0c54c6921115c2ed002c6
                 </td>
             </tr>
         </table>

@@ -37,7 +37,11 @@
           <li><a href="/signin">Signin</a></li>
         </ul>
 
+
+
+
         <ul ng-if="logged" class="nav navbar-nav navbar-right nav-jalp">
+
           <li><a href="/dashboard">Dashboard</a></li>
           <li><a href="/actions">Action</a></li>
           <li><a href="/sensor">Sensor</a></li>
@@ -47,6 +51,14 @@
         <ul ng-if="logged && isDev" class="nav navbar-nav navbar-right nav-jalp">
           <li><a href="/dev">Admin</a></li>
         </ul>
+
+        <ul ng-if="logged && isES" class="nav navbar-nav navbar-right nav-jalp">
+          <li><a href="/emergency" class="btn">E.S.</a></li>
+        </ul>
+        <ul ng-if="logged && !isES" class="nav navbar-nav navbar-right nav-jalp">
+          <li><a href="/fridge" class="btn">Fridge</a></li>
+        </ul>
+
       </div>
     </header>
 
@@ -130,6 +142,8 @@
         <script src="scripts/controllers/actions.js"></script>
         <script src="scripts/controllers/dev.js"></script>
         <script src="scripts/controllers/room.js"></script>
+        <script src="scripts/controllers/fridge.js"></script>
+        <script src="scripts/controllers/emergency.js"></script>
         <!-- endbuild -->
 </body>
 </html>
