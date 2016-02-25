@@ -153,6 +153,18 @@
   </div>
   <!-- Sensors Ends -->
 
+  <div class="col-md-4 action-col">
+
+    <p>Spots</p>
+    <ul ng-repeat="condition in spotFreeConditions">
+      <li>
+        <label>
+          <input type="radio" value="{{condition.command}}" ng-click="setCurrentOperator(condition.operator)" ng-model="conditionConfig.type"><span>{{condition.name}}</span></label>
+      </li>
+    </ul>
+
+  </div>
+
 
   <!-- Types Starts -->
   <div class="col-md-4 action-col" ng-if="conditionConfig.id!=''">
@@ -183,8 +195,8 @@
           <input type="radio" ng-model="conditionConfig.operator" value="{{op.operator}}"><span>{{op.operator}}</span></label>
       </ul>
 
-      <div class="action-col" ng-if="conditionConfig.operator=='>' || conditionConfig.operator=='<' || conditionConfig.operator=='TRUE' || conditionConfig.operator=='FALSE'">
-        <input type="number" ng-if="conditionConfig.operator=='>' || conditionConfig.operator=='<'" class="btn-block form-control" ng-model="conditionConfig.value" />
+      <div class="action-col" ng-if="conditionConfig.operator=='>' || conditionConfig.operator=='<' || conditionConfig.operator=='TRUE' || conditionConfig.operator=='FALSE' || conditionConfig.operator=='=='">
+        <input type="number" ng-if="conditionConfig.operator=='>' || conditionConfig.operator=='<' || conditionConfig.operator=='=='" class="btn-block form-control" ng-model="conditionConfig.value" />
         <button ng-click="add()" class="btn btn-primary btn-block animated fadeIn">Add Condition</button>
       </div>
 
