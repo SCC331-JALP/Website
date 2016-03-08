@@ -357,6 +357,26 @@ angular.module('jalpWebApp')
         $scope.isStep = function(step) {
           return $scope.currentStep == step;
         }
+
+        /*08-03-16 Fixes*/
+        $scope.removeScript = function(id) {
+          var scriptRef = scriptReference.child(id);
+          scriptRef.remove();
+        }
       }
     });
-  });
+  })
+  .directive('ngConfirmClick', [
+        function(){
+            return {
+                link: function (scope, element, attr) {
+                    var msg = attr.ngConfirmClick || "Are you sure?";
+                    var clickAction = attr.confirmedClick;
+                    element.bind('click',function (event) {
+                        if ( window.confirm(msg) ) {
+                            scope.$eval(clickAction)
+                        }
+                    });
+                }
+            };
+    }]);

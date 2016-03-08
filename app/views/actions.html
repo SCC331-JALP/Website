@@ -20,14 +20,19 @@
         <hr>
         <table class="table jalp-table">
           <tr>
+            <td>#</td>
             <td>Action</td>
             <td>Condition</td>
             <td>Timeout</td>
+            <td>Action</td>
           </tr>
           <tr ng-repeat="script in scripts">
+            <td>{{$index+1}}</td>
             <td>{{script.action}}</td>
             <td>{{script.condition}}</td>
             <td>{{script.timeout}}</td>
+            <td><button class="btn btn-danger glyphicon glyphicon-trash btn-sm" confirmed-click="removeScript(script.$id)"
+    ng-confirm-click="Are you sure to delete: {{script.condition}}" ></button></td>
           </tr>
         </table>
     </div>
