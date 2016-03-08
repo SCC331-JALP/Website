@@ -62,7 +62,7 @@
   <!-- Types Starts -->
   <div class="col-md-4 action-col" ng-if="conditionConfig.id!=''">
     <p>Trigger</p>
-    
+
     <h4>Number</h4>
     <ul ng-repeat="sensorType in sensorTypes" ng-if="sensorType.type == 'Number' && sensorType.selected == true">
       <label>
@@ -167,7 +167,6 @@
 <!-- Action Container starts -->
 <div class="action-container">
   <p>Now add actions to this condition [<b>{{scriptObj.condition}}</b>]</p>
-  <pre>{{actionConfig | json}}</pre>
 
   <!-- Sensors Starts -->
   <div class="col-md-4 action-col">
