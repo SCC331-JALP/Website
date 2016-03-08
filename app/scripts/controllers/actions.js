@@ -24,21 +24,6 @@ angular.module('jalpWebApp')
         $scope.scripts = $firebaseArray(scriptReference);
         $scope.bases = $firebaseArray(basesReference);
         $scope.spots = $firebaseArray(spotsReference);
-        $scope.spotFreeConditions = [
-          {
-            'command':'MINUTE',
-            'name':'Every X minute',
-            'operator':'time'
-          },{
-            'command':'HOUR',
-            'name':'Every X hour',
-            'operator':'time'
-          },{
-            'command':'DAY_OF_WEEK',
-            'name':'Day of week',
-            'operator':'time'
-          }
-        ];
 
         //Script object
         $scope.scriptObj = {
@@ -201,6 +186,18 @@ angular.module('jalpWebApp')
           name: 'btn_r',
           value: 'BUTTON_RIGHT',
           type: 'Boolean'
+        }, {
+          name: 'Every X Minute',
+          value: 'MINUTE',
+          type: 'Time'
+        }, {
+          name: 'Every X hour',
+          value: 'HOUR',
+          type: 'Time'
+        }, {
+          name: 'Day of week',
+          value: 'DAY_OF_WEEK',
+          type: 'Time'
         }];
 
         $scope.currentOperator = '';
@@ -219,13 +216,13 @@ angular.module('jalpWebApp')
           type: 'Boolean'
         },{
           operator: "==",
-          type: 'time'
+          type: 'Time'
         },{
           operator: '<',
-          type: 'time'
+          type: 'Time'
         }, {
           operator: '>',
-          type: 'time'
+          type: 'Time'
         } ];
 
         $scope.conditions = [];
