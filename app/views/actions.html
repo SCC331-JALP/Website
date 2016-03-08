@@ -223,7 +223,7 @@
   </div>
   <!-- Options Ends -->
 
-  <button class="btn btn-primary btn-block pull-right" ng-click="saveAction(actionConfig);clearSteps()">Add Action</button>
+  <button class="btn btn-primary btn-block pull-right" ng-disabled="!actionConfig.id || !actionConfig.action || !actionConfig.params || !actionConfig.timeout" ng-click="saveAction(actionConfig);clearSteps()">Add Action</button>
 
 
 </div>
