@@ -206,6 +206,10 @@ angular.module('jalpWebApp')
           name: 'Day of month',
           value: 'DAY_OF_MONTH',
           type: 'Time'
+        }, {
+          name: 'Day of year',
+          value: 'DAY_OF_YEAR',
+          type: 'Time'
         }];
 
         $scope.currentOperator = '';
