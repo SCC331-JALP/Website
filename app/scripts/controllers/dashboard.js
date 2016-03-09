@@ -32,10 +32,42 @@ angular.module('jalpWebApp')
         userReference.on("child_removed", function(snapshot){
           handleDeletedRoom(snapshot.val());
         });*/
-
+        $scope.loadPage = function(roomName) 
+        {
+            window.location.href = "/room?room="+roomName;
+        }
         $scope.unhideForm = function(){
           $(".new-room-button").addClass("hidden");
           $("#new-room-form").removeClass('hidden');
+        }
+        $scope.unHideEditRoom = function(id){
+          console.log(id);
+          $(".edit-room-button-"+id).addClass("hidden");
+          $(".delete-room-button-"+id).addClass("hidden");
+          $("#edit-room-form-"+id).removeClass('hidden');
+        }
+        $scope.cancelEditRoom = function(id){
+          $("#editRoomName")[0].value = "";
+          $("#editRoomDesc")[0].value = "";
+          $("#edit-room-form-"+id).addClass('hidden');
+          $(".edit-room-button").removeClass("hidden");
+          $(".delete-room-button").removeClass("hidden");
+        }
+        $scope.editRoom = function(id){
+          var room = $scope.rooms.$getRecord(id);
+          room.name = $("#editRoomName")[0].value;
+          room.description = $("#editRoomDesc")[0].value;
+          $scope.rooms.$save(room);
+          console.log("edit");
+        }
+        $scope.deleteModal = function(id){
+          $("#room-id")[0].value = ""+id;
+          $("#myModal").modal();
+        }
+        $scope.deleteRoom = function(){
+          var roomArray = $scope.rooms;
+          var room = roomArray.$getRecord($("#room-id")[0].value);
+          roomArray.$remove(room);
         }
         $scope.createRoom = function(){
 

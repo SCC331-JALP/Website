@@ -63,6 +63,18 @@
 
 }
 
+.edit-button{
+	width: 50px;
+	top: 75px;
+	left: 126px;
+
+	background-color: #3e5871;
+	text-align: center;
+	border-radius: 5px;
+	padding: 10px;
+	border: 1px solid #ddd;
+
+}
 
 .has-error input{
 	background-color: rgb(169, 68, 66);
@@ -87,13 +99,12 @@
 			<div id="roomContainer" class="row">
 
 				<div ng-repeat="room in rooms">
-					<a href="/room?room={{room.name}}">
-						<div id="{{room.$id}}" class="room col-md-3 animated flipInX" ng-init="getSensors(room.name)">
+					<!--<a href="/room?room={{room.name}}">-->
+						<div id="{{room.$id}}" class="room col-md-3 animated flipInX" ng-init="getSensors(room.name)" ng-click="loadPage(room.name)">
 
 									<div class="card card-block">
 									<div class="room-contents">
 										<h3 id="room-name">{{room.name}}</h3>
-
 
 										<div class="room-desc">
 											<p id="room-desc">{{room.description}}</p>
@@ -169,6 +180,14 @@
 
 											</div>
 
+											
+												<div id="edit-room-button" class="edit-button" ng-click="unHideEditRoom(room.$id); $event.stopPropagation();">
+													<span id="edit-room-icon" class="glyphicon glyphicon-wrench" ></span>
+												</div>
+												<<div id="delete-room-button" class="edit-button" ng-click="deleteModal(room.$id); $event.stopPropagation();">
+													<span id="delete-room-icon" class="glyphicon glyphicon-remove-sign" ></span>
+												</div>
+												
 										</div>
 
 
@@ -180,7 +199,17 @@
 
 								</div>
 						</div>
-					</a>
+
+						<div id="edit-room-form-{{room.$id}}" class="room col-md-3 animated flipInX hidden">
+							<form class="room-form">
+								<label class="control-label"> Room Name: <br><input class="form-control" id='editRoomName' type="text"></input></label>
+								<label  class="control-label"> Room Description: <br><input class="form-control" id='editRoomDesc' type="text"></input></label>
+															<br>
+								<button class="btn btn-primary" ng-click="editRoom(room.$id); $event.stopPropagation();">Submit</button>
+								<button class="btn btn-danger" ng-click="cancelEditRoom(room.$id); $event.stopPropagation();">Cancel</button>
+							</form>
+						</div>
+					<!--</a>-->
 				</div>
 
 
@@ -204,4 +233,27 @@
 
 		</div>
 	</div>
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Delete This Room?</h4>
+        <h3 id="room-id"></h3>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this room, it won't delete any spots contained in this room.</p>
+      </div>
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="deleteRoom()">Delete</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
 </div>
