@@ -24,21 +24,6 @@ angular.module('jalpWebApp')
         $scope.scripts = $firebaseArray(scriptReference);
         $scope.bases = $firebaseArray(basesReference);
         $scope.spots = $firebaseArray(spotsReference);
-        $scope.spotFreeConditions = [
-          {
-            'command':'MINUTE',
-            'name':'Every X minute',
-            'operator':'time'
-          },{
-            'command':'HOUR',
-            'name':'Every X hour',
-            'operator':'time'
-          },{
-            'command':'DAY_OF_WEEK',
-            'name':'Day of week',
-            'operator':'time'
-          }
-        ];
 
         //Script object
         $scope.scriptObj = {
@@ -201,6 +186,30 @@ angular.module('jalpWebApp')
           name: 'btn_r',
           value: 'BUTTON_RIGHT',
           type: 'Boolean'
+        }, {
+          name: 'Every X Minute',
+          value: 'MINUTE',
+          type: 'Time'
+        }, {
+          name: 'Every X hour',
+          value: 'HOUR',
+          type: 'Time'
+        }, {
+          name: 'Day of week',
+          value: 'DAY_OF_WEEK',
+          type: 'Time'
+        }, {
+          name: 'Day of month',
+          value: 'DAY_OF_MONTH',
+          type: 'Time'
+        }, {
+          name: 'Day of year',
+          value: 'DAY_OF_YEAR',
+          type: 'Time'
+        }, {
+          name: 'multipress',
+          value: 'MULTIPRESS',
+          type: 'Long'
         }];
 
         $scope.currentOperator = '';
@@ -219,13 +228,61 @@ angular.module('jalpWebApp')
           type: 'Boolean'
         },{
           operator: "==",
-          type: 'time'
+          type: 'Time'
         },{
           operator: '<',
-          type: 'time'
+          type: 'Time'
         }, {
           operator: '>',
-          type: 'time'
+          type: 'Time'
+        }, {
+          operator: '-8',
+          type: 'Long'
+        }, {
+          operator: '-7',
+          type: 'Long'
+        }, {
+          operator: '-6',
+          type: 'Long'
+        }, {
+          operator: '-5',
+          type: 'Long'
+        }, {
+          operator: '-4',
+          type: 'Long'
+        }, {
+          operator: '-3',
+          type: 'Long'
+        }, {
+          operator: '-2',
+          type: 'Long'
+        }, {
+          operator: '-1',
+          type: 'Long'
+        }, {
+          operator: '1',
+          type: 'Long'
+        }, {
+          operator: '2',
+          type: 'Long'
+        }, {
+          operator: '3',
+          type: 'Long'
+        }, {
+          operator: '4',
+          type: 'Long'
+        }, {
+          operator: '5',
+          type: 'Long'
+        }, {
+          operator: '6',
+          type: 'Long'
+        }, {
+          operator: '7',
+          type: 'Long'
+        }, {
+          operator: '8',
+          type: 'Long'
         } ];
 
         $scope.conditions = [];
@@ -357,6 +414,26 @@ angular.module('jalpWebApp')
         $scope.isStep = function(step) {
           return $scope.currentStep == step;
         }
+
+        /*08-03-16 Fixes*/
+        $scope.removeScript = function(id) {
+          var scriptRef = scriptReference.child(id);
+          scriptRef.remove();
+        }
       }
     });
-  });
+  })
+  .directive('ngConfirmClick', [
+        function(){
+            return {
+                link: function (scope, element, attr) {
+                    var msg = attr.ngConfirmClick || "Are you sure?";
+                    var clickAction = attr.confirmedClick;
+                    element.bind('click',function (event) {
+                        if ( window.confirm(msg) ) {
+                            scope.$eval(clickAction)
+                        }
+                    });
+                }
+            };
+    }]);
