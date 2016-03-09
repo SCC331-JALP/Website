@@ -28,7 +28,8 @@ angular.module('jalpWebApp')
 		  password : $scope.user.password
 		}, function(error, authData) {
 		  if (error) {
-		    console.log('Login Failed!', error);
+        alert('Login Failed! ' + error);
+		    // console.log('Login Failed!', error);
 		  } else {
 		    console.log('Authenticated successfully with payload:', authData);
 		    $window.location.href = '/sensor';
