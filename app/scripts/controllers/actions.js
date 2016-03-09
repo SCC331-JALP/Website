@@ -167,6 +167,10 @@ angular.module('jalpWebApp')
           value: 'D2',
           type: 'Boolean'
         }, {
+          name: 'multipress',
+          value: 'MULTIPRESS',
+          type: 'Boolean'
+        }, {
           name: 'infrared',
           value: 'INFRARED',
           type: 'Boolean'
@@ -197,6 +201,10 @@ angular.module('jalpWebApp')
         }, {
           name: 'Day of week',
           value: 'DAY_OF_WEEK',
+          type: 'Time'
+        }, {
+          name: 'Day of month',
+          value: 'DAY_OF_MONTH',
           type: 'Time'
         }];
 
