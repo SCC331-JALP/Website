@@ -167,10 +167,6 @@ angular.module('jalpWebApp')
           value: 'D2',
           type: 'Boolean'
         }, {
-          name: 'multipress',
-          value: 'MULTIPRESS',
-          type: 'Boolean'
-        }, {
           name: 'infrared',
           value: 'INFRARED',
           type: 'Boolean'
@@ -210,6 +206,10 @@ angular.module('jalpWebApp')
           name: 'Day of year',
           value: 'DAY_OF_YEAR',
           type: 'Time'
+        }, {
+          name: 'multipress',
+          value: 'MULTIPRESS',
+          type: 'Long'
         }];
 
         $scope.currentOperator = '';
@@ -235,6 +235,54 @@ angular.module('jalpWebApp')
         }, {
           operator: '>',
           type: 'Time'
+        }, {
+          operator: '-8',
+          type: 'Long'
+        }, {
+          operator: '-7',
+          type: 'Long'
+        }, {
+          operator: '-6',
+          type: 'Long'
+        }, {
+          operator: '-5',
+          type: 'Long'
+        }, {
+          operator: '-4',
+          type: 'Long'
+        }, {
+          operator: '-3',
+          type: 'Long'
+        }, {
+          operator: '-2',
+          type: 'Long'
+        }, {
+          operator: '-1',
+          type: 'Long'
+        }, {
+          operator: '1',
+          type: 'Long'
+        }, {
+          operator: '2',
+          type: 'Long'
+        }, {
+          operator: '3',
+          type: 'Long'
+        }, {
+          operator: '4',
+          type: 'Long'
+        }, {
+          operator: '5',
+          type: 'Long'
+        }, {
+          operator: '6',
+          type: 'Long'
+        }, {
+          operator: '7',
+          type: 'Long'
+        }, {
+          operator: '8',
+          type: 'Long'
         } ];
 
         $scope.conditions = [];
