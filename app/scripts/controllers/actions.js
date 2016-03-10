@@ -74,50 +74,68 @@ angular.module('jalpWebApp')
           action : 'NOTIFY'
         }];
 
+        $scope.actionObjects = [];
+
+        $scope.tempSaveAction = function(actionConfig){
+          var newActionConfig = angular.copy(actionConfig);
+
+          $scope.actionObjects.push({
+            newActionConfig
+          });
+          newActionConfig = '';
+          console.log($scope.actionObjects);
+        }
+
         $scope.saveAction = function(actionConfig){
-          var paramString;
-          var paramsLength = getLength(actionConfig.action);
 
-          console.log("Length: " + paramsLength);
-
-          paramString = actionConfig.id + ' ';
-          paramString += actionConfig.action + ' ';
-          if(actionConfig.action == "NOTIFY"){
-            for(var i=0;i<paramsLength;i++){
-              if(actionConfig.params[i].length > 0){
-                paramString += actionConfig.params[i].replace(/ /g,"_") + ' ';
-              }else{
-                paramString += 'NoParameterSaved ';
-              }
-            }
-          }else{
-            for(var i=0;i<paramsLength;i++){
-              if(actionConfig.params[i] > 0){
-                paramString += actionConfig.params[i] + ' ';
-              }else{
-                paramString += '0 ';
-              }
-            }
+          for(var i=0;i<$scope.actionObjects.length;i++){
+              var action = getActionInput($scope.actionObjects[i].newActionConfig) + ";";
+              $scope.scriptObj.action += action;
           }
 
-          var timeout = actionConfig.timeout == null ? 0 : actionConfig.timeout;
+          function getActionInput(actionConfig){
+            var paramString;
+            var paramsLength = getLength(actionConfig.action);
 
-          // var trimmedParams = paramString.replace(/\s+$/, ';');
-          var trimmedParams = paramString.replace(/\s+$/, '');
+            console.log("Length: " + paramsLength);
 
-          $scope.scriptObj.action = trimmedParams;
-          $scope.scriptObj.timeout = timeout;
+            paramString = actionConfig.id + ' ';
+            paramString += actionConfig.action + ' ';
+            if(actionConfig.action == "NOTIFY"){
+              for(var i=0;i<paramsLength;i++){
+                if(actionConfig.params[i].length > 0){
+                  paramString += actionConfig.params[i].replace(/ /g,"_") + ' ';
+                }else{
+                  paramString += 'NoParameterSaved ';
+                }
+              }
+            }else{
+              for(var i=0;i<paramsLength;i++){
+                if(actionConfig.params[i] > 0){
+                  paramString += actionConfig.params[i] + ' ';
+                }else{
+                  paramString += '0 ';
+                }
+              }
+            }
+
+            // var timeout = actionConfig.timeout == null ? 0 : actionConfig.timeout;
+
+            // var trimmedParams = paramString.replace(/\s+$/, ';');
+            var trimmedParams = paramString.replace(/\s+$/, '');
+
+            return trimmedParams;
+          }
+
+
+          // $scope.scriptObj.action = trimmedParams;
+          // $scope.scriptObj.timeout = timeout;
 
           //Save
           $scope.AddNewEntry($scope.scriptObj);
 
           //Reset
-          $scope.actionConfig = {
-            'id' : '',
-            'action' : '',
-            'params' : [],
-            'timeout' : ''
-          };
+          $scope.actionObjects = [{}];
 
           function getLength(action){
             if(action.indexOf('BLINK') > -1){

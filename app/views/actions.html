@@ -219,17 +219,22 @@
   <div class="col-md-4 action-col">
     <p>Options</p>
     <div ng-include=currentTemplate></div>
-    <p>Timeout</p>
-    <div class="form-group">
-      <label>TIMEOUT in ms</label>
-      <input [required="string"] class="form-control block" type="number" ng-model="actionConfig.timeout" />
-    </div>
   </div>
   <!-- Options Ends -->
 
-  <button class="btn btn-primary btn-block pull-right" ng-disabled="!actionConfig.id || !actionConfig.action || !actionConfig.params || !actionConfig.timeout" ng-click="saveAction(actionConfig);clearSteps()">Add Action</button>
+  <button class="btn btn-primary btn-block pull-right" ng-disabled="!actionConfig.id || !actionConfig.action || !actionConfig.params" ng-click="tempSaveAction(actionConfig);">Add Action</button>
 
+  <!-- Time Starts -->
+  <div class="col-md-12 action-col">
+    <p>Timeout</p>
+    <div class="form-group">
+      <label>TIMEOUT in ms</label>
+      <input [required="string"] class="form-control block" type="number" ng-model="scriptObj.timeout" />
+    </div>
+  </div>
+  <!-- Time Ends -->
 
+  <button class="btn btn-primary btn-block pull-right" ng-disabled="!actionObjects || !scriptObj.timeout" ng-click="saveAction();clearSteps();">Save Action</button>
 </div>
 
 </script>
