@@ -32,6 +32,12 @@ angular.module('jalpWebApp')
             window.location.href = "/light?spot="+spotName;
         }
 
+        $scope.loadTemp = function(spotName) 
+        {
+            console.log(spotName);
+            window.location.href = "/temp?spot="+spotName;
+        }
+
         $scope.isCompass = function(liveData){
           for(var i = 0; i<liveData.length; i++){
             if(liveData[i] == "c"){
