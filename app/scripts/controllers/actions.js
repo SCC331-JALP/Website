@@ -187,11 +187,11 @@ angular.module('jalpWebApp')
           value: 'BUTTON_RIGHT',
           type: 'Boolean'
         }, {
-          name: 'Every X Minute',
+          name: 'Minute',
           value: 'MINUTE',
           type: 'Time'
         }, {
-          name: 'Every X hour',
+          name: 'Hour',
           value: 'HOUR',
           type: 'Time'
         }, {
