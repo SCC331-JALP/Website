@@ -26,6 +26,12 @@ angular.module('jalpWebApp')
         var query = userReference.orderByChild("room").equalTo($scope.roomName);
         $scope.sensors = $firebaseArray(query);
 
+        $scope.loadLight = function(spotName) 
+        {
+            console.log(spotName);
+            window.location.href = "/light?spot="+spotName;
+        }
+
         $scope.isCompass = function(liveData){
           for(var i = 0; i<liveData.length; i++){
             if(liveData[i] == "c"){

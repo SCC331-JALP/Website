@@ -76,6 +76,11 @@ angular
         controller: 'EmergencyCtrl',
         controllerAs: 'emergency'
       })
+      .when('/light', {
+        templateUrl: 'views/light.html',
+        controller: 'LightCtrl',
+        controllerAs: 'light'
+      })
       .otherwise({
         redirectTo: '/'
       });
