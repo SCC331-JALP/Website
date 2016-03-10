@@ -67,6 +67,9 @@ angular.module('jalpWebApp')
             title: 'Right Button',
             prefix: 'r',
           },{
+            title: 'multipress',
+            prefix: 'm',
+          },{
             title: 'Left Button',
             prefix: 'b'
           }];

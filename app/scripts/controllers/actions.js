@@ -74,50 +74,68 @@ angular.module('jalpWebApp')
           action : 'NOTIFY'
         }];
 
+        $scope.actionObjects = [];
+
+        $scope.tempSaveAction = function(actionConfig){
+          var newActionConfig = angular.copy(actionConfig);
+
+          $scope.actionObjects.push({
+            newActionConfig
+          });
+          newActionConfig = '';
+          console.log($scope.actionObjects);
+        }
+
         $scope.saveAction = function(actionConfig){
-          var paramString;
-          var paramsLength = getLength(actionConfig.action);
 
-          console.log("Length: " + paramsLength);
-
-          paramString = actionConfig.id + ' ';
-          paramString += actionConfig.action + ' ';
-          if(actionConfig.action == "NOTIFY"){
-            for(var i=0;i<paramsLength;i++){
-              if(actionConfig.params[i].length > 0){
-                paramString += actionConfig.params[i].replace(/ /g,"_") + ' ';
-              }else{
-                paramString += 'NoParameterSaved ';
-              }
-            }
-          }else{
-            for(var i=0;i<paramsLength;i++){
-              if(actionConfig.params[i] > 0){
-                paramString += actionConfig.params[i] + ' ';
-              }else{
-                paramString += '0 ';
-              }
-            }
+          for(var i=0;i<$scope.actionObjects.length;i++){
+              var action = getActionInput($scope.actionObjects[i].newActionConfig) + ";";
+              $scope.scriptObj.action += action;
           }
 
-          var timeout = actionConfig.timeout == null ? 0 : actionConfig.timeout;
+          function getActionInput(actionConfig){
+            var paramString;
+            var paramsLength = getLength(actionConfig.action);
 
-          // var trimmedParams = paramString.replace(/\s+$/, ';');
-          var trimmedParams = paramString.replace(/\s+$/, '');
+            console.log("Length: " + paramsLength);
 
-          $scope.scriptObj.action = trimmedParams;
-          $scope.scriptObj.timeout = timeout;
+            paramString = actionConfig.id + ' ';
+            paramString += actionConfig.action + ' ';
+            if(actionConfig.action == "NOTIFY"){
+              for(var i=0;i<paramsLength;i++){
+                if(actionConfig.params[i].length > 0){
+                  paramString += actionConfig.params[i].replace(/ /g,"_") + ' ';
+                }else{
+                  paramString += 'NoParameterSaved ';
+                }
+              }
+            }else{
+              for(var i=0;i<paramsLength;i++){
+                if(actionConfig.params[i] > 0){
+                  paramString += actionConfig.params[i] + ' ';
+                }else{
+                  paramString += '0 ';
+                }
+              }
+            }
+
+            // var timeout = actionConfig.timeout == null ? 0 : actionConfig.timeout;
+
+            // var trimmedParams = paramString.replace(/\s+$/, ';');
+            var trimmedParams = paramString.replace(/\s+$/, '');
+
+            return trimmedParams;
+          }
+
+
+          // $scope.scriptObj.action = trimmedParams;
+          // $scope.scriptObj.timeout = timeout;
 
           //Save
           $scope.AddNewEntry($scope.scriptObj);
 
           //Reset
-          $scope.actionConfig = {
-            'id' : '',
-            'action' : '',
-            'params' : [],
-            'timeout' : ''
-          };
+          $scope.actionObjects = [{}];
 
           function getLength(action){
             if(action.indexOf('BLINK') > -1){
@@ -187,11 +205,11 @@ angular.module('jalpWebApp')
           value: 'BUTTON_RIGHT',
           type: 'Boolean'
         }, {
-          name: 'Every X Minute',
+          name: 'Minute',
           value: 'MINUTE',
           type: 'Time'
         }, {
-          name: 'Every X hour',
+          name: 'Hour',
           value: 'HOUR',
           type: 'Time'
         }, {
@@ -203,8 +221,12 @@ angular.module('jalpWebApp')
           value: 'DAY_OF_MONTH',
           type: 'Time'
         }, {
-          name: 'Day of year',
-          value: 'DAY_OF_YEAR',
+          name: 'Month',
+          value: 'MONTH',
+          type: 'Time'
+        }, {
+          name: 'Year',
+          value: 'YEAR',
           type: 'Time'
         }, {
           name: 'multipress',
@@ -236,55 +258,59 @@ angular.module('jalpWebApp')
           operator: '>',
           type: 'Time'
         }, {
-          operator: '-8',
+          operator: '== -8',
           type: 'Long'
         }, {
-          operator: '-7',
+          operator: '== -7',
           type: 'Long'
         }, {
-          operator: '-6',
+          operator: '== -6',
           type: 'Long'
         }, {
-          operator: '-5',
+          operator: '== -5',
           type: 'Long'
         }, {
-          operator: '-4',
+          operator: '== -4',
           type: 'Long'
         }, {
-          operator: '-3',
+          operator: '== -3',
           type: 'Long'
         }, {
-          operator: '-2',
+          operator: '== -2',
           type: 'Long'
         }, {
-          operator: '-1',
+          operator: '== -1',
           type: 'Long'
         }, {
-          operator: '1',
+          operator: '== 1',
           type: 'Long'
         }, {
-          operator: '2',
+          operator: '== 2',
           type: 'Long'
         }, {
-          operator: '3',
+          operator: '== 3',
           type: 'Long'
         }, {
-          operator: '4',
+          operator: '== 4',
           type: 'Long'
         }, {
-          operator: '5',
+          operator: '== 5',
           type: 'Long'
         }, {
-          operator: '6',
+          operator: '== 6',
           type: 'Long'
         }, {
-          operator: '7',
+          operator: '== 7',
           type: 'Long'
         }, {
-          operator: '8',
+          operator: '== 8',
           type: 'Long'
         } ];
-
+        $scope.isTimeCondition;
+        $scope.isTime = function(){
+          $scope.isTimeCondition = true;
+          
+        }
         $scope.conditions = [];
 
         $scope.customConditions = [];
@@ -308,7 +334,7 @@ angular.module('jalpWebApp')
               'name' : config.id + ' ' + config.type
             });
           } else if (config.operator == 'FALSE') {
-            operator = 'not';
+            operator = 'NOT';
             $scope.conditions.push({
               'name' : operator + ' ' + config.id + ' ' + config.type
             });
