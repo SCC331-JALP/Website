@@ -240,52 +240,52 @@ angular.module('jalpWebApp')
           operator: '>',
           type: 'Time'
         }, {
-          operator: '-8',
+          operator: '== -8',
           type: 'Long'
         }, {
-          operator: '-7',
+          operator: '== -7',
           type: 'Long'
         }, {
-          operator: '-6',
+          operator: '== -6',
           type: 'Long'
         }, {
-          operator: '-5',
+          operator: '== -5',
           type: 'Long'
         }, {
-          operator: '-4',
+          operator: '== -4',
           type: 'Long'
         }, {
-          operator: '-3',
+          operator: '== -3',
           type: 'Long'
         }, {
-          operator: '-2',
+          operator: '== -2',
           type: 'Long'
         }, {
-          operator: '-1',
+          operator: '== -1',
           type: 'Long'
         }, {
-          operator: '1',
+          operator: '== 1',
           type: 'Long'
         }, {
-          operator: '2',
+          operator: '== 2',
           type: 'Long'
         }, {
-          operator: '3',
+          operator: '== 3',
           type: 'Long'
         }, {
-          operator: '4',
+          operator: '== 4',
           type: 'Long'
         }, {
-          operator: '5',
+          operator: '== 5',
           type: 'Long'
         }, {
-          operator: '6',
+          operator: '== 6',
           type: 'Long'
         }, {
-          operator: '7',
+          operator: '== 7',
           type: 'Long'
         }, {
-          operator: '8',
+          operator: '== 8',
           type: 'Long'
         } ];
 
