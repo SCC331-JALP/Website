@@ -86,6 +86,8 @@
 		                                <li ng-if="isA3(sensor.liveData)">x: {{sensor.a3}}</li>
 		                                <li ng-if="isD2(sensor.liveData)">y: {{sensor.d2}}</li>
 		                                <li ng-if="isD3(sensor.liveData)">z: {{sensor.d3}}</li>
+		                                <button class="btn btn-primary" ng-click="loadLight(sensor.$id)">Light Graph</button>
+		                                <button class="btn btn-primary" ng-click="loadTemp(sensor.$id)">Temperature Graph</button>
 		                            </ul>
 								</div>
 							</div>

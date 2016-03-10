@@ -218,10 +218,14 @@ angular.module('jalpWebApp')
           $scope.cancel();
         }
 
-        $scope.delete = function(index){
-          console.log("deleting spot: " + index);
+        $scope.sensorModal = function(index){
+          $("#spot-id")[0].value = ""+index;
+          $("#sensorModal").modal();
+        }
 
-          var sensor = $scope.sensors[index];
+        $scope.delete = function(){
+
+          var sensor = $scope.sensors[$("#spot-id")[0].value];
           $scope.sensors.$remove(sensor);
           $scope.cancel();
         }
