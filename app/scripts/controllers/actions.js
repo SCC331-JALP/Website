@@ -312,7 +312,7 @@ angular.module('jalpWebApp')
               'name' : config.id + ' ' + config.type
             });
           } else if (config.operator == 'FALSE') {
-            operator = 'not';
+            operator = 'NOT';
             $scope.conditions.push({
               'name' : operator + ' ' + config.id + ' ' + config.type
             });
