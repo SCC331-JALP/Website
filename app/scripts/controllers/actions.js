@@ -309,7 +309,7 @@ angular.module('jalpWebApp')
         $scope.isTimeCondition;
         $scope.isTime = function(){
           $scope.isTimeCondition = true;
-          
+
         }
         $scope.conditions = [];
 
@@ -426,6 +426,12 @@ angular.module('jalpWebApp')
             $scope.conditionConfig.operator = '';
             $scope.conditionConfig.value = '';
           }
+        }
+
+        $scope.timeClear = function(){
+          $scope.conditionCondig.type='';
+          $scope.conditionCondig.operator='';
+          $scope.conditionCondig.value='';
         }
 
 

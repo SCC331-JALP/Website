@@ -7,7 +7,7 @@
         <!-- Script Object: <pre>{{scriptObj | json}}</pre>
         Actions Config: <pre>{{actionConfig | json}}</pre>
         Actions: <pre>{{sensorActions | json}}</pre> -->
-
+        Condition Config: <pre>{{conditionConfig | json}}</pre>
 
         <button ng-if="currentStep == null" class="btn btn-lg pull-right glyphicon btn-primary glyphicon-plus" ng-click="setStep('condition')"></button>
 
@@ -58,7 +58,7 @@
     <h4>Time</h4>
     <ul ng-repeat="sensorType in sensorTypes" ng-if="sensorType.type == 'Time'">
       <label>
-        <input type="radio" ng-model="conditionConfig.id" value="{{sensorType.value}}"><span>{{sensorType.value}}</span></label>
+        <input type="radio" ng-model="conditionConfig.id" value="{{sensorType.value}}"  ng-click="showTypes(sensorType)"><span>{{sensorType.value}}</span></label>
     </ul>
 
   </div>
@@ -66,7 +66,7 @@
 
 
   <!-- Types Starts -->
-  <div class="col-md-4 action-col" ng-if="conditionConfig.id!=''">
+  <div class="col-md-4 action-col" ng-if="conditionConfig.id!='' || sensorType.type == 'Number' || sensorType.type == 'Boolean' || sensorType.type == 'Long'">
     <p>Trigger</p>
 
     <h4>Number</h4>
