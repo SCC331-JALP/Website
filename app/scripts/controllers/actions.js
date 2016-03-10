@@ -309,7 +309,7 @@ angular.module('jalpWebApp')
         $scope.isTimeCondition;
         $scope.isTime = function(){
           $scope.isTimeCondition = true;
-          
+
         }
         $scope.conditions = [];
 
@@ -427,7 +427,6 @@ angular.module('jalpWebApp')
             $scope.conditionConfig.value = '';
           }
         }
-
 
         $scope.setStep = function(step) {
           $scope.currentStep = step;

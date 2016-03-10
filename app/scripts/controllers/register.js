@@ -15,11 +15,11 @@ angular.module('jalpWebApp')
   	if(ref.getAuth()){
   		$location.path('/');
   	}
-  		
+
 
   	$scope.user = {};
 
-  	$scope.submit = function() 
+  	$scope.submit = function()
   	{
   		//If fields are filled
         if($scope.user.firstName && $scope.user.lastName && $scope.user.email && $scope.user.password){
@@ -28,7 +28,7 @@ angular.module('jalpWebApp')
     };
 
     $scope.createUser = function(){
-		
+
 	    ref.createUser({
 			email: $scope.user.email,
 			password: $scope.user.password
@@ -36,9 +36,10 @@ angular.module('jalpWebApp')
 	    },function(error, userData){
 	    	if(error){
 	    		console.log('Error creating user:', error);
+          alert(error);
 	    	}else{
 	    		console.log('Successfully created user account with uid:', userData.uid);
-	    		
+
 	    		//Should be private to user
 				var usersProfileRef = ref.child('users').child(userData.uid);
 				usersProfileRef.set({
@@ -58,5 +59,5 @@ angular.module('jalpWebApp')
 	    	}
 	    });
     };
-    
+
   });
