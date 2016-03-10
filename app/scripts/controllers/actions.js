@@ -203,8 +203,12 @@ angular.module('jalpWebApp')
           value: 'DAY_OF_MONTH',
           type: 'Time'
         }, {
-          name: 'Day of year',
-          value: 'DAY_OF_YEAR',
+          name: 'Month',
+          value: 'MONTH',
+          type: 'Time'
+        }, {
+          name: 'Year',
+          value: 'YEAR',
           type: 'Time'
         }, {
           name: 'multipress',
