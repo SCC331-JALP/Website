@@ -428,13 +428,6 @@ angular.module('jalpWebApp')
           }
         }
 
-        $scope.timeClear = function(){
-          $scope.conditionCondig.type='';
-          $scope.conditionCondig.operator='';
-          $scope.conditionCondig.value='';
-        }
-
-
         $scope.setStep = function(step) {
           $scope.currentStep = step;
         }
