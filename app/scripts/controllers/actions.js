@@ -306,7 +306,11 @@ angular.module('jalpWebApp')
           operator: '== 8',
           type: 'Long'
         } ];
-
+        $scope.isTimeCondition;
+        $scope.isTime = function(){
+          $scope.isTimeCondition = true;
+          
+        }
         $scope.conditions = [];
 
         $scope.customConditions = [];

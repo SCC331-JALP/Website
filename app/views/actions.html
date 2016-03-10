@@ -55,6 +55,12 @@
       </li>
     </ul>
 
+    <h4>Time</h4>
+    <ul ng-repeat="sensorType in sensorTypes" ng-if="sensorType.type == 'Time'">
+      <label>
+        <input type="radio" ng-model="conditionConfig.id" value="{{sensorType.value}}"><span>{{sensorType.value}}</span></label>
+    </ul>
+
   </div>
   <!-- Sensors Ends -->
 
@@ -71,12 +77,6 @@
 
     <h4>Boolean</h4>
     <ul ng-repeat="sensorType in sensorTypes" ng-if="sensorType.type == 'Boolean' && sensorType.selected == true">
-      <label>
-        <input type="radio" ng-click="setCurrentOperator(sensorType.type)" ng-model="conditionConfig.type" value="{{sensorType.value}}"><span>{{sensorType.value}}</span></label>
-    </ul>
-
-    <h4>Time</h4>
-    <ul ng-repeat="sensorType in sensorTypes" ng-if="sensorType.type == 'Time'">
       <label>
         <input type="radio" ng-click="setCurrentOperator(sensorType.type)" ng-model="conditionConfig.type" value="{{sensorType.value}}"><span>{{sensorType.value}}</span></label>
     </ul>
@@ -100,12 +100,14 @@
           <input type="radio" ng-model="conditionConfig.operator" value="{{op.operator}}"><span>{{op.operator}}</span></label>
       </ul>
 
-      <div class="action-col" ng-if="conditionConfig.operator">
-        <input type="number" ng-if="conditionConfig.operator=='>' || conditionConfig.operator=='<' || conditionConfig.operator=='=='" class="btn-block form-control" ng-model="conditionConfig.value" />
-        <button ng-click="add()" class="btn btn-primary btn-block animated fadeIn">Add Condition</button>
-      </div>
+
 
     </div>
+  </div>
+
+  <div class="action-col">
+    <input type="number" class="btn-block form-control" ng-model="conditionConfig.value" />
+    <button ng-click="add()" class="btn btn-primary btn-block animated fadeIn">Add Condition</button>
   </div>
   <!-- Operators Ends -->
 
