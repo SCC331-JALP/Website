@@ -154,6 +154,10 @@ angular.module('jalpWebApp')
           }
         }
 
+        $scope.checkIfTime = function(){
+          return $scope.conditionConfig.id == 'HOUR' || $scope.conditionConfig.id == 'DAY_OF_WEEK' ||  $scope.conditionConfig.id == 'DAY_OF_MONTH'  || $scope.conditionConfig.id == 'MINUTE'  || $scope.conditionConfig.id == 'MONTH' || $scope.conditionConfig.id == 'YEAR';
+        }
+
         /*Action Templates Ends*/
 
         $scope.sensorTypes = [{

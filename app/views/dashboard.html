@@ -1,29 +1,12 @@
-<!--/////////////////////////////////// OLD DESIGN ///////////////////////////////////-->
-<!-- <div id="roomContainer" class="row">
-</div>
-
-<div id="roomTemplate" class="room col-xs-4 hidden">
-	<div class="col-sm-6">
-	    <div class="card card-block">
-		  <div class="room-contents">
-		  </div>
-		  <div class="room-desc">
-		    <p id="room-name">Room Name</p>
-		    <p id="room-desc">A bit longer room description : might limit input to 140 chars.</p>
-		    <p id="room-temp">No temperature reading</p>
-		    <p id="room-light">No light reading</p>
-		    <a href="#" class="btn btn-primary">Go somewhere</a>
-		  </div>
-		</div>
-	</div>
-</div> -->
-
-
-<!--/////////////////////////////////// NEW DESIGN ///////////////////////////////////-->
 <style>
 #room-dashboard{
 	background-color:#2C3E50;
 	position:relative;
+}
+.infrared{
+		width:100px;
+		height:100px;
+		margin:auto;
 }
 .room:hover{
 	    border-color: #a2d4d9;
@@ -37,6 +20,7 @@
     color:#FFFFFF;
     margin:3em;
     box-shadow:0px 0px 0px #FFFFFF;
+		cursor: pointer;
 
 }
 .room h3{
@@ -64,16 +48,7 @@
 }
 
 .edit-button{
-	width: 50px;
-	top: 75px;
-	left: 126px;
-
-	background-color: #3e5871;
-	text-align: center;
-	border-radius: 5px;
-	padding: 10px;
-	border: 1px solid #ddd;
-
+	margin-right:5px;
 }
 
 .has-error input{
@@ -83,6 +58,7 @@
 .room-values{
 	background-color: #3e5871;
 	min-height: 50px;
+	padding:15px;
 }
 
 .icon{
@@ -100,6 +76,7 @@
 
 				<div ng-repeat="room in rooms">
 					<!--<a href="/room?room={{room.name}}">-->
+					<div>
 						<div id="{{room.$id}}" class="room col-md-3 animated flipInX" ng-init="getSensors(room.name)" ng-click="loadPage(room.name)">
 
 									<div class="card card-block">
@@ -114,10 +91,12 @@
 
 										<div class="room-values">
 											<div class="row">
-												<div class="col-xs-6">
-													
-														<object ng-if="anyBoolean('infrared', roomSensors[room.name])" type="image/svg+xml" data="../images/icons/infrared.svg" class="icon active"></object>
-														<object ng-if="!anyBoolean('infrared', roomSensors[room.name])" type="image/svg+xml" data="../images/icons/noinfrared.svg" class="icon inactive"></object>
+												<div class="col-xs-12">
+
+														<div class="infrared">
+															<object ng-if="anyBoolean('infrared', roomSensors[room.name])" type="image/svg+xml" data="../images/icons/infrared.svg" class="icon active"></object>
+															<object ng-if="!anyBoolean('infrared', roomSensors[room.name])" type="image/svg+xml" data="../images/icons/noinfrared.svg" class="icon inactive"></object>
+														</div>
 
 												</div>
 
@@ -129,7 +108,7 @@
 												</div>
 											</div>
 
-											<div class="row">
+											<div class="row container-fluid">
 												<div class="col-xs-3">
 
 														<div ng-if="averageValue('temp',roomSensors[room.name])">
@@ -180,14 +159,11 @@
 
 											</div>
 
-											
-												<div id="edit-room-button" class="edit-button" ng-click="unHideEditRoom(room.$id); $event.stopPropagation();">
-													<span id="edit-room-icon" class="glyphicon glyphicon-wrench" ></span>
-												</div>
-												<div id="delete-room-button" class="edit-button" ng-click="deleteModal(room.$id); $event.stopPropagation();">
-													<span id="delete-room-icon" class="glyphicon glyphicon-remove-sign" ></span>
-												</div>
-												
+											<div class="row">
+												<span id="delete-room-button" class="edit-button btn btn-danger glyphicon glyphicon-remove-sign pull-right" ng-click="deleteModal(room.$id); $event.stopPropagation();"></span>
+												<span id="edit-room-button" class="edit-button btn btn-warning glyphicon glyphicon-wrench pull-right" ng-click="unHideEditRoom(room.$id); $event.stopPropagation();"></span>
+											</div>
+
 										</div>
 
 
@@ -209,6 +185,7 @@
 								<button class="btn btn-danger" ng-click="cancelEditRoom(room.$id); $event.stopPropagation();">Cancel</button>
 							</form>
 						</div>
+					</div>
 					<!--</a>-->
 				</div>
 

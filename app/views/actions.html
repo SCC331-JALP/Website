@@ -45,6 +45,7 @@
 <div class="action-container">
 
   <!-- Sensors Starts -->
+
   <div class="col-md-4 action-col">
 
     <p>Spots</p>
@@ -66,7 +67,7 @@
 
 
   <!-- Types Starts -->
-  <div class="col-md-4 action-col" ng-if="conditionConfig.id!='' || sensorType.type != 'Time'">
+  <div class="col-md-4 action-col" ng-if="!checkIfTime();">
     <p>Trigger</p>
 
     <h4>Number</h4>
