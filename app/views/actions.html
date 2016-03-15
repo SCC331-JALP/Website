@@ -1,4 +1,4 @@
-<div class="container-fluid" id="action-panel">
+x`<div class="container-fluid" id="action-panel">
 <div class="bg-overlay pattern"></div>
     <div class="container action-content animated fadeIn">
 
@@ -105,9 +105,8 @@
 
     </div>
   </div>
-
   <div class="action-col">
-    <input type="number" class="btn-block form-control" ng-model="conditionConfig.value" />
+    <input type="number" ng-if="currentOperator!='Boolean'" class="btn-block form-control" ng-model="conditionConfig.value" />
     <button ng-click="add()" class="btn btn-primary btn-block animated fadeIn">Add Condition</button>
   </div>
   <!-- Operators Ends -->

@@ -16,23 +16,14 @@ angular.module('jalpWebApp')
     ref.onAuth(function(authData){
       if(authData){
         var UID = authData.uid;
-        var userReference = ref.child('users').child(UID).child('data').child('spots');
-        var roomReference = ref.child('users').child(UID).child('data').child('rooms');
+        var userDataReference = ref.child('users').child(UID).child('data');
+        var userReference = userDataReference.child('spots');
+        var roomReference = userDataReference.child('rooms');
 
         $scope.rooms = $firebaseArray(roomReference);
         $scope.roomSensors = new Array;
-      /*  userReference.on('child_added', function(snapshot){
-            handleNewRoom(snapshot.val(), userReference,snapshot.key());
-        });
 
-        userReference.on("child_changed", function(snapshot){
-          //handleChangedRoom(snapshot.val());
-        });
-
-        userReference.on("child_removed", function(snapshot){
-          handleDeletedRoom(snapshot.val());
-        });*/
-        $scope.loadPage = function(roomName) 
+        $scope.loadPage = function(roomName)
         {
             window.location.href = "/room?room="+roomName;
         }

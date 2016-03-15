@@ -86,6 +86,11 @@ angular
         controller: 'TempCtrl',
         controllerAs: 'temp'
       })
+      .when('/dashboard2', {
+        templateUrl: 'views/dashboard2.html',
+        controller: 'Dashboard2Ctrl',
+        controllerAs: 'dashboard2'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -107,6 +112,9 @@ angular
     $rootScope.ref.onAuth($rootScope.authDataCallback);
     $rootScope.authData = $rootScope.ref.getAuth();
     $rootScope.logged = $rootScope.authData ? true : false;
+
+    if($rootScope.logged)
+      $rootScope.userData = $rootScope.ref.child('users').child($rootScope.authData.uid).child('data');
 
     $rootScope.logout = function(){
       $rootScope.ref.unauth();
