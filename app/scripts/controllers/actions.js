@@ -84,6 +84,7 @@ angular.module('jalpWebApp')
           });
           newActionConfig = '';
           console.log($scope.actionObjects);
+          alert("Added Action.");
         }
 
         $scope.saveAction = function(actionConfig){
@@ -124,6 +125,7 @@ angular.module('jalpWebApp')
             // var trimmedParams = paramString.replace(/\s+$/, ';');
             var trimmedParams = paramString.replace(/\s+$/, '');
 
+            alert("Saved script.");
             return trimmedParams;
           }
 
@@ -347,8 +349,9 @@ angular.module('jalpWebApp')
               'name' : config.id + ' ' + config.type + ' ' + config.operator + ' ' + config.value
             });
           }
-
+          alert("Added Condition");
           $scope.resetConditionConfig();
+
         };
 
 
@@ -366,6 +369,7 @@ angular.module('jalpWebApp')
             save($scope.generatedCondition);
           }
 
+          alert("Saved Condition.");
           //Reset configuration
           reset();
 

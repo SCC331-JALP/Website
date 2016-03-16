@@ -101,14 +101,21 @@
           <input type="radio" ng-model="conditionConfig.operator" value="{{op.operator}}"><span>{{op.operator}}</span></label>
       </ul>
 
-
+      <div class="action-col">
+        <input type="number" ng-if="currentOperator!='Boolean'" class="btn-block form-control" ng-model="conditionConfig.value" />
+        <button ng-click="add()" class="btn btn-primary btn-block animated fadeIn">Add Condition</button>
+      </div>
 
     </div>
   </div>
-  <div class="action-col">
+
+
+  <div class="action-col" ng-if="checkIfTime()">
     <input type="number" ng-if="currentOperator!='Boolean'" class="btn-block form-control" ng-model="conditionConfig.value" />
     <button ng-click="add()" class="btn btn-primary btn-block animated fadeIn">Add Condition</button>
   </div>
+
+
   <!-- Operators Ends -->
 
 
@@ -236,7 +243,7 @@
   </div>
   <!-- Time Ends -->
 
-  <button class="btn btn-primary btn-block pull-right" ng-disabled="!actionObjects || !scriptObj.timeout" ng-click="saveAction();clearSteps();">Save Action</button>
+  <button class="btn btn-primary btn-block pull-right" ng-disabled="!actionObjects || !scriptObj.timeout" ng-click="saveAction();clearSteps();">Save Script</button>
 </div>
 
 </script>
