@@ -90,8 +90,13 @@ angular.module('jalpWebApp')
         $scope.saveAction = function(actionConfig){
 
           for(var i=0;i<$scope.actionObjects.length;i++){
-              var action = getActionInput($scope.actionObjects[i].newActionConfig) + ";";
-              $scope.scriptObj.action += action;
+              if($scope.actionObjects.length==1){
+                var action = getActionInput($scope.actionObjects[i].newActionConfig);
+                $scope.scriptObj.action += action;
+              }else{
+                var action = getActionInput($scope.actionObjects[i].newActionConfig) + ";";
+                $scope.scriptObj.action += action;
+              }
           }
 
           function getActionInput(actionConfig){
