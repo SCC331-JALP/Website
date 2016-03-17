@@ -99,6 +99,13 @@ angular.module('jalpWebApp')
               }
           }
 
+          if($scope.actionObjects.length>1){
+            var trim = $scope.scriptObj.action;
+            trim = trim.slice(0, -1);
+            $scope.scriptObj.action = trim;
+            console.log($scope.scriptObj.action);
+          }
+
           function getActionInput(actionConfig){
             var paramString;
             var paramsLength = getLength(actionConfig.action);
@@ -354,7 +361,7 @@ angular.module('jalpWebApp')
               'name' : config.id + ' ' + config.type + ' ' + config.operator + ' ' + config.value
             });
           }
-          alert("Added Condition");
+          // alert("Added Condition");
           $scope.resetConditionConfig();
 
         };
